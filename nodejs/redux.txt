@@ -1,0 +1,5 @@
+redux//react
+
+import {} là import 1 cái biến trong thư mục nào đó
+
+npm install --save slick-carousel@1.8.1

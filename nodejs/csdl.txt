@@ -1,0 +1,5 @@
+//không hiện cột không muốn
+
+ attributes:{
+                        exclude: 'password',
+                    }

@@ -1,0 +1,18 @@
+b1 khai báo web.js
+b2 khai báo hàm trong homeController
+b3 module.exports thêm hàm muốn làm
+	thêm hàm Promise( async (resolve, reject)) 			//để code chạy đồng bộ
+		=> {
+  		      try{
+
+  		      }catch(e)
+   			     {
+    			        reject(e);
+      			  }
+ 		   })
+
+b4 làm việc với models (xem modelname là gì?)
+
+resolve đồng nghĩa với return
+
+hiển thị ở views 

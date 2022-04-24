@@ -1,0 +1,24 @@
+.sanpham-redux-container{
+    .preview-image2{
+        width: 100%;
+        height: 50px;
+        background: center no-repeat;
+        cursor: pointer;
+        background-size: contain;
+        margin-top: 40px;
+    }
+    .btn-createSP{
+        button{
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #04AA6D;
+            height: 30px;
+            &:hover{
+                font-weight: 700;
+                color: black;
+                background-color: #04AA6D;
+            }
+        }
+    }
+}

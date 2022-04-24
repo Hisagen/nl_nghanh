@@ -1,0 +1,60 @@
+
+.manage-sp-container{
+    padding: 10px;
+    .manage-sp-title {
+        text-align: center;
+        font-size: 20px;
+        margin-top: 10px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+    .more-info{
+        display: flex;
+        gap: 30px;
+       .content-left {
+            height: auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 40%;
+        }
+        .content-right{
+            height: auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            width: 60%;
+            // margin-left: 30px;
+        }
+    }
+    .manage-sp-editor {
+        
+        font-size: 30px;
+        margin-top: 5px;
+        
+    }
+
+    .save-content-SP {
+        margin-top: 15px;
+        background-color: orange;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover{
+            color: white;
+            opacity: 0.7;
+        }
+    }
+
+    .create-content-SP{
+        margin-top: 15px;
+        background-color: 	#00FF00;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover{
+            color: white;
+            opacity: 0.7;
+        }
+    }
+}

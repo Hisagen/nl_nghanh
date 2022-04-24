@@ -1,0 +1,16 @@
+2 trang ShopHome.js và ShopHome.scss (containers/ShopHome/...)
+
+git add .
+git commit -m "Name"
+git status
+git push
+
+
+git branch (kiểm tra)
+
+lên github
+
+chọn pull request
+
+
+git pull

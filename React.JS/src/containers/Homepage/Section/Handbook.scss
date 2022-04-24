@@ -1,0 +1,108 @@
+.Tong{
+    display: flex;
+    .Handbook{
+        display: flex;
+        //box-sizing: border-box;
+         .CN24h{
+             
+             .header-24h{
+                 margin-left: 100px;
+             
+                 padding-top: 30px;
+                 .title24h{
+     
+                 }
+                 .btn-24h{
+                     display: block;
+                     padding: 3px 10px;
+                     border: none;
+                     outline: none;
+                     margin-top: -25px;
+                     background: white;
+                     color: black;
+                     cursor: pointer;
+                     text-transform: uppercase;
+                     margin-left: 295px;
+                     &:hover{
+                         color: black;
+                         background: yellow;
+                     }
+                 }
+             }
+             .img-1{
+                 background: url(../../../assets//images/24h/24h1.jpg) no-repeat;
+                 //border: 1px solid red;
+                 height: 300px;
+                 width: 31%;
+                 margin-left: 100px;
+                 padding-top: 10px;
+             }
+             .text{
+                 width: 25%;
+                 margin-left: 100px;
+                 font-size: 18px;
+                 font-weight: bold;
+                 line-height: 27px;
+                 margin-top: 10px;
+                 &:hover{
+                     color: rgb(89, 89, 241);
+                 }
+             }
+             
+         }
+         .CN24h-2{
+             margin-left: -745px;
+             margin-top: 44px;
+     
+             //display: flex;
+             .test1{
+                 display: flex;
+                 padding: 8px;
+                 .img-2{
+                     //border: 1px solid red;
+                     width: 120px;
+                     height: 70px;
+                     
+                     &.img-3{
+                         background-image: url(../../../assets/images/24h/24h2.jpg);
+                         background-size: 125px;
+                     }
+                     &.img-4{
+                         background-image: url(../../../assets/images/24h/24h3.jpg);
+                         background-size: 125px;
+                     }
+                     &.img-5{
+                         background-image: url(../../../assets/images/24h/24h4.jpg);
+                         background-size: 125px;
+                     }
+                     &.img-6{
+                         background-image: url(../../../assets/images/24h/24h5.jpg);
+                         background-size: 125px;
+                     }
+                     &.img-7{
+                         background-image: url(../../../assets/images/24h/24h6.jpg);
+                         background-size: 125px;
+                     }
+                     
+                 }
+                 .text-2{
+                     //border: 1px solid red;
+                     height: 51px;
+                     width: 167px;
+                     margin-top: 10px;
+                     font-size: 9px;
+                     text-align: left;
+                 }
+             }
+             
+         }
+     }
+
+     .Ungdung{
+        margin-top: 25px;
+        //margin-left: -4px;
+     }
+}
+
+    
+

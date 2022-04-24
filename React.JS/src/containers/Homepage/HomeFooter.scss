@@ -1,0 +1,211 @@
+.section-HomeFooter{
+    background-color: #ededed;
+    .khung{
+        display: flex;
+        margin: 0 45px;
+        //border: 1px solid red;
+        .col-1{
+            //border: 1px solid blue;
+            width: 288px;
+            // height: 155px;
+            padding-top: 17px;
+            padding-left: 30px;
+            //padding-left: 25px;
+            .ls{
+                //border: 1px solid red;
+                width: 200%;
+            }
+            .ct{
+                //border: 1px solid red;
+                width: 200%;
+            }
+            .csbm{
+                //border: 1px solid red;
+                width: 200%;
+            }
+            .csbh{
+                //border: 1px solid red;
+                width: 200%;
+            }
+            .xemthem{
+                //border: 1px solid red;
+                width: 200%;
+            }
+        }
+        .col-2{
+            
+            width: 288px;
+            height: 155px;
+            padding-top: 17px;
+            padding-left: 95px;
+        }
+        .col-3{
+            
+            width: 288px;
+            height: 155px;
+            padding-top: 17px;
+            padding-left: 95px;
+        }
+        .col-4{
+            
+            width: 380px;
+            height: 155px;
+            padding-left: 225px;
+            .col-4-1{
+                //border: 1px solid red;
+                width: 100%;
+                height: 50%;
+                .tren{
+                    display: flex;
+                    //border: 1px solid red;
+                    .icon{
+
+                    }
+                    .tt{
+                        margin: 0 10px;
+                    }
+                }
+
+                .duoi{
+                    display: flex;
+                    padding-left: 40px;
+                    .col-1{
+                        //border: 1px solid red;
+                        width: 100px;
+                        height: 40px;
+                        img{
+                            width: 80px;
+                            height: 37px;
+                            margin: -10px -17px;
+                        }
+                    }
+                    .col-2{
+                        //border: 1px solid red;
+                        width: 100px;
+                        height: 40px;
+                        img{
+                            width: 80px;
+                            height: 37px;
+                            margin: -10px -17px;
+                        };
+                    }
+                    .col-3{
+                        //border: 1px solid red;
+                        width: 100px;
+                        height: 40px;
+                        img{
+                            width: 80px;
+                            height: 37px;
+                            margin: -10px -17px;
+                        };
+                    }
+                }
+                
+            }
+            .col-4-2{
+                
+                width: 100%;
+                height: 50%;
+                .tren{
+                    display: flex;
+                    .ip{
+                        //background-image: url(../../assets/images/logo/oppo.png);
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                    .op{
+
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                    .sa{
+                        width: 100px;
+                        height: 40px;
+                       
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                    .vivo{
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                }
+
+
+                .duoi{
+                    display: flex;
+                    .xi{
+                        //background-image: url(../../assets/images/logo/oppo.png);
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                    .re{
+
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                    .no{
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                    .vi{
+                        width: 100px;
+                        height: 40px;
+                        
+                        img{
+                            margin: 0 5px;
+                            width: 80px;
+                            height: 37px;
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+   
+    .title-footer{
+        text-align: center;
+        padding-top: 8px;
+    }
+   
+}

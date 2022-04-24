@@ -1,0 +1,78 @@
+{
+    "homeheader":{
+        "timkiem": "Tìm Kiếm",
+        "giohang": "Giỏ Hàng",
+        "lsdh": "Lịch Sử Đơn Hàng",
+        "tintuc": "Tin Tức",
+        "hoidap": "Hỏi đáp",
+        "title1": "Cửa Hàng Di Động",
+        "place": "Tìm kiếm...",
+        "welcome":"Xin Chào"
+    },
+    
+    "menu": {
+        "system": {
+            "header": "Quản lý",
+            "system-administrator": {
+                "header": "Quản trị hệ thống",
+                "user-manage": "Quản lý người dùng",
+                "user-redux": "Quản lý gói",
+                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
+            },
+            "system-parameter": {
+                "header": "Tham số hệ thống"
+            }
+        },
+
+        "admin": {
+            "manage": "Quản lý",
+            "manage-user": "Người dùng",
+            "manage-guest": "Quản lý khách hàng",
+            "manage-admin": "Quản lý Admin",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux"
+        },
+
+        "product": {
+            "product": "Sản phẩm",
+            "manage-product": "Quản lý sản phẩm",
+            "manage-product-type": "Quản lý loại sản phẩm",
+            "manage-product-category": "Quản lý Danh mục"
+        },
+
+        "posts": {
+            "posts": "Bài viết",
+            "manage-posts": "Quản lý bài viết"
+        },
+
+        "comment": {
+            "comment": "Binh luận",
+            "manage-comment": "Quản lý bình luận"
+        },
+
+        "order": {
+            "order": "Đơn hàng",
+            "manage-order": "Quản lý đơn hàng"
+        }
+    },
+    "manage-user": {
+        "add": "Thêm mới người dùng",
+        "ho": "Họ",
+        "ten": "Tên",
+        "sdt": "Số điện thoại",
+        "dc": "Địa chỉ",
+        "gt": "Giới tính",
+        "cv": "Chức vụ",
+        "avt": "Ảnh đại diện",
+        "avt1": "Ảnh 1",
+        "avt2": "Ảnh 2",
+        "avt3": "Ảnh 3",
+        "save": "Lưu",
+        "edit": "Lưu thay đổi"
+    },
+    "homePage":{
+        "out-standing-DT": "ĐIỆN THOẠI NỔI BẬC NHẤT",
+        "more-infor": "XEM THÊM"
+    }
+    
+}

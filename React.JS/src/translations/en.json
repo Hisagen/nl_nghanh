@@ -1,0 +1,78 @@
+{
+    "homeheader":{
+        "timkiem": "Search",
+        "giohang": "Cart",
+        "lsdh": "Order History",
+        "tintuc": "News",
+        "hoidap": "Q&A",
+        "title1": "Mobile store",
+        "place": "Search...",
+        "welcome": "WelCome"
+    },
+    
+    "menu": {
+        "system": {
+            "header": "System",
+            "system-administrator": {
+                "header": "System Administrator",
+                "user-manage": "User manage",
+                "user-redux": "Manage user using redux",
+                "register-package-group-or-account": "Register service package for group/account"
+            },
+            "system-parameter": {
+                "header": "System-parameter"
+            }
+        },
+         
+        "admin": {
+            "manage": "Manage",
+            "manage-user": "Manage user",
+            "manage-guest": "Manage guest",
+            "manage-admin": "Manage admin",
+            "crud-redux": "CRUD redux"
+        },
+
+        "product": {
+            "product":"product",
+            "manage-product": "Manage product",
+            "manage-product-type": "Manage type product",
+            "manage-product-category": "Mange category"
+        },
+
+        "posts": {
+            "posts": "posts",
+            "manage-posts": "Manage posts"
+        },
+
+        "comment": {
+            "comment": "comment",
+            "manage-comment": "Manage comment"
+        },
+
+        "order": {
+            "order": "order",
+            "manage-order": "Manage order"
+        }
+    },
+    "manage-user": {
+        "add": "Add new user",
+        "ho": "First name",
+        "ten": "Last name",
+        "sdt": "Phone number",
+        "dc": "Address",
+        "gt": "Gender",
+        "cv": "Position",
+        "avt": "avatar",
+        "avt1": "Image 1",
+        "avt2": "Image 2",
+        "avt3": "Image 3",
+        "save": "Save",
+        "edit": "Save changes"
+        
+    },
+   
+    "homePage":{
+        "out-standing-DT": "MOST HOT PHONE",
+        "more-infor": "MORE INFOR"
+    }
+}

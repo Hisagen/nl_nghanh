@@ -1,0 +1,74 @@
+tạo khoá ngooại:
+Cập nhật 1 bảng npx sequelize-cli db:migrate --to (tên migration) nhớ xóa bảng và 
+1/ tạo model
+npx sequelize-cli model:generate --name child --attributes child_name:string, id_parent:integer
+
+npx sequelize-cli model:generate --name parent --attributes parent_name:string,id_temp:integer
+
+npx sequelize-cli model:generate --name temp --attributes temp_name:string
+
+
+2/ tạo bảng trong migrations 
+npx sequelize-cli migration:generate --name tên(tên muốn đặt)-association  
+
+'use strict';
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    queryInterface.addConstraint('childs', {   // tên bảng muốn đặt khóa nhớ thêm s
+      fields: ['cột_parent'], // cột muốn làm khóa ngoại
+      type: 'FOREIGN KEY',
+      name: 'khoa_ngoai_C_P',
+      references:
+      {
+        table: 'parents', // nhớ thêm s
+        field: 'id'
+      }
+
+    });
+
+    queryInterface.addConstraint('parents', {
+          fields: ['id_temp'],
+          type: 'FOREIGN KEY',
+          name: 'khoa_ngoai_P_T',
+          references:
+          {
+            table: 'temps',
+            field: 'id'
+          }
+        });
+}
+}
+
+chạy npx sequelize-cli db:migrate
+
+
+
+đổi kiểu 1 cột:
+module.exports = {
+    up: (queryInterface, Sequelize) => {
+        return Promise.all([
+            queryInterface.changeColumn('Users', 'avt', {
+                type: Sequelize.BLOB,
+                allowNull: true,
+            })
+        ])
+    },
+
+    down: (queryInterface, Sequelize) => {
+        return Promise.all([
+            queryInterface.changeColumn('Users', 'avt', {
+                type: Sequelize.STRING,
+                allowNull: true,
+            })
+        ])
+    }
+};
+
+
+
+
+
+
+
+

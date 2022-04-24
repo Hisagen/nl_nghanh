@@ -1,0 +1,54 @@
+.section-Ungdung{
+    //border: 1px solid red;
+    width: 485px;
+    margin-left: 74px;
+    .section-content{
+        .section-header{
+            .btn-UD{
+                     display: block;
+                     padding: 3px 10px;
+                     border: none;
+                     outline: none;
+                     margin-top: -25px;
+                     background: white;
+                     color: black;
+                     cursor: pointer;
+                     text-transform: uppercase;
+                     margin-left: 389px;
+                     &:hover{
+                         color: black;
+                         background: yellow;
+            }
+        }
+    }
+    .section-body{
+        .img-UD{
+            .title-text{
+                display:  flex;
+                padding: 10px;
+                .avt{
+                    img{
+                        height: 60px;
+                        width: 60px;
+                    }
+                }
+                .text{
+                    width: 83%;
+                    margin-left: 12px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    line-height: 27px;
+                    margin-top: 1px;;
+                    &:hover{
+                        color: rgb(89, 89, 241);
+                    }
+                }
+            }
+            img{
+                height: 282px;
+                width: 483px;
+            }
+        }
+    }
+}
+}

@@ -1,0 +1,178 @@
+.home-header-container{
+    width: 100%;
+    height: 80px;
+    padding: 0 40px;
+    overflow: scroll;
+    .home-header-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .left-content{
+            width: 20%;
+            display: flex;
+            align-items: center;
+            .Header-logo{
+                height: 100%;
+                width: 90%;
+                cursor: pointer;
+            }
+            i.fas.fa-bars {
+                font-size: 30px;
+                color: grey;
+                cursor: pointer;
+            }
+        }
+        .center-content{
+            width: 55%;
+            border: 1px solid red;
+            //cursor: pointer;
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            .child-content{
+                //border: 1px solid red;
+                width: 20%;
+                
+            }
+        }
+        .right-content{
+            width: 25%;
+            
+            //cursor: pointer;
+            align-items: center;
+            display: flex;
+            justify-content: flex-end;
+            .support-content{
+                //border: 1px solid red;
+                //width: 50%;
+                padding-right: 50px;
+                display: flex;
+                align-items: center;
+            }
+            .language-vi {
+                cursor: pointer;
+                opacity: 0.2;
+                
+                &.active {
+                    opacity: 1;
+                    span {
+                        
+                        color: blue;
+                    }  
+                }   
+                
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            .language-en{
+                margin: 0 10px;
+                cursor: pointer;
+                opacity: 0.2;
+                &.active {
+                    opacity: 1;
+                    span{
+                        
+                        color: blue;
+                    }
+                }
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.home-header-banner{
+    background-color: rgb(197, 146, 146);
+    background-position: center;
+    background-size: cover;
+    background: url(../../assets/images/nen.png) no-repeat center;
+    height: 490px;
+    //margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.88;
+    .content-up{
+        height: 70%;
+        //background-image: linear-gradient(rgba(0,0,0,0.25), rgba(255,255,255,0.1));
+        //border: 1px solid red;
+        .title1 {
+            text-align: center;
+            color: greenyellow;
+            font-size: 30px;
+            text-shadow: 1px 1px 1px #333;
+            margin-bottom: 15px;
+            padding-top: 120px;
+            
+        }
+        .title2 {
+            text-align: center;
+            color: greenyellow;
+            font-size: 30px;
+            text-shadow: 1px 1px 1px #333;
+            margin-bottom: 15px;
+        }
+        .search{
+                text-align: center;
+                width: 246px;;
+                padding: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 auto;
+                border-radius: 25px;
+                background: orange;
+                i{
+                    margin: 0 5px;
+                }
+                input {
+                    height: 30px;
+                    width: 200px;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                }
+            .txt-search{
+                
+            }
+
+    }
+    }
+    .content-dow{
+        height: 30%;
+        display: flex;  
+       background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(238, 233, 233, 0.966),rgba(255, 255, 255, 1));
+        .options{
+            padding: 10px 128px;
+            text-align: center;
+            display: flex;
+            gap: 91px;
+            .option-child{
+                //border: 1px solid red;
+                width: 252px;
+                text-align: center;
+                padding: 15px;
+               
+                .icon-child{
+                    margin: 0 auto;
+                    width: 50px;
+                    border-radius: 50%;
+                    background-color: white;
+                    font-size: 30px;
+                }
+                .text-child{
+                    font-size: 20px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    color: greenyellow;
+                    &:hover{
+                        color: rgb(126, 131, 212);
+                    }
+                }
+            }
+        }
+    }
+}

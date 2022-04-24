@@ -1,0 +1,8 @@
+quản lý người dùng
+quản lý loại sản phẩm
+quản lý sản phẩm
+quản lý bài viết
+quản lý bình luận
+quản lý đơn hàng
+
+npm install --save bootstrap@4.6.0
