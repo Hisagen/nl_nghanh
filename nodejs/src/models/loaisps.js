@@ -11,7 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      loaisps.hasOne(models.sanphams, {foreignKey: 'ma_loaisp'})
+      loaisps.hasOne(models.sanphams, {foreignKey: 'ma_loaisp'}) // sản phẩm thuộc 1 loại sản phẩm
+
+      loaisps.belongsTo(models.danhmucs, { foreignKey: "ma_dm"})
+      //loaisps.belongsTo(models.danhmucs, {foreignKey: 'ma_dm', targetKey: "id", as: 'danhmucData'})
     }
   };
   loaisps.init({

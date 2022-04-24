@@ -57,7 +57,7 @@ let initWebRoute = (app) =>
 
     // tìm
     route.get("/api/tim_loaisp_danhmuc", dtController.search_loaisp);
-    
+    route.get("/api/lay_ds_loaisp_dm", dtController.getdsloaidm);
     route.get('/nlnghanh',(req, res) => 
     {
         return res.send('Hello Ra Sin');

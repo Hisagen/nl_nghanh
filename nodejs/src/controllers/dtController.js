@@ -259,6 +259,21 @@ let search_loaisp =  async (req, res) =>
         })
 }
 }
+let getdsloaidm =  async (req, res) =>
+{
+    try {
+        
+        let data = await DTService.getdsloaidm(req.query.idDM);
+        console.log('data', data);
+        return res.status(200).json(data);
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server...'
+        })
+}
+}
+
 module.exports = {
     getTopDTHome:getTopDTHome,
     getAllSP:getAllSP,
@@ -279,5 +294,6 @@ module.exports = {
     getDetailDanhMuc:getDetailDanhMuc,
     updateLoaiSP:updateLoaiSP,
     deleteLoaiSP:deleteLoaiSP,
-    search_loaisp:search_loaisp
+    search_loaisp:search_loaisp,
+    getdsloaidm:getdsloaidm
 }

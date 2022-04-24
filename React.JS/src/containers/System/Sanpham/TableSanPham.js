@@ -32,7 +32,7 @@ class TableSanPham extends Component {
     }
    async componentDidMount () {
         this.props.fetchAllSANPHAMStart();
-        this.props.fetchAllLoaiSanPhamSTART();
+        //this.props.fetchAllLoaiSanPhamSTART();
         //let res = await getInfoDetailSanPham(6);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -59,7 +59,7 @@ class TableSanPham extends Component {
 
         let arrLoaiSanPham = this.props.listLoaiSanPham;
 
-        //console.log("arrSanPham.avt",arrSanPham);
+        console.log("arrSanPham.avt",arrSanPham);
         // console.log("arrLoaiSanPham",arrLoaiSanPham);
         return (
             <React.Fragment>
@@ -79,7 +79,7 @@ class TableSanPham extends Component {
                             arrSanPham.map((item, index) =>{
                                 let tenloai = ''
                                 tenloai = getInfoDetailSanPham("1")
-                                console.log("check tenloai",tenloai)
+                                //console.log("check tenloai",tenloai)
                                 let imageBase64 =''
                                     if (item.avt) {
                                         imageBase64 = new Buffer(item.avt, 'base64').toString('binary')  
@@ -123,7 +123,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
+        //fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
         fetchAllSANPHAMStart: (data) => dispatch(actions.fetchAllSANPHAMStart(data)),
         deleteSanPham: (id) => dispatch(actions.deleteSanPham(id)),
         //getInfoDetailSanPham: (id) => dispatch(actions.getInfoDetailSanPham(id))

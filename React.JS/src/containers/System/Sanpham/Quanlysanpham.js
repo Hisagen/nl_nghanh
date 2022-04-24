@@ -12,7 +12,8 @@ import { FormattedMessage } from 'react-intl';
 import TableSanPham from "./TableSanPham";
 import Lightbox from 'react-image-lightbox';
 import { isArrayLiteralExpression } from 'typescript';
-import {getInfoDetailSanPham, searchLoaispService} from "../../../services/sanphamService"
+import {getInfoDetailSanPham, searchLoaispService, getdsloaidm} from "../../../services/sanphamService"
+import { isEmpty } from 'lodash';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 function handleEditorChange({ html, text }) {
     //console.log('handleEditorChange', html, text);
@@ -36,7 +37,12 @@ class Quanlysanpham extends Component {
             ma_loaisp: '',
             trangthai: '',
             msadmin: '',
+
+
+            ma_dm_dau: '',
             ma_dm: '',
+
+
             HDH: '',
             cameraSau: '',
             cameraTruoc: '',
@@ -67,6 +73,7 @@ class Quanlysanpham extends Component {
         this.props.fetchStatusStart();
         this.props.fetchAllSANPHAMStart();
         this.props.fetchAllDanhMucSTART();
+        
         //this.props.searchLoaisp(1);
         //console.log("this.state.ma_dm",this.state.ma_dm)
         let res = await get_all_san_pham()
@@ -80,6 +87,18 @@ class Quanlysanpham extends Component {
     }
     async componentDidUpdate(prevProps, prevState, snapshot)
     {
+        // if(prevProps.ma_dm !== this.state.ma_dm)
+        // {
+        //     // let test = []
+
+        //     test = this.props.loaispnew
+        //     if(test && test.errCode === 0)
+        //     {
+        //         this.setState({
+        //             loaiSPArr: test
+        //         })
+        //     }    
+        // }
         if(prevProps.arrdanhmuc !== this.props.arrdanhmuc)
         {
             let arrdanhmuc  = this.props.arrdanhmuc;
@@ -88,7 +107,9 @@ class Quanlysanpham extends Component {
                 DMArr: arrdanhmuc,
                 ma_dm: arrdanhmuc && arrdanhmuc.length>0 ? arrdanhmuc[0].id: ''
             })
+            //this.props.searchLoaisp(this.state.ma_dm)
         }
+
         if(prevProps.loaiSPRedux !== this.props.loaiSPRedux)
         {
             let loaiSPRedux = this.props.loaiSPRedux;
@@ -98,21 +119,11 @@ class Quanlysanpham extends Component {
             })
         }
         
-        // if(prevProps. !== this.state.ma_dm)
-        // {
-        //     let test = []
-
-        //     //test = await searchLoaispService(this.state.ma_dm)
-        //     if(test && test.errCode === 0)
-        //     {
-        //         this.setState({
-        //             loaiSPArr: test
-        //         })
-        //     }    
-        // }
+        
         if(prevProps.statusRedux !== this.props.statusRedux)
         {
             let arrStatus  = this.props.statusRedux;
+            
             this.setState({
                 statusArr: arrStatus,
                 trangthai: arrStatus && arrStatus.length>0 ? arrStatus[0].keyMap: ''
@@ -158,7 +169,7 @@ class Quanlysanpham extends Component {
         }
     }
    
-    onchangeInput = (event, id) => {
+    onchangeInput = async (event, id) => {
         let copyState = {...this.state};
 
         copyState[id] = event.target.value;
@@ -167,6 +178,8 @@ class Quanlysanpham extends Component {
             ...copyState
         }) 
         console.log("dsfsf",copyState)
+        // this.props.searchLoaisp(this.state.ma_dm)
+        // console.log("check this.state.ma_dm", this.state.ma_dm)
     }
     checkValidateInput = () => {
         let isValid = true;
@@ -272,6 +285,7 @@ class Quanlysanpham extends Component {
     {
         let sp = await getInfoDetailSanPham(sanpham.id);
         this.state.id = sanpham.id;
+        
         //console.log("check sp",sp)
         let hinhsp = sp.data.hinhsp;
         //console.log("check hinhsp",hinhsp)
@@ -360,11 +374,18 @@ class Quanlysanpham extends Component {
             isOpen: true,
         })
     }
+    onClickdanhmuc = () =>
+    {
+        alert("lick me");
+    }
 
     render() {
         
-        let loai = this.state.loaiSPArr
-        //let  = loaitemp.data
+        
+        // let loaispnew = this.props.loaispnew;
+        // console.log("check loaispnew",loaispnew)
+        let loai = this.state.loaiSPArr;
+        let arrdanhmuc = this.state.DMArr;
         let status = this.state.statusArr
         let language = this.props.language
         let {ten_sp,
@@ -384,9 +405,6 @@ class Quanlysanpham extends Component {
         pin,
         gia,        
         } = this.state
-        let arrdanhmuc = this.state.DMArr;
-
-        //console.log("loaispnew",this.props.loaispnew)
         console.log("check component ", this.state)
         return (
             <React.Fragment>
@@ -400,12 +418,13 @@ class Quanlysanpham extends Component {
                                     <label>Danh mục:</label>
                                         <select className='form-control loaisp' type="text"
                                             onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}
+                                            
                                             value={ma_dm}
                                         >
                                         {arrdanhmuc && arrdanhmuc.length> 0 && 
                                             arrdanhmuc.map((item, index) =>{
                                                     return (
-                                                        <option key={index} value={item.id}>
+                                                        <option key={index} value={item.id} >
                                                             {item.ten_dm}
                                                         </option>
                                                     )
@@ -420,15 +439,19 @@ class Quanlysanpham extends Component {
                                             onChange={(event)=>{this.onchangeInput(event, 'ma_loaisp')}}
                                             value={ma_loaisp}
                                         >
-                                        {loai && loai.length> 0 && 
+                                        
+                                            {loai && loai.length> 0 && 
                                                 loai.map((item, index) =>{
+                                                    
+
                                                     return (
                                                         <option key={index} value={item.id}>
                                                             {item.ten_loaisp}
                                                         </option>
                                                     )
                                                 })
-                                        }
+                                            }
+                                        
                                         </select>
                                 </div>
 
@@ -639,7 +662,7 @@ const mapStateToProps = state => {
         listSanPham: state.sanpham.sanphams,
         idAdmin: state.user.userInfo,
         arrdanhmuc: state.sanpham.danhmucArr,
-        //loaispnew: state.sanpham.loaispnew
+        loaispnew: state.sanpham.loaispnew
     };
 };
 
@@ -652,7 +675,7 @@ const mapDispatchToProps = dispatch => {
         fetchAllSANPHAMStart: (data) => dispatch(actions.fetchAllSANPHAMStart(data)),
         editSanPham: (data) => dispatch(actions.editSanPham(data)),
         fetchAllDanhMucSTART: () => dispatch(actions.fetchAllDanhMucSTART()),
-        //searchLoaisp: (id) => dispatch(actions.searchLoaisp(id)),
+        searchLoaisp: (id) => dispatch(actions.searchLoaisp(id)),
 
     };
 };

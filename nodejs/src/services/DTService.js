@@ -665,8 +665,15 @@ let getDetailDanhMuc = (id) =>
         }
         else
         {
-            let data = await db.danhmucs.findOne({
+            let data = await db.danhmucs.findAll({
                 where:{id:id},
+                include: [
+                    {   
+                        model: db.loaisps, attributes: ['id', 'ten_loaisp', 'ma_dm']
+                    },
+                ],
+                raw: true,
+                nest: true
             })
             //console.log("check data.image1",)
             resolve({
@@ -801,6 +808,50 @@ let search_loaispService = (id) =>
 
     })
 }
+
+let getdsloaidm = (idDM) =>
+{
+    return new Promise(async (resolve, reject) => {   
+        console.log("check id",idDM)
+        if(!idDM)
+        {
+            resolve({
+                errCode: 1,
+                errMessage: "missing require!"
+            })
+        }
+        else
+        {
+            let data = await db.loaisps.findAll({
+                where:{ma_dm:idDM},
+                // include: [
+                //     {   
+                //         model: db.hinhsps, attributes: ['image1', 'image2', 'image3']
+                //     },
+                //     {   
+                //         model: db.loaisps, attributes: ['id','ten_loaisp']
+                //     }
+                // ],
+                raw: false,
+                nest: true
+            })
+            // if(data && data.avt)
+            // {
+            //     data.avt = new Buffer(data.avt, 'base64').toString('binary');
+            //     data.hinhsp.image1 = new Buffer(data.hinhsp.image1, 'base64').toString('binary');
+            //     data.hinhsp.image2 = new Buffer(data.hinhsp.image2, 'base64').toString('binary');
+            //     data.hinhsp.image3 = new Buffer(data.hinhsp.image3, 'base64').toString('binary');
+            // }
+            //console.log("check data.image1",)
+            resolve({
+                errCode: 0,
+                data: data
+            });
+        }
+
+    })
+}
+
 module.exports={
     getTopDTHomeService:getTopDTHomeService,
     getAllSP:getAllSP,
@@ -823,4 +874,5 @@ module.exports={
     deleteLoaiSP:deleteLoaiSP,
     getDetailLoaiSP:getDetailLoaiSP,
     search_loaispService:search_loaispService,
+    getdsloaidm:getdsloaidm,
 }
