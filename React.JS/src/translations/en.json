@@ -29,7 +29,8 @@
             "manage-user": "Manage user",
             "manage-guest": "Manage guest",
             "manage-admin": "Manage admin",
-            "crud-redux": "CRUD redux"
+            "crud-redux": "CRUD redux",
+            "whitelist": "whitelist"
         },
 
         "product": {

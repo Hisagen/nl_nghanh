@@ -5,6 +5,7 @@ export const path = {
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     DETAIL_SP: '/detail_sp/:id',
+    GIOHANG: '/giohang',
     SANPHAM: '/sanpham/',
     DANHMUC: '/Danhmucsanpham/',
     LOAISP: '/Loaisanpham/',

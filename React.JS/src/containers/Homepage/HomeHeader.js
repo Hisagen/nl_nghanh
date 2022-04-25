@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { Route} from 'react-router-dom';
 import './HomeHeader.scss'
 import logo1 from '../../assets/images/HISAGEN_VI.png'
-
+// import { adminMenu, sanphamMenu } from '../../containers/Header/menuApp';
 import { FormattedMessage } from 'react-intl';
 import {LANGUAGES} from '../../utils';
-
+import img1 from "../../assets/images/nenQC/nen1.jpg"
 import {changeLanguageApp} from '../../store/actions';
 import {withRouter} from "react-router";
-
+import Giohang from '../../routes/Giohang';
+import DetailSP from '../Patient/SanPham/DetailSP';
 class 
 
 HomeHeader extends Component {
@@ -40,26 +41,57 @@ HomeHeader extends Component {
                             <i class="fas fa-bars"></i>
                             <img className='Header-logo' src= {logo1} onClick={()=> this.returnHome()}/>
                         </div>
-                        <div className='center-content'>
+                        <div className='center-content'>                            
                             <div className='child-content'>
-                                <div><b><FormattedMessage id="homeheader.timkiem"/></b></div>
-                            </div>
-                            <div className='child-content'>
-                            <div><b><FormattedMessage id="homeheader.giohang"/></b></div>
+                                <div className='hieu-ung'>
+                                    <b><FormattedMessage id="homeheader.tintuc"/></b>
+                                </div>
                                 
                             </div>
-                            <div className='child-content'>
-                            <div><b><FormattedMessage id="homeheader.lsdh"/></b></div>
-                                
+                            <div className='child-content1'>
+                            <div className='hieu-ung'>
+                                <Link to="/giohang">
+                                    <b><FormattedMessage id="homeheader.giohang"/></b>        
+                                </Link>                   
+                            </div>                                
                             </div>
-                            <div className='child-content'>
-                            <div><b><FormattedMessage id="homeheader.tintuc"/></b></div>
+                            <div className='child-content2'>
+                            <div className='hieu-ung'><b><FormattedMessage id="homeheader.lsdh"/></b></div>
     
                             </div>
-                            <div className='child-content'>
-                            <div onClick={() => this.returnManage()}><b><FormattedMessage id="menu.admin.manage"/></b></div>
-    
+                            <div className='child-whitelist'>
+                               <b><FormattedMessage id="menu.admin.whitelist"/></b>
+                               
+                               <div className='test'>
+                                        <table id='tablespyt' className='text-center'>
+                                            <tbody >
+                                                <tr className='text-center'>
+                                                   <th>STT</th>
+                                                   <th>Tên</th>
+                                                   <th>Hinh</th>
+                                                   <th>Số Lượng</th>
+                                                   <th>Xóa</th>
+                                                </tr>
+                                                <tr>    
+                                                    <td>1</td>
+                                                    <td>Sản phẩm 1</td>
+                                                    <td><img src={img1}/></td>
+                                                    <td>2</td>
+                                                    <td title='xóa sản phẩm khỏi yêu thích'><i className="fas fa-minus-circle"></i></td>
+                                                </tr>
+                                                <tr>    
+                                                    <td>2</td>
+                                                    <td>Sản phẩm 1</td>
+                                                    <td><img src={img1}/></td>
+                                                    <td>2</td>
+                                                    <td title='xóa sản phẩm khỏi yêu thích'><i className="fas fa-minus-circle"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                               </div>
                             </div>
+                            
+
                         </div>
 
                         <div className='right-content'>

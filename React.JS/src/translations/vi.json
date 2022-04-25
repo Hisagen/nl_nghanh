@@ -30,7 +30,8 @@
             "manage-guest": "Quản lý khách hàng",
             "manage-admin": "Quản lý Admin",
             "crud": "CRUD user",
-            "crud-redux": "CRUD redux"
+            "crud-redux": "CRUD redux",
+            "whitelist": "Yêu Thích"
         },
 
         "product": {

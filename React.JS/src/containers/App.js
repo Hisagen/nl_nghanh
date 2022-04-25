@@ -21,6 +21,7 @@ import Homepage from '../containers/Homepage/Homepage.js';
 import Sanpham from '../routes/Sanpham';
 import Danhmuc from '../routes/Danhmuc';
 import Loaisp from '../routes/Loaisp';
+import Giohang from '../routes/Giohang';
 import CustomScrollbars from '../components/CustomScrollbars';
 class App extends Component {
 
@@ -58,6 +59,7 @@ class App extends Component {
                                     <Route path={path.LOAISP} component={userIsAuthenticated(Loaisp)} />
                                     <Route path={path.HOMEPAGE} component={(Homepage)} />
                                     <Route path={path.DETAIL_SP} component={DetailSP}/>
+                                    <Route path={path.GIOHANG} component={Giohang}/>
 
                                 </Switch>
                             </CustomScrollbars>

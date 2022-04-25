@@ -24,17 +24,132 @@
         }
         .center-content{
             width: 55%;
-            border: 1px solid red;
+            //border: 1px solid red;
             //cursor: pointer;
             align-items: center;
             display: flex;
             justify-content: space-between;
             cursor: pointer;
-            .child-content{
+            //border: 1px solid red;
+
+            
                 //border: 1px solid red;
-                width: 20%;
+                // width: 1000px;
                 
-            }
+                .child-content{
+                    //border: 1px solid red;
+                    width: 100px;       
+                    .hieu-ung{
+                        b{
+                            position: absolute;
+                        }   
+                            //border: 1px solid red;
+
+                            height: 2px;
+                            content: '';                            
+                            bottom: 0px;
+                            left: 0px;
+                            transition: all 0.5s ease-in-out;
+                            width: 5px;
+                            
+                            //z-index: 100;
+                                &:hover{
+                                    background: tomato;
+                                    width: 52px;
+                                    //transform: translateX(100%);
+                                }        
+                            }
+                }
+                .child-content1{
+                    //border: 1px solid red;
+                    width: 100px;       
+                    .hieu-ung{
+                        
+                        b{
+                            position: absolute;
+                        }
+                            height: 2px;
+                            content: '';                            
+                            bottom: 0px;
+                            left: 0px;
+                            transition: all 0.5s ease-in-out;
+                            width: 5px;
+                            
+                            //z-index: 100;
+                                &:hover{
+                                    background: tomato;
+                                    width: 62px;
+                                    //transform: translateX(100%);
+                                }        
+                            }
+                }  
+                .child-content2{
+                    //border: 1px solid red;
+                    width: 100px;       
+                    .hieu-ung{
+                        b{
+                            position: absolute;
+                        }
+                            height: 2px;
+                            content: '';                            
+                            bottom: 0px;
+                            left: 0px;
+                            transition: all 0.5s ease-in-out;
+                            width: 5px;
+                            
+                            //z-index: 100;
+                                &:hover{
+                                    background: tomato;
+                                    width: 123px;
+                                    //transform: translateX(100%);
+                                }        
+                            }
+                }
+                .child-whitelist{
+                    //border: 1px solid red;
+                    width: 100px; 
+                    padding-top: 15px;
+                    &:hover{
+                        .test{
+                            display: block;
+                            position: absolute;
+                            z-index: 1000;
+                            //border: 1px solid black;
+                            width: auto;
+                            height: auto;
+                            background-color: white;
+                            border-radius: 10px;
+                            opacity: 0.9;
+                              #tablespyt td, #tablespyt th {
+                                  padding: 7px;
+                                img{
+                                    width: 50px;
+                                    height: 50px;
+                                }
+                                &:hover{
+                                    i{
+                                        color: red;
+                                        
+                                    }
+                                }
+                                
+                              }
+                              #tablespyt tr:hover {background-color: #CCFFFF;}
+                              #tablespyt th {
+                                padding-top: 12px;
+                                padding-bottom: 12px;
+                                text-align: left;
+                                background-color: #04AA6D;
+                                color: white;
+                              }
+                            
+                        }
+                    }
+                    .test{
+                        display: none;
+                    }      
+                }    
+                
         }
         .right-content{
             width: 25%;
@@ -168,6 +283,7 @@
                     font-weight: 600;
                     cursor: pointer;
                     color: greenyellow;
+                    transition: all 0.5s ease-in-out;
                     &:hover{
                         color: rgb(126, 131, 212);
                     }

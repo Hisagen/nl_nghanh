@@ -130,7 +130,6 @@ class Quanlysanpham extends Component {
             })
         }
         
-       
         if(prevProps.listSanPham !== this.props.listSanPham)
         {
             let arrStatus = this.props.statusRedux
@@ -288,7 +287,7 @@ class Quanlysanpham extends Component {
         
         //console.log("check sp",sp)
         let hinhsp = sp.data.hinhsp;
-        //console.log("check hinhsp",hinhsp)
+        console.log("check hinhsp",hinhsp)
         let idAdmin = this.props.idAdmin.id;
         let imageBase64 = '';
 
@@ -328,9 +327,9 @@ class Quanlysanpham extends Component {
             action: CRUD_ACTIONS.EDIT,
             previewImgURL: imageBase64,
             id: sanpham.id,
-            previewImgURL1: imageBase641,
-            previewImgURL2: imageBase642,
-            previewImgURL3: imageBase643,
+            previewImgURL1: hinhsp.image1,
+            previewImgURL2: hinhsp.image2,
+            previewImgURL3: hinhsp.image3,
         })
     }
      handleOnchangeImage = async (event) =>
@@ -383,7 +382,7 @@ class Quanlysanpham extends Component {
         
         
         // let loaispnew = this.props.loaispnew;
-        // console.log("check loaispnew",loaispnew)
+        console.log("check previewImgURL",this.state.previewImgURL)
         let loai = this.state.loaiSPArr;
         let arrdanhmuc = this.state.DMArr;
         let status = this.state.statusArr
@@ -417,8 +416,7 @@ class Quanlysanpham extends Component {
                             <div className='col-3'>
                                     <label>Danh mục:</label>
                                         <select className='form-control loaisp' type="text"
-                                            onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}
-                                            
+                                            onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}                                            
                                             value={ma_dm}
                                         >
                                         {arrdanhmuc && arrdanhmuc.length> 0 && 
@@ -640,13 +638,13 @@ class Quanlysanpham extends Component {
                         
                     />
                 }
-                {this.state.isOpen === true &&
+                {/* {this.state.isOpen === true &&
                     <Lightbox
                         mainSrc={this.state.previewImgURL1}
                         onCloseRequest={() => this.setState({ isOpen: false })}
                         
                     />
-                }
+                } */}
             </React.Fragment>          
         );
     }
