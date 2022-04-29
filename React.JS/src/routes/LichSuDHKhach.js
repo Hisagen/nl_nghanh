@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from 'react-router-dom';
-import QuanLyGiohang from '../containers/System/Giohang/QuanLyGiohang';
+import DonHanngKhac from '../containers/System/DonHang/DonHanngKhac';
 import Header from '../containers/Header/Header';
 import { path } from '../utils'
-class Giohang extends Component {
+class LichSuDHKhach extends Component {
     render() {
         {/*  */}
         const { isLoggedIn } = this.props;
@@ -14,7 +14,7 @@ class Giohang extends Component {
                     <div className="system-container">
                         <div className="system-list">
                             <Switch>
-                                <Route path="/giohang/" component={QuanLyGiohang} />
+                                <Route path="/lichsumuahang/" component={DonHanngKhac} />
                             </Switch>
                         </div>
                     </div>
@@ -37,4 +37,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Giohang);
+export default connect(mapStateToProps, mapDispatchToProps)(LichSuDHKhach);

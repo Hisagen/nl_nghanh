@@ -66,7 +66,7 @@ class NoiBac extends Component {
     // }
     handleViewSanPhamNoiBac = (sanpham) =>
     {
-        console.log("View info Sản Phẩm:", sanpham);
+        // console.log("View info Sản Phẩm:", sanpham);
         if(this.props.history)
         {
             this.props.history.push(`/detail_sp/${sanpham.id}`)
@@ -84,9 +84,9 @@ class NoiBac extends Component {
             // nextArrow: <SampleNextArrow />,
             // prevArrow: <SamplePrevArrow />
         };
-        console.log("check topDTRedux", this.props.topDTRedux);
+        //console.log("check topDTRedux", this.props.topDTRedux);
         let allDT = this.state.arrDT;
-        console.log("check allDT",allDT);
+        // console.log("check allDT",allDT);
         let {language} = this.props; 
         //allDT = allDT.concat(allDT).concat(allDT);
         return (
@@ -114,7 +114,7 @@ class NoiBac extends Component {
                                         <img src={imageBase64}/>
                                         <div className='nensp1'>
                                         <div>{item.ten_sp}</div>
-                                        <div>{item.gia} VNĐ</div>
+                                        <div>{item.gia.toLocaleString()} VNĐ</div>
                                         <div>Tai nghe GALAXY ...</div>
                                         </div>
                                         

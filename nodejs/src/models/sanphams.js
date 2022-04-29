@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       sanphams.hasOne(models.hinhsps, {foreignKey: 'ma_sp'})
+      sanphams.hasOne(models.giohangs, {foreignKey: 'id_sp'})
       sanphams.belongsTo(models.loaisps, { foreignKey: "ma_loaisp"})
 
     }

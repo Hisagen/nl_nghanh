@@ -1,32 +1,38 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('donhangs', {
+    await queryInterface.createTable('giohangs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ngaydathang: {
-        type: Sequelize.INTEGER
+    //   ten_sp:DataTypes.STRING,
+    // gia_sp:DataTypes.INTEGER,
+    // soluong_sp: DataTypes.INTEGER,
+    // id_sp: DataTypes.STRING,
+    // id_nguoidung: DataTypes.INTEGER
+      avt: {
+        type: Sequelize.BLOB('long'),
+        allowNull: true,
       },
-      ngaygiaohang: {
-        type: Sequelize.DATE
-      },
-      dc_gh: {
+      ten_sp: {
         type: Sequelize.STRING
       },
-      tongtien: {
+      gia_sp: {
         type: Sequelize.INTEGER
       },
-      trangthai: {
-        type: Sequelize.STRING
-      },
-      ma_nguoidung: {
+      soluong_sp: {
         type: Sequelize.INTEGER
       },
-      ma_nhanvien: {
+      thanhtien: {
+        type: Sequelize.INTEGER
+      },
+      id_sp: {
+        type: Sequelize.INTEGER
+      },
+      id_nguoidung: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -40,6 +46,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('donhangs');
+    await queryInterface.dropTable('giohangs');
   }
 };

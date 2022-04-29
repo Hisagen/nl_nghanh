@@ -71,7 +71,7 @@ let getDetailSP = async (req, res) =>
     try {
         
         let response = await DTService.getChitietSP(req.query.id);
-        console.log('sin', response);
+        //console.log('sin', response);
         return res.status(200).json(response);
     } catch (e) {
         return res.status(200).json({
@@ -110,7 +110,21 @@ let getAllSanPham = async (req, res) =>
         })
     }
 }
-
+let getAllGioHang = async (req, res) =>
+{
+    try{
+        let sp = await DTService.getAllGioHang(req.body);
+        console.log(sp);
+        return res.status(200).json(sp);
+    }catch(e)
+    {
+        console.log("check lỗi",e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: "Error from Server"
+        })
+    }
+}
 let GetAllLoaiSanPham = async (req, res) =>
 {
     let id = req.query.id
@@ -134,21 +148,21 @@ let GetAllLoaiSanPham = async (req, res) =>
 let handleCreateNewSanPham = async (req, res) =>
 {
     let message = await DTService.CreateNewSanPham(req.body);
-    console.log("check message", message);
+    // console.log("check message", message);
     return res.status(200).json(message);
 }
 
 let handleCreateNewLoaiSanPham = async (req, res) =>
 {
     let message = await DTService.CreateNewLoaiSanPham(req.body);
-    console.log("check message", message);
+    // console.log("check message", message);
     return res.status(200).json(message);
 }
 
 let handleCreateNewDMSanPham = async (req, res) =>
 {
     let message = await DTService.CreateNewDMSanPham(req.body);
-    console.log("check message", message);
+    // console.log("check message", message);
     return res.status(200).json(message);
 }
 
@@ -274,6 +288,45 @@ let getdsloaidm =  async (req, res) =>
 }
 }
 
+let handleCreateNewGioHang = async (req, res) =>
+{
+    let message = await DTService.CreateNewGioHang(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+let hanldegetGioHang = async (req, res) =>
+{
+    let message = await DTService.getGioHang(req.query.idUser);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+let hanldeDeleteGioHang = async (req, res) =>
+{
+    let message = await DTService.deletgiohang(req.body);
+    // console.log("check req.body", req.body);
+    return res.status(200).json(message);
+}
+
+let handleCreateThanhToan = async (req, res) =>
+{
+    let message = await DTService.bulkCreateThanhToan(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleGetTrangThai = async (req, res) =>
+{
+    let message = await DTService.getTrangThai(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let getAllDonHang = async (req, res) =>
+{
+    let message = await DTService.getAllDonHang(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
 module.exports = {
     getTopDTHome:getTopDTHome,
     getAllSP:getAllSP,
@@ -295,5 +348,13 @@ module.exports = {
     updateLoaiSP:updateLoaiSP,
     deleteLoaiSP:deleteLoaiSP,
     search_loaisp:search_loaisp,
-    getdsloaidm:getdsloaidm
+    getdsloaidm:getdsloaidm,
+    handleCreateNewGioHang:handleCreateNewGioHang,
+    hanldegetGioHang:hanldegetGioHang,
+    getAllGioHang:getAllGioHang,
+    hanldeDeleteGioHang:hanldeDeleteGioHang,
+    handleCreateThanhToan:handleCreateThanhToan,
+    handleGetTrangThai:handleGetTrangThai,
+    getAllDonHang:getAllDonHang
+
 }

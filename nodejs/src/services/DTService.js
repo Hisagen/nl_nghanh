@@ -113,61 +113,36 @@ let saveSP = (data) => {
         })
 }
 
-let getChitietSP = (id) => {
-    return new Promise(async (resolve, reject) => {    
-            try {
-                    if(!id)
-                    {
-                        resolve({
-                            errCode: 1,
-                            errMessage: "missing require!"
-                        })
-                    }
-                    else
-                    {
-                        let data = await db.User.findOne({
-                            where: {id:id},
-                            attributes:{
-                                exclude: ['password']
-                            },
-                            include: [
-                                {   
-                                    model: db.Markdown, attributes: ['contentHTML', 'contentMarkdown', 'description']
-                                },
-                                {   
-                                    model: db.allCode, as: 'typeRoleData', attributes: ['valueEn','valueVi']
-                                }
-                            ],
-                            raw: false,
-                            nest: true
-                        })
-                        console.log("check avt:",data.avt)
-                        if(data && data.avt)
-                        {
-                            data.avt = new Buffer(data.avt, 'base64').toString('binary');
-                        }
 
-                        if(!data)
-                        {
-                            data = {}
-                        }
-                        resolve({
-                            errCode: 0,
-                            data: data
-                        });
-                    }
-                
-               
-            } catch (e) {
-                reject(e);
-            }
-        })
+let getChitietSP = (id) =>
+{
+    return new Promise(async (resolve, reject) => {   
+        // console.log("check id",id)
+        if(!id)
+        {
+            resolve({
+                errCode: 1,
+                errMessage: "missing require!"
+            })
+        }
+        else
+        {
+            let data = await db.sanphams.findOne({
+                where:{id:id},
+            })
+            
+            resolve({
+                errCode: 0,
+                data: data
+            });
+        }
+
+    })
 }
-
 let getDetailSanPham = (id) =>
 {
     return new Promise(async (resolve, reject) => {   
-        console.log("check id",id)
+        // console.log("check id",id)
         if(!id)
         {
             resolve({
@@ -301,6 +276,28 @@ let checkNameLoaiSanPham = (nameLSP) =>
         }
     })
 }
+// let checkNameGioHang = (nameLSP) =>
+// {
+//     return new Promise(async(resolve, reject) => {
+//         try
+//         {   
+//             let name = await db.giohangs.findOne({
+//                 where: {ten_sp: nameLSP}
+//             })
+//             if(name)
+//             {
+//                 resolve(true);
+//             }
+//             else
+//             {
+//                 resolve(false);
+//             }
+//         }catch(e)
+//         {
+//             reject(e);
+//         }
+//     })
+// }
 let checkNameDMSanPham = (nameDM) =>
 {
     return new Promise(async(resolve, reject) => {
@@ -309,6 +306,7 @@ let checkNameDMSanPham = (nameDM) =>
             let name = await db.danhmucs.findOne({
                 where: {ten_dm: nameDM}
             })
+            console.log("check danh sách danh mục",name)
             if(name)
             {
                 resolve(true);
@@ -360,7 +358,7 @@ let CreateNewSanPham = (data) =>
                     gia: data.gia,
                 })
                 // db.query(createSP, function (err, results, fields){
-                     console.log("check id mới tạo", createSP.id)
+                    //  console.log("check id mới tạo", createSP.id)
                 // })
                 await db.hinhsps.create({
                     image1: data.avt1,
@@ -426,7 +424,7 @@ let CreateNewDMSanPham = (data) =>
         try{
             
             let check = await checkNameDMSanPham(data.ten_dm);
-            console.log(check);
+            console.log("check tên danh mục",check);
             if(check === true)
             {
                 resolve({
@@ -461,7 +459,7 @@ let updateSanPham = (data) =>
     return new Promise(async(resolve, reject) =>
     {
         //data.id = 6;
-        console.log("check data",data);
+        // console.log("check data",data);
         try{
             if(!data.id)
             {
@@ -543,7 +541,7 @@ let deleteSanPham = (id) =>
        let foundSanPham = await db.sanphams.findOne({
             where: {id: id}
         })
-        console.log("check id",id);
+        // console.log("check id",id);
             if(!foundSanPham)
             {
                 resolve({
@@ -590,7 +588,7 @@ let updateDanhMuc = (data) =>
     return new Promise(async(resolve, reject) =>
     {
         //data.id = 6;
-        console.log("check data",data);
+        // console.log("check data",data);
         try{
             if(!data.id)
             {
@@ -634,7 +632,7 @@ let deleteDanhMuc = (id) =>
        let foundDanhMuc = await db.danhmucs.findOne({
             where: {id: id}
         })
-        console.log("check id",id);
+        // console.log("check id",id);
             if(!foundDanhMuc)
             {
                 resolve({
@@ -655,7 +653,7 @@ let deleteDanhMuc = (id) =>
 let getDetailDanhMuc = (id) =>
 {
     return new Promise(async (resolve, reject) => {   
-        console.log("check id",id)
+        // console.log("check id",id)
         if(!id)
         {
             resolve({
@@ -692,7 +690,7 @@ let updateLoaiSP = (data) =>
     return new Promise(async(resolve, reject) =>
     {
         //data.id = 6;
-        console.log("check data",data);
+        // console.log("check data",data);
         try{
             if(!data.id)
             {
@@ -737,7 +735,7 @@ let deleteLoaiSP = (id) =>
        let foundLoaisp = await db.loaisps.findOne({
             where: {id: id}
         })
-        console.log("check id",id);
+        // console.log("check id",id);
             if(!foundLoaisp)
             {
                 resolve({
@@ -758,7 +756,7 @@ let deleteLoaiSP = (id) =>
 let getDetailLoaiSP = (id) =>
 {
     return new Promise(async (resolve, reject) => {   
-        console.log("check id",id)
+        // console.log("check id",id)
         if(!id)
         {
             resolve({
@@ -784,7 +782,7 @@ let getDetailLoaiSP = (id) =>
 let search_loaispService = (id) =>
 {
     return new Promise(async (resolve, reject) => {   
-        console.log("check id",id)
+        // console.log("check id",id)
         if(!id)
         {
             resolve({
@@ -812,7 +810,7 @@ let search_loaispService = (id) =>
 let getdsloaidm = (idDM) =>
 {
     return new Promise(async (resolve, reject) => {   
-        console.log("check id",idDM)
+        // console.log("check id",idDM)
         if(!idDM)
         {
             resolve({
@@ -852,6 +850,314 @@ let getdsloaidm = (idDM) =>
     })
 }
 
+let CreateNewGioHang = (data) =>
+{
+    // console.log('check data',data)
+    
+    return new Promise( async(resolve, reject) =>
+    {
+        // if(data.detailSP.data.id)
+        // {}
+        let check = await checkNameSPGioHang(data.detailSP.id)
+        // console.log("check check", check)
+        try{   
+                if(check === true)
+                {
+                    let giohang = await db.giohangs.findOne(
+                    {
+                        where : { id_sp:data.detailSP.id}
+                    })  
+                    // console.log("check giỏ hàng",giohang)
+
+                    let sp = await db.sanphams.findOne({
+                        where: {id:data.detailSP.id}
+                    }) 
+
+                    if(sp)
+                    {
+                        
+                        let temp = sp.sl_sp*1 - data.quantity*1  
+                        if(temp > 0 )
+                        {
+                            sp.sl_sp = temp
+                            await sp.save()
+
+                        }
+                        else
+                        {
+                            sp.sl_sp = 0
+                            await sp.save()
+                        }
+                    }
+                    
+                    let tong = 0
+                    if(tong > sp.slg_sp)
+                    {
+                        tong = giohang.soluong_sp
+                    }
+                    else
+                    {
+                        tong = giohang.soluong_sp*1 + data.quantity*1
+                    }
+                    console.log("tổng",tong)
+                    if(giohang)
+                    {
+                        giohang.soluong_sp = tong
+                        giohang.thanhtien = sp.gia * giohang.soluong_sp
+                        await giohang.save();
+                    } 
+                    
+
+                }
+                else
+                {
+                    let createGH = await db.giohangs.create({
+                        avt:data.detailSP.avt, 
+                        ten_sp:data.detailSP.ten_sp,
+                        gia_sp:data.detailSP.gia,
+                        soluong_sp: data.quantity,
+                        thanhtien: data.quantity * data.detailSP.gia,
+                        id_sp:data.detailSP.id,
+                        id_nguoidung: data.idUser
+                    })
+                    let sp = await db.sanphams.findOne({
+                        where: {id:data.detailSP.id}
+                    }) 
+                    if(sp)
+                    {
+                        
+                        let temp = sp.sl_sp*1 - data.quantity*1  
+                        if(temp > 0 )
+                        {
+                            sp.sl_sp = temp
+                            await sp.save()
+
+                        }
+                        else
+                        {
+                            sp.sl_sp = 0
+                            await sp.save()
+                        }
+                    }
+
+                     
+                }
+                resolve({
+                    errCode: 0,
+                    errMessage: "thành công",
+                })   
+            }catch(e)
+            {
+                reject(e)
+            }
+    })
+}
+let getGioHang = (idUser) =>
+{
+    return new Promise(async (resolve, reject) => {   
+        // console.log("check id",idUser)
+        if(!idUser)
+        {
+            resolve({
+                errCode: 1,
+                errMessage: "missing require!"
+            })
+        }
+        else
+        {
+            let data = await db.giohangs.findAll({
+                where:{id_nguoidung:idUser},
+            })
+            resolve({
+                errCode: 0,
+                data: data
+            });
+        }
+
+    })
+}
+
+
+let checkNameSPGioHang = (id_sp) =>
+{
+    return new Promise(async(resolve, reject) => {
+        try
+        {   
+            let name = await db.giohangs.findOne({
+                where: {id_sp: id_sp}
+            })
+            // console.log("check danh sách giỏ hàng",name)
+            if(name)
+            {
+                resolve(true);
+            }
+            else
+            {
+                resolve(false);
+            }
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+let getAllGioHang = () =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let giohang = await db.giohangs.findAll();
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: giohang,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let deletgiohang = (data) =>
+{
+    console.log(" check data ",data)
+    return new Promise(async(resolve, reject) =>{
+        
+        let giohang = await db.giohangs.findOne({
+             where: {id_sp: data.id_sp}
+         })
+        //  console.log("check id",data);
+             if(!giohang)
+             {
+                 resolve({
+                     errCode: 2,
+                     errMessage: "không có sản phẩm này"
+                 })
+             }else{
+                await db.giohangs.destroy({
+                    where: {id_sp: data.id_sp}
+                 });
+                let sanpham = await db.sanphams.findOne({
+                    where: {id: data.id_sp}
+                })
+    
+                if(sanpham)
+                {
+                    sanpham.sl_sp = sanpham.sl_sp*1 + data.soluong_sp*1 
+                    await sanpham.save()
+                }
+                    resolve({
+                        errCode: 0,
+                        errMessage: "thành công",
+                        data
+                    })
+             }
+              
+             
+    })
+}
+
+let bulkCreateThanhToan = (data) =>
+{
+    // console.log("check data",data)
+    return new Promise ( async (resolve, reject)=>
+    {
+        try{
+            if(!data)
+            {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Chưa truyền tham số"
+                })
+            }
+            else
+            {
+                let thanhtoan = await db.donhangs.create({
+                    ngaydathang: Date.now(),
+                    // ngaygiaohang:ngaygiaohang,
+                    // dc_gh:dc_gh,
+                    ma_nguoidung:data.ma_nguoidung,
+                    tongtien:data.tongtien,
+                    trangthai: "DH1",
+                    // ma_nhanvien:data.ma_nhanvien
+                })     
+                let temp = data.giohang;
+                console.log('check temp đầu',temp)
+                if(temp && temp.length>0)
+                {
+                        temp = temp.map(item =>{
+                        item.avt = new Buffer(item.avt, 'base64').toString('binary');
+                        item.ma_donhang = thanhtoan.id
+                        return item;
+                    })
+                    console.log("check data don hang",temp)
+
+                    await db.chitietdonhangs.bulkCreate(temp);
+                    resolve({
+                        errCode: 0,
+                        errMessage: "Thành Công"
+                    })
+                }
+                await db.giohangs.destroy({
+                    where: {id_nguoidung: data.idUser}
+                });
+            }
+            
+        }catch(e)
+        {
+            reject(e)
+        }
+    })
+}
+let getTrangThai = () =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let trangthai = await db.allCode.findAll({
+                where : {type : "ORDERS"}
+            });
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: trangthai,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let getAllDonHang = () =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let donhang = await db.donhangs.findAll({
+                include: [
+                        {   
+                            model: db.allCode, attributes: ['keyMap']
+                        },
+                ],   
+                raw: false,
+                nest: true     
+            });
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: donhang,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports={
     getTopDTHomeService:getTopDTHomeService,
     getAllSP:getAllSP,
@@ -875,4 +1181,12 @@ module.exports={
     getDetailLoaiSP:getDetailLoaiSP,
     search_loaispService:search_loaispService,
     getdsloaidm:getdsloaidm,
+    CreateNewGioHang:CreateNewGioHang,
+    getGioHang:getGioHang,
+    checkNameSPGioHang:checkNameSPGioHang,
+    getAllGioHang:getAllGioHang,
+    deletgiohang:deletgiohang,
+    bulkCreateThanhToan:bulkCreateThanhToan,
+    getTrangThai: getTrangThai,
+    getAllDonHang:getAllDonHang
 }

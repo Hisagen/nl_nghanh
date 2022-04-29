@@ -58,6 +58,22 @@ let initWebRoute = (app) =>
     // tìm
     route.get("/api/tim_loaisp_danhmuc", dtController.search_loaisp);
     route.get("/api/lay_ds_loaisp_dm", dtController.getdsloaidm);
+
+    // giỏ hàng
+    route.get("/api/GetAllGioHang", dtController.getAllGioHang);
+    route.get("/api/lay_ds_giohang", dtController.hanldegetGioHang);
+    route.post("/api/create-new-giohang", dtController.handleCreateNewGioHang);
+    route.post("/api/delete-giohang", dtController.hanldeDeleteGioHang);
+    route.post("/api/bulk-create-thanhtoan", dtController.handleCreateThanhToan);
+    // route.post("/api/bulk-create-donhang", dtController.handlecreateDonHang);
+
+    // chi tiết đơn hàng
+
+    route.get("/api/get_trangthai_allcode", dtController.handleGetTrangThai);
+
+    //đơn hàng
+    route.get("/api/get_ALL_DonHang", dtController.getAllDonHang);
+
     route.get('/nlnghanh',(req, res) => 
     {
         return res.send('Hello Ra Sin');

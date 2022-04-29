@@ -4,7 +4,9 @@ import { dispatch } from '../../redux';
 import {get_all_loai_san_pham, create_new_SanPham,get_all_san_pham, 
     editSanPhamService,deleteSanPhamService,getAllDanhMuc, 
     create_new_DanhMuc,editDanhMucService,deleteDanhMucService,create_new_Loaisp,editLoaiSPService,
-    deleteLoaispService, searchLoaispService} from "../../services/sanphamService";
+    deleteLoaispService, searchLoaispService, getgiohang,
+    getAllGioHang, create_new_giohang,deleteGioHang
+    ,getTrangThaiDonHang,getAllDonHang} from "../../services/sanphamService";
 
 export const createNewSanPham = (data) =>
 {
@@ -444,3 +446,202 @@ export const searchLoaispFailed = () =>
     type: actionTypes.SEARCH_LOAISP_FAILED
 })
 
+export const getGiohang = (idUser) =>
+{
+    return async (dispatch,getState) =>
+    {
+        try{
+            let res = await getgiohang(idUser)
+            if(res && res.errCode === 0)
+            {
+                dispatch({
+                        type: actionTypes.GET_ALL_GIO_HANG_SUCCESS,
+                        giohangArr: res.data,
+                })
+                dispatch(fetchAllGioHangSTART());
+
+            }
+            else
+            {
+                dispatch({
+                    type: actionTypes.GET_ALL_GIO_HANG_FAILED, 
+                })
+            }
+        }catch(e)
+        {
+
+        }
+    }
+}
+
+export const fetchAllGioHangSTART = (userId) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getAllGioHang(userId);
+            // console.log("check res mới", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(fetchAllGioHangSuccess(res.data));
+            }else
+            {
+                dispatch(fetchAllGioHangFailed());
+            }
+        }catch(e)
+        {
+            dispatch(fetchAllGioHangFailed());
+            console.log("fetchAllGioHangSTART error",e);
+        }
+    }
+}
+
+export const fetchAllGioHangSuccess = (giohang) => ({
+    type: actionTypes.FETCH_ALL_GIOHANGNEW_SUCCESS,
+    data: giohang
+})
+
+export const fetchAllGioHangFailed = () => ({
+    type: actionTypes.FETCH_ALL_GIOHANGNEW_FAILED
+})
+
+export const createNewGioHang = (data) =>
+{
+    return async (dispatch, getState) =>{
+        try{
+            let res = await create_new_giohang(data);
+            //console.log("check create sản phẩm redux", res)
+            if(res && res.errCode === 0 )
+            {
+                toast.success("THÊM SẢN PHẨM THÀNH CÔNG")
+                //dispatch(saveGioHangSuccess());
+                dispatch(fetchAllGioHangSTART());
+            }else
+            {
+                toast.error("KHÔNG THỂ THÊM SẢN PHẨM THÀNH CÔNG")
+                //dispatch(saveGioHangFailed());
+            }
+        }catch(e)
+        {
+            dispatch(saveGioHangFailed());
+            console.log("createNewGioHang error",e);
+        }
+    }
+}
+
+export const saveGioHangSuccess = () => (
+    {
+        type: actionTypes.CREATE_GIOHANG_SUCCESS
+
+    })
+
+export const saveGioHangFailed = () => (
+    {
+        type: actionTypes.CREATE_GIOHANG_FAILED,
+        
+    }
+)
+
+export const hanldedeleteGioHang = (data) =>
+{
+    return async (dispatch, getState) =>{
+        try{
+            let res = await deleteGioHang(data);
+            console.log("check res delete giỏ hàng", res)
+            if(res && res.errCode === 0 )
+            {
+                toast.success("XÓA THÀNH CÔNG")
+                //dispatch(saveGioHangSuccess());
+                dispatch(fetchAllGioHangSTART());
+            }else
+            {
+                toast.error("KHÔNG THỂ XÓA")
+                //dispatch(saveGioHangFailed());
+            }
+        }catch(e)
+        {
+            dispatch(saveGioHangFailed());
+            console.log("deleteGioHang error",e);
+        }
+    }
+}
+
+export const deleteGioHangSuccess = () => (
+    {
+        type: actionTypes.DELETE_GIOHANG_SUCCESS
+
+    })
+
+export const deleteGioHangFailed = () => (
+    {
+        type: actionTypes.DELETE_GIOHANG_FAILED,
+        
+    }
+)
+
+export const fetchAllTrangThaiSTART = () =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getTrangThaiDonHang();
+            // console.log("check res mới", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(fetchAllTrangThaiSuccess(res.data));
+            }else
+            {
+                dispatch(fetchAllTrangThaiFailed());
+            }
+        }catch(e)
+        {
+            dispatch(fetchAllTrangThaiFailed());
+            console.log("fetchAllGioHangSTART error",e);
+        }
+    }
+}
+
+export const fetchAllTrangThaiSuccess = (trangthai) => ({
+    type: actionTypes.GET_ALL_TRANGTHAI_SUCCESS,
+    data: trangthai
+})
+
+export const fetchAllTrangThaiFailed = () => ({
+    type: actionTypes.GET_ALL_TRANGTHAI_FAILED
+})
+
+// đơn hàng
+
+export const fetchAllDonHangSTART = () =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getAllDonHang();
+            // console.log("check res mới", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(fetchAllDonHangSuccess(res.data));
+            }else
+            {
+                dispatch(fetchAllDonHangFailed());
+            }
+        }catch(e)
+        {
+            dispatch(fetchAllDonHangFailed());
+            console.log("fetchAllDonHangSTART error",e);
+        }
+    }
+}
+
+export const fetchAllDonHangSuccess = (donhang) => ({
+    type: actionTypes.GET_ALL_DONHANG_SUCCESS,
+    data: donhang
+})
+
+export const fetchAllDonHangFailed = () => ({
+    type: actionTypes.GET_ALL_DONHANG_FAILED
+})

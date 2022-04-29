@@ -11,6 +11,7 @@ import { divide } from 'lodash';
 import { Alert } from 'reactstrap';
 
 import { handelLoginApi } from '../../services/userService';
+import e from 'cors';
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -80,6 +81,13 @@ class Login extends Component {
         })
         //<i class="fas fa-eye-slash"></i>
     }
+    handleKeyDown = (event) =>
+    {
+        if(event.key === "Enter" || event.code === 113)
+        {
+            this.handelLogin()
+        }
+    }
     render() {
         return (
             <div className='login-background'>
@@ -106,7 +114,10 @@ class Login extends Component {
                                     type= { this.state.isShowPassword ? 'text' : 'password' }                  
                                     className='form-control' 
                                     placeholder='Nhập mật khẩu'
-                                    onChange={(event) => this.handleOnChangePassword(event)}></input>
+                                    onChange={(event) => this.handleOnChangePassword(event)}
+                                    onKeyDown={(event) => this.handleKeyDown(event)}
+                                    ></input>
+
                                <span
                                 onClick={() => { this.handleShowHidePassword()
                                 }}

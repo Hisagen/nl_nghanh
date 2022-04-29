@@ -382,7 +382,7 @@ class Quanlysanpham extends Component {
         
         
         // let loaispnew = this.props.loaispnew;
-        console.log("check previewImgURL",this.state.previewImgURL)
+        console.log("check avt1",this.state.avt1)
         let loai = this.state.loaiSPArr;
         let arrdanhmuc = this.state.DMArr;
         let status = this.state.statusArr

@@ -1,0 +1,87 @@
+
+.donhang-redux-container{
+    .left-right{
+        // border: 1px solid red;
+        margin: 0 160px;
+        height: auto;
+        background-color: #f5f5f5;
+        .TH{
+            text-align: center;
+            display: flex;
+            // gap: 97px;
+            // border: 1px solid red;
+            height: 50px;
+            padding-top: 15px;
+            font-weight: 700;
+            border-radius: 5px;
+            background-color: #ffffff;
+            .title-sanpham{
+                width: 16%;
+            }
+            .title-dongia{
+                width: 16%;
+
+            }
+            .title-soluong{
+                width: 16%;
+
+            }
+            .title-sotien{
+                width: 16%;
+
+            }
+            .title-action{
+                width: 16%;
+
+            }
+        }
+        .TD{
+            // border: 1px solid blue;
+            height: auto;
+            width: auto;
+            border-radius: 5px;
+            background-color: #ffffff;
+            display: flex;
+            // gap: 90px;
+            text-align: center;
+            &:hover{
+                background-color: #CCFFFF;
+            }
+            .id{
+                width: 16%;
+            }
+            .ngaydathang{
+                width: 16%;
+            }
+            .ngaygiaohang{
+                width: 16%;
+            }
+            .tongtien{
+                width: 16%;
+            }
+            .trangthai{
+                width: 16%;
+            }
+            .xem{
+                width: 16%;
+            }
+        }
+        .tong{
+            border-radius: 15px;
+            background-color: #ffffff;
+            height: 64px;
+            display: flex;
+            .name{
+                padding-top: 20px;
+                padding-left: 580px;
+                font-size: 20px;
+            }
+            .tongtien{
+                padding-top: 20px;
+                padding-left: 40px;
+                font-size: 22px;
+                color: #ee4d2d;
+            }
+        }
+    }
+}

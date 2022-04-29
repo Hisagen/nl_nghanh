@@ -152,6 +152,34 @@
                 }     
             }
             
+            .soluong{
+                font-size: 15px;
+                font-weight: 500;
+                color: #3366ff;
+            }
+            .css-soluong{
+                .btn-soluong-tang{
+                    border: none;
+                    background-color: white;
+                    color:  #33cc33;
+                    &:hover{
+                        color: 	 #145214;
+                    }
+                }
+                .text-soluong{
+                    border: 1px solid #8585ad;
+                    width: 30px;
+                    border-radius: 10px;
+                }
+                .btn-soluong-giam{
+                    border: none;
+                    background-color: white;
+                    color:  #33cc33;
+                    &:hover{
+                        color: 	 #145214;
+                    }
+                }
+            }
             .gia-sp{
                 font-size: 20px;
                 font-weight: 700;

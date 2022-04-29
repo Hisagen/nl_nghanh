@@ -50,20 +50,24 @@ HomeHeader extends Component {
                             </div>
                             <div className='child-content1'>
                             <div className='hieu-ung'>
-                                <Link to="/giohang">
+                                <Link to='/giohang/'>
                                     <b><FormattedMessage id="homeheader.giohang"/></b>        
                                 </Link>                   
                             </div>                                
                             </div>
                             <div className='child-content2'>
-                            <div className='hieu-ung'><b><FormattedMessage id="homeheader.lsdh"/></b></div>
+                            <div className='hieu-ung'>
+                                <Link to='/lichsumuahang/'>
+                                    <b><FormattedMessage id="homeheader.lsdh"/></b>            
+                                </Link> 
+                            </div>
     
                             </div>
                             <div className='child-whitelist'>
                                <b><FormattedMessage id="menu.admin.whitelist"/></b>
                                
                                <div className='test'>
-                                        <table id='tablespyt' className='text-center'>
+                                        <table id='tablespyt' className='xtext-center'>
                                             <tbody >
                                                 <tr className='text-center'>
                                                    <th>STT</th>

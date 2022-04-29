@@ -16,20 +16,29 @@
             border-radius: 5px;
             background-color: #ffffff;
             .title-sanpham{
-                width: 30%;
+                width: 24%;
             }
             .title-dongia{
+                width: 10%;
+
             }
             .title-soluong{
+                width: 10%;
+
             }
             .title-sotien{
+                width: 10%;
+
             }
             .title-action{
+                width: 10%;
+
             }
         }
         .TD{
             // border: 1px solid blue;
             height: auto;
+            width: auto;
             border-radius: 5px;
             background-color: #ffffff;
             display: flex;
@@ -40,7 +49,7 @@
             }
             .sanpham{
                 display: flex;
-                width: 30%;
+                width: 25%;
 
                 .image-avt{
                     padding-top: 10px;
@@ -58,13 +67,27 @@
                 }
             }
             .dongia{
-                // padding-left: 5px;
+                width: 10%;
+            margin-left: 42px;
+            // border: 1px solid blue;
                 
             }
+            .soluong{
+                width: 10%;
+                margin-left: 25px;
+                // border: 1px solid blue;
+
+            }
             .sotien{
-                // padding-left: 25px;
+                width: 10%;
+                // border: 1px solid blue;
+
+                margin-left: 25px;
             }
             .action{
+                width: 10%;
+                // border: 1px solid blue;
+
                 // border: 1px solid red;
                 // padding-left: 0px;
                 &:hover{

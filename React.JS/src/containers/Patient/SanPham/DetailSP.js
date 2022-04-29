@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 // import { Redirect } from 'react-router-dom';
 import HomeHeader from '../../Homepage/HomeHeader';
 import "./DetailSP.scss";
-
+import * as actions from "../../../store/actions";
 import HomeFooter from "../../Homepage/HomeFooter"
 import Spkhac from './Spkhac2';
 import Slider from 'react-slick';
@@ -13,6 +13,9 @@ import Avt from './Avt';
 import {getInfoDetailSP} from "../../../services/userService"
 import {getInfoDetailSanPham} from "../../../services/sanphamService"
 import { LANGUAGES } from '../../../utils';
+import {withRouter} from "react-router";
+import {toast} from 'react-toastify';
+
 class DetailSP extends Component {
     
     constructor(props) {
@@ -24,16 +27,21 @@ class DetailSP extends Component {
             hinh1: '',
             hinh2: '',
             hinh3: '',
+            idUser: '',
+            quantity: 1,
+
         }
     }
 
     async  componentDidMount () {
+        this.props.getGiohang(this.state.idUser)
+
         if(this.props.match && this.props.match.params && this.props.match.params.id)
         {   
             let id = this.props.match.params.id
             let res = await getInfoDetailSanPham(id)
             let hinh = res.data.hinhsp
-            console.log("check hinh", hinh.image1)
+            //console.log("check hinh", hinh.image1)
             if(res && res.errCode === 0)
             {
                 this.setState({
@@ -41,6 +49,7 @@ class DetailSP extends Component {
                     hinh1: hinh.image1,
                     hinh2: hinh.image2,
                     hinh3: hinh.image3,
+                    idUser: this.props.userInfo.id
                 })
             }
             //console.log("check res",res)
@@ -53,9 +62,42 @@ class DetailSP extends Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         
     }
-
+    handlethemvaogiohang = (sp) =>
+    {
+        //console.log("View info Sản Phẩm:", sp);
+        if(sp.sl_sp==0)
+        { 
+            toast.error("SẢN PHẨM HẾT HÀNG")
+        }
+        else
+        {
+            this.props.history.push(`/giohang/`)
+            this.props.createNewGioHang(this.state)
+        }
+    }
+    onUpdateQuantity = (sp, quantity) =>
+    {
+        if(quantity>0)
+        {
+            this.setState({
+                quantity: quantity
+            })
+        }
+        if(quantity>sp.sl_sp)
+        {
+            this.setState({
+                quantity: sp.sl_sp
+            })
+        }
+        if(sp.sl_sp === 0)
+        {
+            this.setState({
+                quantity: 0
+            })
+        }
+    }
     render() {
-        console.log("get id",this.props.match.params.id)
+        console.log("state",this.state)
         let {language} = this.props;
         let detailSP = this.state;
         let sp = detailSP.detailSP;
@@ -63,14 +105,9 @@ class DetailSP extends Component {
         let img1 = detailSP.hinh1;
         let img2 = detailSP.hinh2;
         let img3 = detailSP.hinh3;
-        console.group("sp",sp);
-        //let nameVi = '', nameEn = '';
-        // if(detailSP && detailSP.typeRoleData)
-        // {
-        //     nameVi = `${detailSP.typeRoleData.valueVi} ${detailSP.firstName} ${detailSP.lastName}`;
-        //     nameEn = `${detailSP.typeRoleData.valueEn} ${detailSP.lastName} ${detailSP.firstName}`;
-        // }
-        //console.log("detailSP avt",detailSP.avt)
+        
+        let quantity = sp.sl_sp > 0 ? this.state.quantity : sp.sl_sp
+        console.log("check quantity", quantity)
         return (
             <>
 
@@ -123,6 +160,7 @@ class DetailSP extends Component {
                             <div className='color'>Vàng</div>
                             <div className='color'>Vàng</div>
                         </div>
+                        
                         <div className='chung'>
                         <div className='khung mt-3'>
                             
@@ -133,14 +171,21 @@ class DetailSP extends Component {
                         </div>
                         &nbsp; &nbsp;
                         <div className='khung mt-3'>
-                            <div className='btn-tvgh' >
+                            <div className='btn-tvgh' 
+                                onClick={() => this.handlethemvaogiohang(sp)}
+                            >
                                 <i className="fas fa-cart-arrow-down"></i> &nbsp;&nbsp;
                                 Thêm Vào Giỏ Hàng
                             </div>
                         </div>
                         </div>
-                        
-                        <div className='gia-sp'>Giá: {sp.gia}₫</div>
+                        <div className='soluong mt-3'>Số lượng còn: {sp.sl_sp == 0 ?"hết hàng" : sp.sl_sp}</div>
+                        <div className='css-soluong mt-3'>
+                            <button className='btn-soluong-tang' onClick={()=> this.onUpdateQuantity(sp, this.state.quantity-1)}><i className="fas fa-minus"></i></button>
+                            <input className='text-soluong' type="text" value={quantity} disabled></input>
+                            <button className='btn-soluong-giam' onClick={()=> this.onUpdateQuantity(sp, this.state.quantity+1)}><i className="fas fa-plus"></i></button>
+                        </div>
+                        <div className='gia-sp mt-3'>Giá: {sp.gia}₫</div>
                         <button className='btn-muangay'>MUA NGAY</button>
                         <p className='title-cauhinh'>Cấu hình Điện thoại {sp.ten_sp} 128GB</p>
                         <div className='cauhinh-sp'>
@@ -201,8 +246,8 @@ class DetailSP extends Component {
                 <br/>
                 <br/>
                 <br/>
-                <HomeFooter/>
             </div>
+            <HomeFooter/>
             
             </>
             
@@ -215,14 +260,18 @@ const mapStateToProps = state => {
         DetailSPMenuPath: state.app.DetailSPMenuPath,
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
+        userInfo: state.user.userInfo,
+        giohangArr: state.sanpham.giohangArr
 
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getGiohang: (idUser) => dispatch(actions.getGiohang(idUser)),
+        createNewGioHang: (data) => dispatch(actions.createNewGioHang(data)),
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailSP);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DetailSP));
   

@@ -22,6 +22,7 @@ import Sanpham from '../routes/Sanpham';
 import Danhmuc from '../routes/Danhmuc';
 import Loaisp from '../routes/Loaisp';
 import Giohang from '../routes/Giohang';
+import LichSuDHKhach from '../routes/LichSuDHKhach'
 import CustomScrollbars from '../components/CustomScrollbars';
 class App extends Component {
 
@@ -58,8 +59,11 @@ class App extends Component {
                                     <Route path={path.DANHMUC} component={userIsAuthenticated(Danhmuc)} />
                                     <Route path={path.LOAISP} component={userIsAuthenticated(Loaisp)} />
                                     <Route path={path.HOMEPAGE} component={(Homepage)} />
-                                    <Route path={path.DETAIL_SP} component={DetailSP}/>
-                                    <Route path={path.GIOHANG} component={Giohang}/>
+                                    <Route path={path.DETAIL_SP} exact component={DetailSP}/>
+                                    <Route path={path.GIOHANG} exact component={Giohang}/>
+                                    <Route path={path.LICHSUMUAHNAG} exact component={LichSuDHKhach}/>
+
+                                    
 
                                 </Switch>
                             </CustomScrollbars>

@@ -5,6 +5,10 @@ const initialState = {
     loaispArr: [],
     danhmucArr: [],
     loaispnew: [],
+    giohangArr: [],
+    trangthaiArr: [],
+    donhangArr: [],
+
 }
 
 const sanphamReducer = (state = initialState, action) => {
@@ -52,6 +56,36 @@ const sanphamReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        case actionTypes.FETCH_ALL_GIOHANGNEW_SUCCESS: 
+            state.giohangArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.FETCH_ALL_GIOHANGNEW_FAILED:
+            state.giohangArr = [];
+            return {
+                ...state,
+            }  
+        case actionTypes.GET_ALL_TRANGTHAI_SUCCESS: 
+            state.trangthaiArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_TRANGTHAI_FAILED:
+            state.trangthaiArr = [];
+            return {
+                ...state,
+            }  
+        case actionTypes.GET_ALL_DONHANG_SUCCESS: 
+            state.donhangArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_DONHANG_FAILED:
+            state.trangthaiArr = [];
+            return {
+                ...state,
+            }  
         default:
             return state;
     }
