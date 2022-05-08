@@ -83,9 +83,9 @@ class HomeFooter extends Component {
                 <div className='col-4'>
                   <div className='col-4-1'>
                       <div className='tren'>
-                        <div className='icon'><i class="fab fa-facebook"></i></div>
+                        <div className='icon'><i className="fab fa-facebook"></i></div>
                         <div className='tt'>300k Fan</div>
-                        <div className='icon'><i class="fab fa-youtube"></i></div>
+                        <div className='icon'><i className="fab fa-youtube"></i></div>
                         <div className='tt'>838k Đăng ký</div>
                       </div>
                       <div className='duoi'>

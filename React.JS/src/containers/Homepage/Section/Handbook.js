@@ -5,6 +5,7 @@ import "./Handbook.scss";
 import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 import Ungdung from './Ungdung';
+import { Link } from 'react-router-dom';
 
 
 function SampleNextArrow(props) {
@@ -48,7 +49,9 @@ class Handbook extends Component {
                 <div className='CN24h'>
                 <div className='header-24h'>
                     <span className='title24h'>TIN TỨC</span>
-                    <button className='btn-24h'>xem thêm</button>
+                    <Link to='/tintuc/'>
+                      <button className='btn-24h'>xem thêm</button>
+                    </Link>
                 </div>
                 <div className='img-1'>
 

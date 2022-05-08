@@ -23,7 +23,16 @@ import Danhmuc from '../routes/Danhmuc';
 import Loaisp from '../routes/Loaisp';
 import Giohang from '../routes/Giohang';
 import LichSuDHKhach from '../routes/LichSuDHKhach'
+import ChiTietGioHangKhach from '../routes/ChiTietGioHangKhach'
 import CustomScrollbars from '../components/CustomScrollbars';
+import DonHang from '../routes/Admin/DonHang';
+import ChiTietDonHang from '../routes/Admin/ChiTietDonHang';
+import TinTuc from '../routes/Khach/TinTuc';
+import BaiViet from '../routes/Admin/BaiViet';
+import ChiTietTinTuc from '../routes/Khach/ChiTietTinTuc';
+import SanPham from '../routes/Khach/SanPham';
+import DangKy from '../routes/Khach/DangKy';
+import UngDung from './System/Khach/UngDung';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -55,15 +64,27 @@ class App extends Component {
                                     <Route path={path.HOME} exact component={(Home)} />
                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={path.SANPHAM} component={userIsAuthenticated(Sanpham)} />
+                                    <Route path={path.SANPHAMMANAGE} component={userIsAuthenticated(Sanpham)} />
                                     <Route path={path.DANHMUC} component={userIsAuthenticated(Danhmuc)} />
                                     <Route path={path.LOAISP} component={userIsAuthenticated(Loaisp)} />
-                                    <Route path={path.HOMEPAGE} component={(Homepage)} />
-                                    <Route path={path.DETAIL_SP} exact component={DetailSP}/>
-                                    <Route path={path.GIOHANG} exact component={Giohang}/>
-                                    <Route path={path.LICHSUMUAHNAG} exact component={LichSuDHKhach}/>
+                                    <Route path={path.HOMEPAGE} component={userIsAuthenticated(Homepage)} />
+                                    <Route path={path.DETAIL_SP} exact component={userIsAuthenticated(DetailSP)}/>
+                                    <Route path={path.GIOHANG} exact component={userIsAuthenticated(Giohang)}/>
+                                    <Route path={path.LICHSUMUAHNAG} exact component={userIsAuthenticated(LichSuDHKhach)}/>
+                                    <Route path={path.CHITIET} exact component={userIsAuthenticated(ChiTietGioHangKhach)}/>
+                                    <Route path={path.TINTUC} exact component={userIsAuthenticated(TinTuc)}/>
+                                    <Route path={path.LICHSUMUAHNAGADMIN} exact component={userIsAuthenticated(DonHang)}/>
+                                    <Route path={path.CHITIETADMIN} exact component={userIsAuthenticated(ChiTietDonHang)}/>
+                                    <Route path={path.BAIVIET} exact component={userIsAuthenticated(BaiViet)}/>
+                                    <Route path={path.CHITIETTINTUC} exact component={userIsAuthenticated(ChiTietTinTuc)}/>
+                                    <Route path={path.SANPHAM} exact component={userIsAuthenticated(SanPham)}/>
+                                    <Route path={path.DANGKY} exact component={DangKy}/>
+                                    <Route path={path.UNGDUNG} exact component={UngDung}/>
+
+                                    {/* /sanpham/ */}
 
                                     
+
 
                                 </Switch>
                             </CustomScrollbars>

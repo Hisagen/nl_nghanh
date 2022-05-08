@@ -327,6 +327,72 @@ let getAllDonHang = async (req, res) =>
     // console.log("check message", message);
     return res.status(200).json(message);
 }
+let getChiTietDonHang = async (req, res) =>
+{
+    let message = await DTService.getChiTietDonHang(req.query.id_donhang);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+let getAllYeuThich = async (req, res) =>
+{
+    let message = await DTService.getAllYeuThich(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+let CreateNewYeuThich = async (req, res) =>
+{
+    let message = await DTService.CreateNewYeuThich(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let deleteYeuThich = async (req, res) =>
+{
+    let message = await DTService.deleteYeuThich(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+let getTrangThaiDonHang = async (req, res) =>
+{
+    let message = await DTService.getTrangThaiDonHang(req.query.id);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let saveTTDH = async (req, res) =>
+{
+    let message = await DTService.saveTTDH(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let getDiaChiFromUser = async (req, res) =>
+{
+    let message = await DTService.getDiaChiFromUser(req.query.idUser);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let getALLMarkdown  = async (req, res) =>
+{
+    let message = await DTService.getALLMarkdown(req.query.id);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+// ứng dụng
+let getALLUngDung  = async (req, res) =>
+{
+    let message = await DTService.getALLUngDung(req.query.id);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+let searchSPtheoLoai  = async (req, res) =>
+{
+    let message = await DTService.searchSPtheoLoai(req.query.idLoai);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
 module.exports = {
     getTopDTHome:getTopDTHome,
     getAllSP:getAllSP,
@@ -355,6 +421,15 @@ module.exports = {
     hanldeDeleteGioHang:hanldeDeleteGioHang,
     handleCreateThanhToan:handleCreateThanhToan,
     handleGetTrangThai:handleGetTrangThai,
-    getAllDonHang:getAllDonHang
-
+    getAllDonHang:getAllDonHang,
+    getChiTietDonHang:getChiTietDonHang,
+    getAllYeuThich:getAllYeuThich,
+    CreateNewYeuThich:CreateNewYeuThich,
+    deleteYeuThich:deleteYeuThich,
+    getTrangThaiDonHang:getTrangThaiDonHang,
+    saveTTDH:saveTTDH,
+    getDiaChiFromUser:getDiaChiFromUser,
+    getALLMarkdown:getALLMarkdown,
+    searchSPtheoLoai:searchSPtheoLoai,
+    getALLUngDung:getALLUngDung
 }

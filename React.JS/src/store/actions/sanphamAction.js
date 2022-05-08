@@ -6,7 +6,9 @@ import {get_all_loai_san_pham, create_new_SanPham,get_all_san_pham,
     create_new_DanhMuc,editDanhMucService,deleteDanhMucService,create_new_Loaisp,editLoaiSPService,
     deleteLoaispService, searchLoaispService, getgiohang,
     getAllGioHang, create_new_giohang,deleteGioHang
-    ,getTrangThaiDonHang,getAllDonHang} from "../../services/sanphamService";
+    ,getTrangThaiDonHang,getAllDonHang,getDonHangtheoid_donhang, CreateNewYeuThich,
+    getAllYeuThich,deleteYeuThichSerVice,getTTdonhangService,getDiaChiFromUserSerVice,
+    getAllMarkdownSerVice, searchSanPhamtheoLoaiSerVice} from "../../services/sanphamService";
 
 export const createNewSanPham = (data) =>
 {
@@ -44,12 +46,12 @@ export const saveSanPhamFailed = () => (
     }
 )
 
-export const fetchAllSANPHAMStart = (data) =>
+export const fetchAllSANPHAMStart = () =>
 {  
     return async (dispatch,getState) =>
     {
         try{
-            let res = await get_all_san_pham(data);
+            let res = await get_all_san_pham();
             //console.log("check res sản phẩm", res)
             if(res && res.errCode === 0)
             {
@@ -587,7 +589,7 @@ export const fetchAllTrangThaiSTART = () =>
         try{
 
             let res = await getTrangThaiDonHang();
-            // console.log("check res mới", res)
+            // console.log("check res getTrangThaiDonHang", res)
             if(res && res.errCode === 0 )
             {
                 dispatch(fetchAllTrangThaiSuccess(res.data));
@@ -644,4 +646,326 @@ export const fetchAllDonHangSuccess = (donhang) => ({
 
 export const fetchAllDonHangFailed = () => ({
     type: actionTypes.GET_ALL_DONHANG_FAILED
+})
+
+export const fetchAllChiTietDonHangSTART = (id_chitiet) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getDonHangtheoid_donhang(id_chitiet);
+            console.log("check res getDonHangtheoid_donhang", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(fetchAllChiTietDonHangSuccess(res.data));
+            }else
+            {
+                dispatch(fetchAllChiTietDonHangFailed());
+            }
+        }catch(e)
+        {
+            dispatch(fetchAllChiTietDonHangFailed());
+            console.log("fetchAllDonHangSTART error",e);
+        }
+    }
+}
+
+export const fetchAllChiTietDonHangSuccess = (donhang) => ({
+    type: actionTypes.GET_ALL_CHITIETDONHANG_SUCCESS,
+    data: donhang
+})
+
+export const fetchAllChiTietDonHangFailed = () => ({
+    type: actionTypes.GET_ALL_CHITIETDONHANG_FAILED
+})
+
+
+export const fetchAllYeuThichSTART = () =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getAllYeuThich();
+            // console.log("check res mới", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(fetchAllYeuThichSuccess(res.data.reverse()));
+            }else
+            {
+                dispatch(fetchAllYeuThichFailed());
+            }
+        }catch(e)
+        {
+            dispatch(fetchAllYeuThichFailed());
+            console.log("fetchAllGioHangSTART error",e);
+        }
+    }
+}
+
+export const fetchAllYeuThichSuccess = (yeuthich) => ({
+    type: actionTypes.GET_ALL_YEUTHICH_SUCCESS,
+    data: yeuthich
+})
+
+export const fetchAllYeuThichFailed = () => ({
+    type: actionTypes.GET_ALL_YEUTHICH_FAILED
+})
+
+export const createYeuThich = (data) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await CreateNewYeuThich(data);
+            // console.log("check res mới", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(createYeuThichSuccess());
+                dispatch(fetchAllYeuThichSTART());
+            }else
+            {
+                dispatch(createYeuThichFailed());
+            }
+        }catch(e)
+        {
+            dispatch(createYeuThichFailed());
+            console.log("fetchAllGioHangSTART error",e);
+        }
+    }
+}
+
+export const createYeuThichSuccess = () => ({
+    type: actionTypes.CREATE_YEUTHICH_SUCCESS,
+})
+
+export const createYeuThichFailed = () => ({
+    type: actionTypes.CREATE_YEUTHICH_FAILED
+})
+
+export const deleteYeuThich = (data) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await deleteYeuThichSerVice(data);
+            // console.log("check res mới", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(deleteYeuThichSuccess());
+                dispatch(fetchAllYeuThichSTART());
+            }else
+            {
+                dispatch(deleteYeuThichFailed());
+            }
+        }catch(e)
+        {
+            dispatch(deleteYeuThichFailed());
+            console.log("fetchAllGioHangSTART error",e);
+        }
+    }
+}
+
+export const deleteYeuThichSuccess = () => ({
+    type: actionTypes.DELETE_YEUTHICH_SUCCESS,
+})
+
+export const deleteYeuThichFailed = () => ({
+    type: actionTypes.DELETE_YEUTHICH_FAILED
+})
+
+export const getTTdonhang = (id) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getTTdonhangService(id);
+            console.log("check res getTTdonhang", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(getTTdonhangSuccess(res));
+                // dispatch(fetchAllYeuThichSTART());
+            }else
+            {
+                dispatch(getTTdonhangFailed());
+            }
+        }catch(e)
+        {
+            dispatch(getTTdonhangFailed());
+            console.log("fetchAllGioHangSTART error",e);
+        }
+    }
+}
+
+export const getTTdonhangSuccess = (data) => ({
+    type: actionTypes.GET_TT_DH_SUCCESS,
+    data: data
+})
+
+export const getTTdonhangFailed = () => ({
+    type: actionTypes.GET_TT_DH_FAILED
+})
+
+// export const getAllDiaChi = () => {
+//     return async (dispatch, getState) =>
+//     {
+//         try{
+
+//             let res = await getDiaChiFromUserSerVice("ALL");
+//             console.log("check res getDiaChiFromUser", res)
+//             if(res && res.errCode === 0 )
+//             {
+//                 dispatch(getDiaChiFromUserSuccess(res));
+//                 // dispatch(fetchAllYeuThichSTART());
+//             }else
+//             {
+//                 dispatch(getDiaChiFromUserFailed());
+//             }
+//         }catch(e)
+//         {
+//             dispatch(getDiaChiFromUserFailed());
+//             console.log("getDiaChiFromUser error",e);
+//         }
+//     }
+// }
+export const getDiaChiFromUser = (idUser) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getDiaChiFromUserSerVice(idUser);
+            console.log("check res getDiaChiFromUser", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(getDiaChiFromUserSuccess(res.data));
+                // dispatch(getDiaChiFromUser(idUser));
+
+            }else
+            {
+                dispatch(getDiaChiFromUserFailed());
+            }
+        }catch(e)
+        {
+            dispatch(getDiaChiFromUserFailed());
+            console.log("getDiaChiFromUser error",e);
+        }
+    }
+}
+
+export const getDiaChiFromUserSuccess = (data) => ({
+    type: actionTypes.GET_DIACHIFROMUSER_SUCCESS,
+    data: data
+})
+
+export const getDiaChiFromUserFailed = () => ({
+    type: actionTypes.GET_DIACHIFROMUSER_FAILED
+})
+
+export const getAllMarkdown = (id) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getAllMarkdownSerVice(id);
+            console.log("check res getAllMarkdown", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(getAllMarkdownSuccess(res.data));
+                // dispatch(getDiaChiFromUser(idUser));
+
+            }else
+            {
+                dispatch(getAllMarkdownFailed());
+            }
+        }catch(e)
+        {
+            dispatch(getAllMarkdownFailed());
+            console.log("getDiaChiFromUser error",e);
+        }
+    }
+}
+
+export const getAllMarkdownSuccess = (data) => ({
+    type: actionTypes.GET_ALLMARKDOWN_SUCCESS,
+    data: data
+})
+
+export const getAllMarkdownFailed = () => ({
+    type: actionTypes.GET_ALLMARKDOWN_FAILED
+})
+
+export const getOneMarkdown = (id) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await getAllMarkdownSerVice(id);
+            console.log("check res getOneMarkdown", res)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(getOneMarkdownSuccess(res.data));
+                // dispatch(getDiaChiFromUser(idUser));
+
+            }else
+            {
+                dispatch(getOneMarkdownFailed());
+            }
+        }catch(e)
+        {
+            dispatch(getOneMarkdownFailed());
+            console.log("getDiaChiFromUser error",e);
+        }
+    }
+}
+
+export const getOneMarkdownSuccess = (data) => ({
+    type: actionTypes.GET_ONEMARKDOWN_SUCCESS,
+    data: data
+})
+
+export const getOneMarkdownFailed = () => ({
+    type: actionTypes.GET_ONEMARKDOWN_FAILED
+})
+
+
+
+export const searchSanPhamtheoLoai = (idLoai) =>
+{
+    return async (dispatch, getState) =>
+    {
+        try{
+
+            let res = await searchSanPhamtheoLoaiSerVice(idLoai);
+            // console.log("check res searchSanPhamtheoLoai", res.data)
+            if(res && res.errCode === 0 )
+            {
+                dispatch(searchSanPhamtheoLoaiSuccess(res.data));
+                // dispatch(getDiaChiFromUser(idUser));
+
+            }else
+            {
+                dispatch(searchSanPhamtheoLoaiFailed());
+            }
+        }catch(e)
+        {
+            dispatch(searchSanPhamtheoLoaiFailed());
+            console.log("searchSanPhamtheoLoai error",e);
+        }
+    }
+}
+
+export const searchSanPhamtheoLoaiSuccess = (data) => ({
+    type: actionTypes.SEARCH_SANPHAM_THEOLOAI_SUCCESS,
+    data: data
+})
+
+export const searchSanPhamtheoLoaiFailed = () => ({
+    type: actionTypes.SEARCH_SANPHAM_THEOLOAI_FAILED
 })

@@ -59,7 +59,7 @@ class Avt extends Component {
                 
                 <div className='section-body'>
                     <Slider {...settings}>
-                        <div className='img-UD'>
+                        <div className='img-avt'>
                             <img src={this.props.img}/>
                         </div>
                         <div className='img-UD'>

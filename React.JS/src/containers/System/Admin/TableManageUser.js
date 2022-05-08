@@ -65,20 +65,29 @@ class TableManageUser extends Component {
                 <tbody>
                          <tr>
                             <th>Id</th>
-                            <th>Password</th>
+                            <th>Avatar</th>
                             <th>firstName</th>
                             <th>lastName</th>
+                            <th>Số Điện Thoại</th>
                             <th>address</th>
                             <th>Actions</th>
                         </tr>
                         {arrUsers && arrUsers.length > 0 && 
                             arrUsers.map((item, index) =>{
+                                console.log("item", item.avt)
+                                let imageBase64 =''
+                                        if (item.avt) {
+                                            imageBase64 = new Buffer(item.avt, 'base64').toString('binary')  
+                                        }
+                                        console.log("check imageBase64", imageBase64)
                                 return (
                                     <tr key={index}>
                                         <td>{item.id}</td>
-                                        <td>{item.password}</td>
+                                        <td><img src={imageBase64}></img></td>
+                                        
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>
+                                        <td>{item.sdt}</td>
                                         <td>{item.address}</td>
                                         
                                         <td>
@@ -95,7 +104,7 @@ class TableManageUser extends Component {
                 </tbody>
             </table>  
             
-            <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
+            {/* <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} /> */}
 
             </React.Fragment>
             

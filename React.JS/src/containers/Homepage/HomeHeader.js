@@ -10,11 +10,19 @@ import {LANGUAGES} from '../../utils';
 import img1 from "../../assets/images/nenQC/nen1.jpg"
 import {changeLanguageApp} from '../../store/actions';
 import {withRouter} from "react-router";
+import * as actions from "../../store/actions";
 import Giohang from '../../routes/Giohang';
 import DetailSP from '../Patient/SanPham/DetailSP';
 class 
 
 HomeHeader extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         processLogout: ''
+
+    //     }
+    // }
 
     changeLanguage = (language) =>
     {
@@ -29,22 +37,50 @@ HomeHeader extends Component {
     {
         this.props.history.push(`/system`)
     }
+    async  componentDidMount () {
+        
+        this.props.fetchAllYeuThichSTART()
+    }
+    handleOnclickXoa = (data) =>
+    {
+        // console.log("check data yêu thích", data)
+        this.props.deleteYeuThich(data)
+    }
+    handleOnClickDetail = (sanpham) =>
+    {
+        // console.log("check sanpham id", sanpham)
+        if(this.props.history)
+        {
+            this.props.history.push(`/detail_sp/${sanpham.id_sp}`)
+            window.location.reload(false)
+        }
+    }
     render() {
         
         console.log("check userInfo", this.props.userInfo);
+        let userInfo = this.props.userInfo;
+        let avt =''
+            if (userInfo.avt) {
+                avt = new Buffer(userInfo.avt, 'base64').toString('binary')  
+            }
+        console.log("check userInfo.avt", avt)
+        let yeuthichArr = this.props.yeuthichArr
         let language = this.props.language;
+        const {processLogout}  = this.props
         return (
             <React.Fragment>
                  <div className='home-header-container'>
                     <div className='home-header-content'>
                         <div  className='left-content'>
-                            <i class="fas fa-bars"></i>
+                            <i className="fas fa-bars"></i>
                             <img className='Header-logo' src= {logo1} onClick={()=> this.returnHome()}/>
                         </div>
                         <div className='center-content'>                            
                             <div className='child-content'>
                                 <div className='hieu-ung'>
-                                    <b><FormattedMessage id="homeheader.tintuc"/></b>
+                                    <Link to='/tintuc/'>
+                                        <b><FormattedMessage id="homeheader.tintuc"/></b>
+                                    </Link>
                                 </div>
                                 
                             </div>
@@ -67,29 +103,45 @@ HomeHeader extends Component {
                                <b><FormattedMessage id="menu.admin.whitelist"/></b>
                                
                                <div className='test'>
-                                        <table id='tablespyt' className='xtext-center'>
+                                        <table id='tablespyt' className='text-center'>
                                             <tbody >
                                                 <tr className='text-center'>
                                                    <th>STT</th>
                                                    <th>Tên</th>
                                                    <th>Hinh</th>
-                                                   <th>Số Lượng</th>
+                                                   <th>Giá</th>
+                                                   <th>Chi Tiết</th>
                                                    <th>Xóa</th>
                                                 </tr>
-                                                <tr>    
-                                                    <td>1</td>
-                                                    <td>Sản phẩm 1</td>
-                                                    <td><img src={img1}/></td>
-                                                    <td>2</td>
-                                                    <td title='xóa sản phẩm khỏi yêu thích'><i className="fas fa-minus-circle"></i></td>
-                                                </tr>
-                                                <tr>    
-                                                    <td>2</td>
-                                                    <td>Sản phẩm 1</td>
-                                                    <td><img src={img1}/></td>
-                                                    <td>2</td>
-                                                    <td title='xóa sản phẩm khỏi yêu thích'><i className="fas fa-minus-circle"></i></td>
-                                                </tr>
+
+                                                {yeuthichArr && yeuthichArr.length > 0 &&
+                                                    yeuthichArr.map((item, index)=>{
+                                                        {/* console.log("check id item yêu thích", item) */}
+                                                        let imageBase64 =''
+                                                        if (item.avt) {
+                                                            imageBase64 = new Buffer(item.avt, 'base64').toString('binary')  
+                                                        }
+                                                        return (
+                                                            
+                                                            
+                                                            <tr>    
+                                                                <td>{index+1}</td>
+                                                                <td>{item.ten_sp}</td>
+                                                                <td><img src={imageBase64}/></td>
+                                                                <td>{item.gia_sp.toLocaleString()}đ</td>
+                                                                <td>
+                                                                    <i className="fas fa-info" onClick={()=>this.handleOnClickDetail(item)}>
+
+                                                                    </i>    
+                                                                </td>
+                                                                <td title='xóa sản phẩm khỏi yêu thích' ><i className="fas fa-minus-circle"
+                                                                    onClick={()=> this.handleOnclickXoa(item)}
+                                                                ></i></td>                                                                
+                                                            </tr>
+                                                           
+                                                        )
+                                                    })
+                                                }
                                             </tbody>
                                         </table>
                                </div>
@@ -102,9 +154,13 @@ HomeHeader extends Component {
                             <div className='support-content'>
                                 <div><b><i className="fas fa-question-circle"></i> <FormattedMessage id="homeheader.hoidap"/></b></div>
                             </div>
-                            
+                            <div className='avt'><img src={avt}></img></div>
+                            <span className='welcome'> <FormattedMessage id="homeheader.welcome"/>,&nbsp; {userInfo && userInfo.lastName ? userInfo.lastName: ''}</span>
                             <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}><span onClick={()=> this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
                             <div className={language === LANGUAGES.EN ? 'language-en active' : 'language-en'}><span onClick={()=> this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
+                        </div>
+                        <div className="btn btn-logout" onClick={processLogout} title="Log out">
+                            <i className="fas fa-sign-out-alt"></i>
                         </div>
                     </div>
                 </div>
@@ -113,41 +169,41 @@ HomeHeader extends Component {
                     <div className='content-up'>
                         <div className='title1'><FormattedMessage id="homeheader.title1"/></div>
                         <div className='title2'>HISAGEN</div>
-                        <div className='search'>
-                        <i class="fas fa-search"></i>
+                        {/* <div className='search'>
+                        <i className="fas fa-search"></i>
                             <input type='text' className='txt-search' placeholder="Tìm kiếm..." />
-                        </div>
+                        </div> */}
                     </div>
                     <div className='content-dow'>
-                    <div className='options'>
+                    {/* <div className='options'>
                         <div className='option-child'>
                             <div className='icon-child'>
-                              <i class="fab fa-apple"></i>
+                              <i className="fab fa-apple"></i>
                             </div>
                             <div className='text-child'>iPhone</div>
                         </div>
                         
                         <div className='option-child'>
                             <div className='icon-child'>
-                            <i class="fab fa-android"></i>
+                            <i className="fab fa-android"></i>
                             </div>
                             <div className='text-child'>ANDROID</div>
                         </div>
 
                         <div className='option-child'>
                             <div className='icon-child'>
-                            <i class="fas fa-laptop"></i>
+                            <i className="fas fa-laptop"></i>
                             </div>
                             <div className='text-child'>LAPTOP</div>
                         </div>
 
                         <div className='option-child'>
                             <div className='icon-child'>
-                              <i class="fas fa-tablet"></i>
+                              <i className="fas fa-tablet"></i>
                             </div>
                             <div className='text-child'>TABLET</div>
                         </div>
-                    </div>
+                    </div> */}
                     </div>
                 </div>
                 }
@@ -163,13 +219,16 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
         language: state.app.language,
-
+        yeuthichArr: state.sanpham.yeuthichArr
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        fetchAllYeuThichSTART: () => dispatch(actions.fetchAllYeuThichSTART()),
+        deleteYeuThich: (data) => dispatch(actions.deleteYeuThich(data)),
+        processLogout: () => dispatch(actions.processLogout()),
     };
 };
 

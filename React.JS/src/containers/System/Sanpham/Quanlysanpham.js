@@ -670,7 +670,7 @@ const mapDispatchToProps = dispatch => {
         fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
         fetchStatusStart: () => dispatch(actions.fetchStatusStart()),
         createNewSanPham: (data) => dispatch(actions.createNewSanPham(data)),
-        fetchAllSANPHAMStart: (data) => dispatch(actions.fetchAllSANPHAMStart(data)),
+        fetchAllSANPHAMStart: () => dispatch(actions.fetchAllSANPHAMStart()),
         editSanPham: (data) => dispatch(actions.editSanPham(data)),
         fetchAllDanhMucSTART: () => dispatch(actions.fetchAllDanhMucSTART()),
         searchLoaisp: (id) => dispatch(actions.searchLoaisp(id)),

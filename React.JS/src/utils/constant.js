@@ -6,10 +6,22 @@ export const path = {
     SYSTEM: '/system',
     DETAIL_SP: '/detail_sp/:id',
     GIOHANG: '/giohang/',
-    SANPHAM: '/sanpham/',
     DANHMUC: '/Danhmucsanpham/',
     LOAISP: '/Loaisanpham/',
     LICHSUMUAHNAG: '/lichsumuahang/',
+    CHITIET: '/ChiTietGioHangKhach/:id_chitiet',
+    TINTUC: '/tintuc/',
+    CHITIETTINTUC: '/chitiettintuc/:id',
+    SANPHAM: '/sanpham/',
+    DANGKY: '/dangky/',
+    UNGDUNG: '/ungdung/',
+    //admin
+    LICHSUMUAHNAGADMIN: '/lichsumuahangAdmin/',
+    CHITIETADMIN: '/ChiTietGioHangKhachAdmin/:id_chitiet/:tt_donhang',
+    BAIVIET: '/baiviet/',
+    SANPHAMMANAGE: '/Sanpham/manage-sanpham',
+
+
 };
 
 export const LANGUAGES = {
@@ -35,5 +47,6 @@ export const YesNoObj = {
 
 export const USER_ROLE = {
     ADMIN: "R1",
-    MEMBER: "R2"
+    MEMBER:"R3", 
+    CUSTOMER: "R2"
 }

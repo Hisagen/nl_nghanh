@@ -5,13 +5,13 @@ import HomeHeader from '../../Homepage/HomeHeader';
 import "./DetailSP.scss";
 import * as actions from "../../../store/actions";
 import HomeFooter from "../../Homepage/HomeFooter"
-import Spkhac from './Spkhac2';
+import NoiBac from '../../Homepage/Section/NoiBac';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Avt from './Avt';
 import {getInfoDetailSP} from "../../../services/userService"
-import {getInfoDetailSanPham} from "../../../services/sanphamService"
+import {getInfoDetailSanPham, CreateNewYeuThich} from "../../../services/sanphamService"
 import { LANGUAGES } from '../../../utils';
 import {withRouter} from "react-router";
 import {toast} from 'react-toastify';
@@ -40,6 +40,7 @@ class DetailSP extends Component {
         {   
             let id = this.props.match.params.id
             let res = await getInfoDetailSanPham(id)
+            console.log("check res", res)
             let hinh = res.data.hinhsp
             //console.log("check hinh", hinh.image1)
             if(res && res.errCode === 0)
@@ -74,6 +75,11 @@ class DetailSP extends Component {
             this.props.history.push(`/giohang/`)
             this.props.createNewGioHang(this.state)
         }
+    }
+    handlethemvaoyeuthich = (sp, idUser) =>
+    {
+        this.props.createYeuThich({sp:sp, idUser:idUser})
+        console.log("check sp",sp)
     }
     onUpdateQuantity = (sp, quantity) =>
     {
@@ -164,20 +170,22 @@ class DetailSP extends Component {
                         <div className='chung'>
                         <div className='khung mt-3'>
                             
-                            <div className='btn-spyt' >
+                            <div className='btn-spyt' 
+                                onClick={() => this.handlethemvaoyeuthich(sp, this.state.idUser)}
+                            >
                                 <i className="fas fa-heart"></i> &nbsp;
                                     Yêu Thích
                             </div>
                         </div>
                         &nbsp; &nbsp;
-                        <div className='khung mt-3'>
+                        {/* <div className='khung mt-3'>
                             <div className='btn-tvgh' 
                                 onClick={() => this.handlethemvaogiohang(sp)}
                             >
                                 <i className="fas fa-cart-arrow-down"></i> &nbsp;&nbsp;
                                 Thêm Vào Giỏ Hàng
                             </div>
-                        </div>
+                        </div> */}
                         </div>
                         <div className='soluong mt-3'>Số lượng còn: {sp.sl_sp == 0 ?"hết hàng" : sp.sl_sp}</div>
                         <div className='css-soluong mt-3'>
@@ -186,7 +194,10 @@ class DetailSP extends Component {
                             <button className='btn-soluong-giam' onClick={()=> this.onUpdateQuantity(sp, this.state.quantity+1)}><i className="fas fa-plus"></i></button>
                         </div>
                         <div className='gia-sp mt-3'>Giá: {sp.gia}₫</div>
-                        <button className='btn-muangay'>MUA NGAY</button>
+                        <button className='btn-muangay'
+                                onClick={() => this.handlethemvaogiohang(sp)}
+
+                        >MUA NGAY</button>
                         <p className='title-cauhinh'>Cấu hình Điện thoại {sp.ten_sp} 128GB</p>
                         <div className='cauhinh-sp'>
                             <div className='tt-1'>
@@ -236,7 +247,7 @@ class DetailSP extends Component {
                         }
                 </div>
                 <div className='spkhac'>
-                    <Spkhac/>
+                    <NoiBac/>
                 </div>
                
                 <div className='comment-sp'></div> 
@@ -270,6 +281,7 @@ const mapDispatchToProps = dispatch => {
     return {
         getGiohang: (idUser) => dispatch(actions.getGiohang(idUser)),
         createNewGioHang: (data) => dispatch(actions.createNewGioHang(data)),
+        createYeuThich: (data) => dispatch(actions.createYeuThich(data)),
     };
 };
 

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   diachis.init({
-    ten_dc: DataTypes.STRING,
+    address: DataTypes.STRING,
     ma_kh: DataTypes.INTEGER
   }, {
     sequelize,

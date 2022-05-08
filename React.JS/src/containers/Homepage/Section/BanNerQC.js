@@ -26,10 +26,6 @@ class BanNerQC extends Component {
         return(
             <div className='section-share section-QC'>
                 <div className='section-content'>
-                <div className='section-header'>
-                    <span className='title1'>HOT</span>
-                    <button className='btn-1'>xem thêm</button>
-                </div>
                 <div className='section-body'>
                 <Slider {...this.props.settings}>
                     <div className='img-customize'>

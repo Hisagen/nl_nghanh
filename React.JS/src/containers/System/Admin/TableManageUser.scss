@@ -11,7 +11,12 @@
     padding: 8px;
     text-align: center;
   }
-  
+  #TableManageUser td{
+    img{
+      height: 80px;
+      width: 80px;
+    }
+  }
    #TableManageUser tr:nth-child(even){background-color: #f2f2f2;}
   
    #TableManageUser tr:hover {background-color: #ddd;}

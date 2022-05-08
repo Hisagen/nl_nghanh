@@ -4,12 +4,11 @@ import { push } from "connected-react-router";
 
 // import * as actions from "../store/actions";
 import * as actions from "../../store/actions";
-
+import { Link } from 'react-router-dom';
 import './login.scss';
 import { FormattedMessage } from 'react-intl';
 import { divide } from 'lodash';
 import { Alert } from 'reactstrap';
-
 import { handelLoginApi } from '../../services/userService';
 import e from 'cors';
 class Login extends Component {
@@ -79,7 +78,7 @@ class Login extends Component {
         this.setState({
             isShowPassword: !this.state.isShowPassword
         })
-        //<i class="fas fa-eye-slash"></i>
+        //<i className="fas fa-eye-slash"></i>
     }
     handleKeyDown = (event) =>
     {
@@ -89,6 +88,7 @@ class Login extends Component {
         }
     }
     render() {
+        // console.log("typeRole", this.props.typeRole)
         return (
             <div className='login-background'>
 
@@ -121,7 +121,7 @@ class Login extends Component {
                                <span
                                 onClick={() => { this.handleShowHidePassword()
                                 }}
-                               ><i class= {this.state.isShowPassword ? 'fas fa-eye':'fas fa-eye-slash'}></i></span>
+                               ><i className= {this.state.isShowPassword ? 'fas fa-eye':'fas fa-eye-slash'}></i></span>
                             </div>
                         </div>
                         <div className='col-12' style={{color:'red'}}>
@@ -133,13 +133,19 @@ class Login extends Component {
                         
                         <div className='col-12'>
                             <span className='forgot-password'>Quên mật khẩu</span>
+                            <Link to="/dangky/">
+                                <span className='forgot-dang-ky'>Đăng ký</span>
+
+                            </Link>
+
                         </div>
+                        
                         <div className='col-12 text-center mt-5'>
                          <span className='text-order-login'>Đăng nhập bằng cách khác</span> 
                         </div>
                         <div className='col-12  icon'>
                             <label><i className="fab fa-facebook"></i></label>
-                            <label><i class="fab fa-google-plus-g"></i></label>
+                            <label><i className="fab fa-google-plus-g"></i></label>
                             <label><i className="fab fa-twitter"></i></label>
                         </div>
                     </div>
@@ -151,7 +157,8 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        // typeRole: state.user.typeRole,
     };
 };
 
@@ -160,6 +167,7 @@ const mapDispatchToProps = dispatch => {
         navigate: (path) => dispatch(push(path)),
         //userLoginFail: () => dispatch(actions.adminLoginFail()),
         userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
+        // LoginStart: (email, password) => dispatch(actions.LoginStart(email,password)),
     };
 };
 

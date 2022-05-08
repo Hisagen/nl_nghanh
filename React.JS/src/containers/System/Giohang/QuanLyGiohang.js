@@ -13,7 +13,7 @@ import { dispatch } from '../../../redux';
 import HomeHeader from '../../Homepage/HomeHeader';
 import HomeFooter from "../../Homepage/HomeFooter"
 import img1 from "../../../assets/images/nenQC/nen1.jpg"
-import {getInfoDetailSanPham, deleteGioHang, createThanhToan,createDonHang} from "../../../services/sanphamService"
+import {getInfoDetailSanPham, deleteGioHang, createThanhToan,createDonHang,getDiaChiFromUserSerVice} from "../../../services/sanphamService"
 import {withRouter} from "react-router";
 import {toast} from 'react-toastify';
 import {create_new_giohang, getgiohang} from "../../../services/sanphamService"
@@ -30,17 +30,20 @@ class QuanLyGiohang extends Component {
             },
             idUser: '',
             // idDonHangNew: ''
+            diachiArr : [],
+            addressNew: '',
+            ten_nguoidung: '',
         }
     }
 
     async componentDidMount() {
-        //await this.props.processLogout()
-           
+                this.props.getDiaChiFromUser(this.state.idUser)
+                this.state.diachiArr = this.props.diachiArr;
                 await  this.props.fetchAllGioHangSTART()
                 if(this.props.match && this.props.match.params && this.props.match.params.id)
                 {   
                     let id = this.props.match.params.id
-                    console.log("id",id)
+                    // console.log("id",id)
                     let res = await getInfoDetailSanPham(id)
                     // let hinh = res.data.hinhsp
                     // console.log("check res", res)
@@ -59,10 +62,12 @@ class QuanLyGiohang extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot)
     {
-        if(prevProps.giohangArr !== this.props.giohangArr)
+        if(prevProps.diachiArr !== this.props.diachiArr)
         {
+            let diachiArr = this.props.diachiArr
             this.setState({
-
+                // diachiArr: this.props.diachiArr,
+                addressNew: diachiArr && diachiArr.length>0 ? diachiArr[0].address: ''
             })
         }
         
@@ -93,30 +98,24 @@ class QuanLyGiohang extends Component {
 
         return isValid;
     }
-    hanldeSaveDanhMuc = () =>
-    {
-        
-    }
-    handleEditLoaispFromParent = async (loaisp) =>
-    {    
-        
-    }
+   
     handleDeleteGioHang = async (data) =>
     {
         this.props.deleteGioHang(data)
         //console.log('check data',data)
         // alert("click me")
     }
-    handleThanhToan = async (subtotal , idUser, giohangArr) =>
+    handleThanhToan = async (subtotal , idUser, giohangArr, addressNew) =>
     {
         let res = await createThanhToan({
             ma_nguoidung: this.state.idUser,
             tongtien:subtotal,
             idUser: idUser,
-            giohang: giohangArr
+            giohang: giohangArr,
+            addressNew: addressNew
             // ma_nhanvien:
         })
-        console.log("check res.iddonhang",res.iddonhang)
+        // console.log("check res.iddonhang",res.iddonhang)
         if(res && res.errCode === 0)
         {
             // this.state.idDonHangNew = res.iddonhang
@@ -130,15 +129,19 @@ class QuanLyGiohang extends Component {
 
     }
     render() {
-        
+       
+        let diachiArr = this.props.diachiArr
+        console.log("check this.state.diachiArr", this.state.diachiArr)
         let giohangArr = this.props.giohangArr 
         this.state.idUser = this.props.userInfo.id
-        // console.log("check giohangArr",giohangArr)
+        this.state.ten_nguoidung = this.props.userInfo.lastName
+        let addressNew = this.state.addressNew;
+        let ten_nguoidung = this.state.ten_nguoidung
+        console.log("check state", this.state)
         const subtotal = giohangArr.reduce(
             (acc, item) => acc*1 + item.soluong_sp * item.gia_sp,
             0
           );
-        console.log('check giohangArr',giohangArr)
         return (
             <React.Fragment>
                 
@@ -191,10 +194,43 @@ class QuanLyGiohang extends Component {
                                 })
 
                             }
+                        <div className='text-center'>Thông Tin Khách Hàng
+                        </div>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-3'>
+                                    <label>Tên:</label>
+                                        <input className='form-control email' type="text"
+                                            value={ten_nguoidung}
+                                            // onChange={(event)=>{this.onchangeInput(event, 'email')}}
+                                            // disabled={this.state.action === CRUD_ACTIONS.EDIT ? true : false}
+                                        ></input>                                    
+                                </div>  
+                                <div className='col-3'>
+                                    <label>Địa Chỉ:</label>
+                                    <select className='form-control ttsp'
+                                        onChange={(event)=>{this.onchangeInput(event, 'addressNew')}}
+                                        value={addressNew}
+                                    >
+                                        {diachiArr && diachiArr.length> 0 && 
+                                            diachiArr.map((item, index) =>{
+                                                console.log("check item",item)
+                                                    return (
+                                                        <option key={index} value={item.address}>
+                                                        {item.address}
+                                                        </option>
+                                                    )
+                                                })
+                                        }
+                                    </select>                                 
+                                </div>                            
+                            </div>
+                        </div>
+                        
                         <div className='tong mt-5 mb-5'>
                             <div className='name'>Tổng Thanh Toán:</div>
                             <div className='tongtien'>{subtotal.toLocaleString()}₫</div>
-                            <div onClick={()=> this.handleThanhToan(subtotal, this.state.idUser, giohangArr)}>
+                            <div onClick={()=> this.handleThanhToan(subtotal, this.state.idUser, giohangArr, addressNew)}>
                                 <button className='btn-muahang'>Thanh Toán</button>
                             </div>
                         </div>
@@ -211,7 +247,8 @@ class QuanLyGiohang extends Component {
 const mapStateToProps = state => {
     return {
         userInfo: state.user.userInfo,
-        giohangArr: state.sanpham.giohangArr
+        giohangArr: state.sanpham.giohangArr,
+        diachiArr: state.sanpham.diachiArr
     };
 };
 
@@ -220,6 +257,8 @@ const mapDispatchToProps = dispatch => {
         fetchAllGioHangSTART: () => dispatch(actions.fetchAllGioHangSTART()),
         createNewGioHang: (data) => dispatch(actions.createNewGioHang(data)),
         deleteGioHang: (data) => dispatch(actions.hanldedeleteGioHang(data)),
+        getDiaChiFromUser: (idUser) => dispatch(actions.getDiaChiFromUser(idUser)),
+
     };
 };
 

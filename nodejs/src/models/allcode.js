@@ -13,12 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       allCode.hasMany(models.User, { foreignKey: 'gender', as: 'genderData'})
       allCode.hasMany(models.User, { foreignKey: 'typeRole', as: 'roleData'})
-      // allCode.hasMany(models.donhangs, { foreignKey: 'trangthai', as: 'trangthaiData'})
+      allCode.hasMany(models.donhangs, { foreignKey: 'trangthai', as: 'trangthaiData'})
 
-      allCode.belongsTo(models.donhangs, { foreignKey: "keyMap"})
-
-
-      
+      // allCode.belongsTo(models.donhangs, { foreignKey: "keyMap"})   
     }
   };
   allCode.init({

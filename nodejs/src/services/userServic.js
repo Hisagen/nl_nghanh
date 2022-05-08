@@ -17,7 +17,7 @@ let handleUserLogin = (email, password) =>
                 
                 let user = await db.User.findOne({
                     where: {email:email},
-                    attributes: ['id','email', 'password', 'firstName', 'lastName','gender','typeRole'],
+                    attributes: ['id','email', 'avt', 'password', 'firstName', 'lastName','gender','typeRole'],
                     raw: true,
                 })
                 if(user)
@@ -126,7 +126,7 @@ let getAllUsers = (usersId) =>
             {
                 let hashPasswordFromBcrypt =  await hashUserPassword(data.password);
                 console.log("check hash",hashPasswordFromBcrypt)
-                await db.User.create({
+                let user = await db.User.create({
                 firstName: data.firstName,
                 lastName: data.lastName,
                 password: hashPasswordFromBcrypt,
@@ -136,6 +136,10 @@ let getAllUsers = (usersId) =>
                 gender: data.gender,
                 typeRole: data.typeRole,
                 avt: data.avt
+                })
+                await db.diachis.create({
+                    address: data.address,
+                    ma_kh: user.id
                 })
                 resolve({
                     errCode: 0,

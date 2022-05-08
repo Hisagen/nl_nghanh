@@ -1,0 +1,132 @@
+
+.chitiet-redux-container{
+    .left-right{
+        // border: 1px solid red;
+        margin: 0 160px;
+        height: auto;
+        background-color: #f5f5f5;
+        .TH{
+            text-align: center;
+            display: flex;
+            gap: 113px;
+            // border: 1px solid red;
+            height: 50px;
+            padding-top: 15px;
+            font-weight: 700;
+            border-radius: 5px;
+            background-color: #ffffff;
+            .title-sanpham{
+                width: 24%;
+            }
+            .title-dongia{
+                width: 10%;
+
+            }
+            .title-soluong{
+                width: 10%;
+
+            }
+            .title-sotien{
+                width: 10%;
+
+            }
+            .title-action{
+                width: 10%;
+
+            }
+        }
+        .TD{
+            // border: 1px solid blue;
+            height: auto;
+            width: auto;
+            border-radius: 5px;
+            background-color: #ffffff;
+            display: flex;
+            gap: 80px;
+            text-align: center;
+            &:hover{
+                background-color: #CCFFFF;
+            }
+            .sanpham{
+                display: flex;
+                width: 25%;
+
+                .image-avt{
+                    padding-top: 10px;
+                    img{
+                        margin-left: 30px;
+                        height: 80px;
+                        width: 80px;
+                    }
+                }
+                .name-sp{
+                    font-size: 14px;
+                    padding-top: 20px;
+                    width: 108px;
+                    
+                }
+            }
+            .dongia{
+                width: 10%;
+            margin-left: 42px;
+            // border: 1px solid blue;
+                
+            }
+            .soluong{
+                width: 10%;
+                margin-left: 25px;
+                // border: 1px solid blue;
+
+            }
+            .sotien{
+                width: 10%;
+                // border: 1px solid blue;
+
+                margin-left: 25px;
+            }
+            .action{
+                width: 10%;
+                // border: 1px solid blue;
+
+                // border: 1px solid red;
+                // padding-left: 0px;
+                &:hover{
+                    i{
+                        color: red;
+                    }
+                }
+            }
+            
+        }
+        .tong{
+            border-radius: 15px;
+            background-color: #ffffff;
+            height: 64px;
+            display: flex;
+            .name{
+                padding-top: 20px;
+                padding-left: 580px;
+                font-size: 20px;
+            }
+            .tongtien{
+                padding-top: 20px;
+                padding-left: 40px;
+                font-size: 22px;
+                color: #ee4d2d;
+            }
+            .btn-muahang{
+                border: none;
+                height: 40px;
+                width: 210px;
+                margin-top: 13px;
+                margin-left: 20px;
+                background-color: #ee4d2d;
+                border-radius: 5px;
+                color: #ffffff;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

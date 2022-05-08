@@ -302,7 +302,7 @@ class sanphamReducer extends Component {
 
 
                                     />
-                                    <label className='labe-upload' htmlFor='previewImg'>Tải ảnh <i class="fas fa-upload"></i></label>
+                                    <label className='labe-upload' htmlFor='previewImg'>Tải ảnh <i className="fas fa-upload"></i></label>
                                     <div className='preview-image' 
 
                                         style={{backgroundImage: `url(${this.state.previewImgURL})`}}

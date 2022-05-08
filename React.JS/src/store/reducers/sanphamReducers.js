@@ -8,7 +8,14 @@ const initialState = {
     giohangArr: [],
     trangthaiArr: [],
     donhangArr: [],
-
+    chitietdonhangArr: [],
+    yeuthichArr: [],
+    tt: '',
+    diachiArr: [],
+    markdown: [],
+    markdownone: [],
+    // tìm
+    sanphamArr: [],
 }
 
 const sanphamReducer = (state = initialState, action) => {
@@ -86,6 +93,76 @@ const sanphamReducer = (state = initialState, action) => {
             return {
                 ...state,
             }  
+        case actionTypes.GET_ALL_CHITIETDONHANG_SUCCESS: 
+            state.chitietdonhangArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_CHITIETDONHANG_FAILED:
+            state.chitietdonhangArr = [];
+            return {
+                ...state,
+            }  
+        case actionTypes.GET_ALL_YEUTHICH_SUCCESS: 
+            state.yeuthichArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_YEUTHICH_FAILED:
+            state.chitietdonhangArr = [];
+            return {
+                ...state,
+            }  
+        case actionTypes.GET_TT_DH_SUCCESS: 
+            state.tt = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_TT_DH_FAILED:
+            state.tt = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_DIACHIFROMUSER_SUCCESS: 
+            state.diachiArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_DIACHIFROMUSER_FAILED:
+            state.diachiArr = [];
+            return {
+                ...state,
+            }  
+        case actionTypes.GET_ALLMARKDOWN_SUCCESS: 
+            state.markdown = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALLMARKDOWN_FAILED:
+            state.markdown = [];
+            return {
+                ...state,
+            } 
+        case actionTypes.GET_ONEMARKDOWN_SUCCESS: 
+            state.markdownone = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ONEMARKDOWN_FAILED:
+            state.markdownone = [];
+            return {
+                ...state,
+            }
+        case actionTypes.SEARCH_SANPHAM_THEOLOAI_SUCCESS: 
+            state.sanphamArr = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.SEARCH_SANPHAM_THEOLOAI_FAILED:
+            state.sanphamArr = [];
+            return {
+                ...state,
+            } 
         default:
             return state;
     }

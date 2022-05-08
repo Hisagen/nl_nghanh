@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       sanphams.hasOne(models.hinhsps, {foreignKey: 'ma_sp'})
       sanphams.hasOne(models.giohangs, {foreignKey: 'id_sp'})
       sanphams.belongsTo(models.loaisps, { foreignKey: "ma_loaisp"})
+      sanphams.hasOne(models.Markdown, {foreignKey: 'SPId' })
 
     }
   };

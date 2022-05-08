@@ -1,0 +1,38 @@
+.ungdung-container{
+    .left-right{
+        // margin: 0 1px;
+        padding: 0px 170px;
+        // border: 1px solid red;
+        width: auto;
+        height: auto;
+        .khung{
+            display: flex;
+            .avt{
+                img{
+                    height: 140px;
+                    width: 250px;
+                }
+            }
+            .title-ungdung{
+                margin-left: 15px;
+                height: 56px;
+                width: 500px;
+                line-height: 28px;
+                font-size: 22px;
+                font-weight: 600;
+                &:hover{
+                    color: #288ad6;
+                }
+                .timeCreate{
+                    margin-top: 10px;
+                    // border: 1px solid red;
+                    height: 14px;
+                    width: 72px;
+                    font-size: 14px;
+                    font-weight: 100;
+                }
+            }
+        }
+       
+    }
+}

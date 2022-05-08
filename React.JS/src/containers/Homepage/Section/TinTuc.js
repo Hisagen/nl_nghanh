@@ -53,8 +53,8 @@ class TinTuc extends Component {
             
             <div className='section-content'>
                 <div className='section-header'>
-                    <span className='title1'>ĐIỆN THOẠI NỔI BẬC NHẤT</span>
-                    <button className='btn-1'>xem thêm</button>
+                    <span className='title1'>ĐIỆN THOẠI NỔI BẬC NHẤT</span>                   
+                     <button className='btn-1'>xem thêm</button>
                 </div>
                 <div className='section-body'>
                 <Slider {...settings}>

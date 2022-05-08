@@ -24,15 +24,10 @@ module.exports = {
         allowNull: true,
         type: Sequelize.INTEGER
       },
-      LSPId: {
+      avt: {
+        type: Sequelize.BLOB('long'),
         allowNull: true,
-        type: Sequelize.INTEGER
       },
-      TTId: {
-        allowNull: true,
-        type: Sequelize.INTEGER
-      },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -52,7 +52,6 @@ class UserRedux extends Component {
                 gioitinh: arrGender && arrGender.length >0 ? arrGender[0].keyMap : ''
             })
         }
-
         if(prevProps.roleRedux !== this.props.roleRedux)
         {
             let arrRole = this.props.roleRedux;
@@ -226,7 +225,7 @@ class UserRedux extends Component {
         return (
             <div className='user-redux-container'>
                 <div className='title'>
-                    User Redux Nguyễn Ra Sin
+                    HỆ THỐNG BÁN ĐIỆN THOẠI DI ĐỘNG 
                 </div>
                 <div className="user-redux-body" >
                     <div className='container'>
@@ -323,7 +322,7 @@ class UserRedux extends Component {
 
 
                                     />
-                                    <label className='labe-upload' htmlFor='previewImg'>Tải ảnh <i class="fas fa-upload"></i></label>
+                                    <label className='labe-upload' htmlFor='previewImg'>Tải ảnh <i className="fas fa-upload"></i></label>
                                     <div className='preview-image' 
 
                                         style={{backgroundImage: `url(${this.state.previewImgURL})`}}
@@ -345,7 +344,7 @@ class UserRedux extends Component {
                             <div className='col-12 mb-5'>
                             
                             </div>
-                            <div className="col-3 mb-3">
+                            {/* <div className="col-3 mb-3">
                                 <label>Tìm theo <FormattedMessage id="manage-user.cv"/></label>
                                 <select class="form-control"
                                     onChange={(event)=>{this.onchangeInput(event, 'typeRole')}}
@@ -362,7 +361,7 @@ class UserRedux extends Component {
                                     
                                     }
                                 </select>
-                            </div>
+                            </div> */}
                             
                             <TableManageUser
                                 handleEditUserFromParentKey = {this.handleEditUserFromParent}

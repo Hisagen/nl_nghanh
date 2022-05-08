@@ -38,14 +38,7 @@ let getTopDTHomeService = (limitInput) =>
 let getAllSP = () => {
     return new Promise(async (resolve, reject) => {
             try {
-                let sp = await db.User.findAll(
-                    {
-                        where: {typeRole: "R1"},
-                        attributes:{
-                            exclude: ['password']
-                        },
-                    }
-                );
+                let sp = await db.sanphams.findAll();
                 resolve({
                     errCode: 0,
                     data: sp
@@ -79,6 +72,7 @@ let saveSP = (data) => {
                                 contentMarkdown: data.contentMarkdown,
                                 description: data.description,
                                 SPId: data.SPId,
+                                avt: data.avt
                                 // LSPId: 	data.LSPId,
                             }) 
                         }
@@ -95,6 +89,7 @@ let saveSP = (data) => {
                                 doctorMarkdown.contentMarkdown = data.contentMarkdown,
                                 doctorMarkdown.description = data.description,
                                 doctorMarkdown.updatedAt = new Date()
+                                doctorMarkdown.avt = data.avt,
                                 //doctorMarkdown.SPId: data.SPId,
                                 await doctorMarkdown.save();
                             }
@@ -129,6 +124,13 @@ let getChitietSP = (id) =>
         {
             let data = await db.sanphams.findOne({
                 where:{id:id},
+                include: [
+                    {   
+                        model: db.Markdown, attributes: ['contentHTML', 'contentMarkdown', 'description', 'avt']
+                    }
+                ],
+                raw: false,
+                nest: true
             })
             
             resolve({
@@ -160,7 +162,8 @@ let getDetailSanPham = (id) =>
                     },
                     {   
                         model: db.loaisps, attributes: ['id','ten_loaisp']
-                    }
+                    },
+
                 ],
                 raw: false,
                 nest: true
@@ -1001,6 +1004,29 @@ let checkNameSPGioHang = (id_sp) =>
         }
     })
 }
+let checkNameSPYeuThich = (id_sp) =>
+{
+    return new Promise(async(resolve, reject) => {
+        try
+        {   
+            let name = await db.yeuthichs.findOne({
+                where: {id_sp: id_sp}
+            })
+            // console.log("check danh sách giỏ hàng",name)
+            if(name)
+            {
+                resolve(true);
+            }
+            else
+            {
+                resolve(false);
+            }
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
 let getAllGioHang = () =>
 {
     return new Promise(async (resolve, reject) => {
@@ -1080,7 +1106,8 @@ let bulkCreateThanhToan = (data) =>
                     // dc_gh:dc_gh,
                     ma_nguoidung:data.ma_nguoidung,
                     tongtien:data.tongtien,
-                    trangthai: "DH1",
+                    trangthai: "DH2",
+                    dc_gh: data.addressNew
                     // ma_nhanvien:data.ma_nhanvien
                 })     
                 let temp = data.giohang;
@@ -1139,10 +1166,8 @@ let getAllDonHang = () =>
             
             let donhang = await db.donhangs.findAll({
                 include: [
-                        {   
-                            model: db.allCode, attributes: ['keyMap']
-                        },
-                ],   
+                    { model: db.allCode, as: 'trangthaiData', attributes: ['valueEn', 'valueVi'] },
+                ], 
                 raw: false,
                 nest: true     
             });
@@ -1158,6 +1183,405 @@ let getAllDonHang = () =>
         }
     })
 }
+
+let getChiTietDonHang = (id_donhang) =>
+{
+    // console.log("check id_donhang", id_donhang)
+    return new Promise(async (resolve, reject) => {   
+        // console.log("check id",idUser)
+        if(!id_donhang)
+        {
+            resolve({
+                errCode: 1,
+                errMessage: "missing require!"
+            })
+        }
+        else
+        {
+            let data = await db.chitietdonhangs.findAll({
+                where:{ma_donhang:id_donhang},
+            })
+            // console.log("check data.avt",data.avt)
+            // if(data.avt)
+            // {
+            //     data.avt = new Buffer(data.avt, 'base64').toString('binary');
+            // }
+            resolve({
+                errCode: 0,
+                data: data
+            });
+        }
+
+    })
+}
+
+let getAllYeuThich = () =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let yeuthich = await db.yeuthichs.findAll({
+                include: [
+                    { model: db.hinhsps, as: 'hinhsp', attributes: ['image1', 'image2','image3'] },
+                    
+                ],
+                raw: false,
+                nest: true
+            });
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: yeuthich,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let CreateNewYeuThich = (data) =>
+{
+    // console.log('check data',data)
+    
+    return new Promise( async(resolve, reject) =>
+    {
+        // if(data.detailSP.data.id)
+        // {}
+        let check = await checkNameSPYeuThich(data.sp.id)
+        // console.log("check check", check)
+        try{   
+                if(check === true)
+                {
+                    resolve({
+                        errCode: 1,
+                        errMessage: "đã có",
+                    })  
+                }
+                else
+                {
+                    let createGH = await db.yeuthichs.create({
+                        avt:data.sp.avt, 
+                        ten_sp:data.sp.ten_sp,
+                        gia_sp:data.sp.gia,
+                        id_sp:data.sp.id,
+                        id_nguoidung: data.idUser
+                    })
+                    resolve({
+                        errCode: 0,
+                        errMessage: "thành công",
+                    })  
+                }
+                 
+            }catch(e)
+            {
+                reject(e)
+            }
+    })
+}
+
+let deleteYeuThich = (data) =>
+{
+    console.log(" check data ",data)
+    return new Promise(async(resolve, reject) =>{
+        
+        let yeuthich = await db.yeuthichs.findOne({
+             where: {id_nguoidung: data.id_nguoidung}
+         })
+        //  console.log("check id",data);
+             if(!yeuthich)
+             {
+                 resolve({
+                     errCode: 1,
+                     errMessage: "yêu thích trống"
+                 })
+             }else{
+                await yeuthich.destroy({
+                    where: {id_sp: data.id_sp}
+                 });
+                    resolve({
+                        errCode: 0,
+                        errMessage: "thành công",
+                        data
+                    })
+             }
+              
+             
+    })
+}
+let getTrangThaiDonHang = (id) =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let donhang = await db.donhangs.findOne({
+                where : {id : id}
+            });
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: donhang.trangthai,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let saveTTDH = (data) =>
+{
+    return new Promise(async(resolve, reject) =>
+    {
+        console.log("check data đơn hàng",data);
+        try{
+            if(!data.id)
+            {
+                //console.log(data);
+                resolve({
+                    errCode: 2,
+                    errMessage: "khong nhan duoc id"
+                })
+            }
+           
+             let donhang = await db.donhangs.findOne({
+                where: {id: data.id},
+                //raw: false
+                })
+                // console.log("check donhang",donhang);
+                if(donhang)
+                {
+                    donhang.trangthai = data.tt;
+                    await donhang.save();
+                    resolve({
+                        errCode: 0,
+                        errMessage: "update thanh cong"
+                    })
+                }else{
+                    resolve({
+                        errCode: 1,
+                        errMessage: "chua update"
+                    });
+                }
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+
+let getDiaChiFromUser = (idUser) =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            if(idUser == "ALL")
+            {
+                let diachi = await db.diachis.findAll();
+                resolve({
+                    errCode: 0,
+                    data: diachi,
+                });
+            }
+            else
+            {
+                let diachi = await db.diachis.findAll({
+                    where : {ma_kh: idUser}
+                });
+                //console.log("avt", sp.avt)
+    
+                resolve({
+                    errCode: 0,
+                    data: diachi,
+                });
+            }
+            resolve({
+                errCode: 1,
+                codeMessage: "chưa có id",
+            });
+
+            
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+let getALLMarkdown = (id) =>
+{   
+    return new Promise(async (resolve, reject) => {
+        try {
+            if(id == "ALL")
+            {
+                let Markdown = await db.Markdown.findAll();
+                resolve({
+                    errCode: 0,
+                    data: Markdown,
+                });
+            }
+            else
+            {
+                let Markdown = await db.Markdown.findOne({
+                    where : {SPId: id}
+                });
+                //console.log("avt", sp.avt)
+    
+                resolve({
+                    errCode: 0,
+                    data: Markdown,
+                });
+            }
+            resolve({
+                errCode: 1,
+                codeMessage: "chưa có id",
+            }); 
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+// ứng dụng
+let saveUD = (data) => {
+    //console.log("check contentMarkdown", data.contentMarkdown);
+    return new Promise(async (resolve, reject) => {
+    console.log("check contentHTML", data.contentHTML);
+    console.log("check lisp", data);
+            try {
+                    if(!data.contentHTML || !data.action)
+                    {
+                        console.log("check Data", data)
+                        resolve({
+                            errCode: 1,
+                            errMessage: "thiếu"
+                        })
+                    }
+                    else
+                    {
+                        if(data.action === 'CREATE')
+                        {
+                            await db.Markdown.create({
+                                contentHTML: data.contentHTML,
+                                contentMarkdown: data.contentMarkdown,
+                                description: data.description,
+                                SPId: data.SPId,
+                                avt: data.avt
+                                // LSPId: 	data.LSPId,
+                            }) 
+                        }
+                        else if(data.action === 'EDIT')
+                        {
+                            let doctorMarkdown = await db.Markdown.findOne({
+                                where: {SPId: data.SPId},
+                                raw : false
+                            })
+
+                            if(doctorMarkdown)
+                            {
+                                doctorMarkdown.contentHTML = data.contentHTML,
+                                doctorMarkdown.contentMarkdown = data.contentMarkdown,
+                                doctorMarkdown.description = data.description,
+                                doctorMarkdown.updatedAt = new Date()
+                                doctorMarkdown.avt = data.avt,
+                                //doctorMarkdown.SPId: data.SPId,
+                                await doctorMarkdown.save();
+                            }
+                            
+                        }
+                        resolve({
+                            errCode: 0,
+                            errMessage: 'thành công'
+                        });
+                    }
+                
+               
+            } catch (e) {
+                reject(e);
+            }
+        })
+}
+
+let getALLUngDung = (id) =>
+{   
+    return new Promise(async (resolve, reject) => {
+        try {
+            if(id == "ALL")
+            {
+                let Markdown = await db.ungdungs.findAll();
+                resolve({
+                    errCode: 0,
+                    data: Markdown,
+                });
+            }
+            else
+            {
+                let Markdown = await db.ungdungs.findOne({
+                    where : {SPId: id}
+                });
+                //console.log("avt", sp.avt)
+    
+                resolve({
+                    errCode: 0,
+                    data: Markdown,
+                });
+            }
+            resolve({
+                errCode: 1,
+                codeMessage: "chưa có id",
+            }); 
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+let searchSPtheoLoai = (idLoai) =>
+{   
+    return new Promise(async (resolve, reject) => {
+        try {
+            if(idLoai == "ALL")
+            {
+                let Markdown = await db.sanphams.findAll({
+                    include: [
+                        {   
+                            model: db.loaisps, attributes: ['id','ten_loaisp']
+                        }
+                    ],
+                    raw: false,
+                    nest: true
+                });
+                resolve({
+                    errCode: 0,
+                    data: Markdown,
+                });
+            }
+            else
+            {
+                let Markdown = await db.sanphams.findAll({
+                    where : {ma_loaisp: idLoai},
+                    include: [
+                        {   
+                            model: db.loaisps, attributes: ['id','ten_loaisp']
+                        }
+                    ],
+                    raw: false,
+                    nest: true
+                });    
+                resolve({
+                    errCode: 0,
+                    data: Markdown,
+                });
+            }
+            resolve({
+                errCode: 1,
+                codeMessage: "chưa có id",
+            }); 
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports={
     getTopDTHomeService:getTopDTHomeService,
     getAllSP:getAllSP,
@@ -1188,5 +1612,17 @@ module.exports={
     deletgiohang:deletgiohang,
     bulkCreateThanhToan:bulkCreateThanhToan,
     getTrangThai: getTrangThai,
-    getAllDonHang:getAllDonHang
+    getAllDonHang:getAllDonHang,
+    getChiTietDonHang:getChiTietDonHang,
+    getAllYeuThich:getAllYeuThich,
+    checkNameSPYeuThich:checkNameSPYeuThich,
+    CreateNewYeuThich:CreateNewYeuThich,
+    deleteYeuThich:deleteYeuThich,
+    getTrangThaiDonHang:getTrangThaiDonHang,
+    saveTTDH:saveTTDH,
+    getDiaChiFromUser:getDiaChiFromUser,
+    getALLMarkdown:getALLMarkdown,
+    searchSPtheoLoai:searchSPtheoLoai,
+    getALLUngDung:getALLUngDung,
+    saveUD:saveUD
 }

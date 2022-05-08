@@ -15,6 +15,7 @@ import "slick-carousel/slick/slick-theme.css";
 import * as actions from "../../../store/actions"
 import { LANGUAGES } from '../../../utils';
 import {withRouter} from "react-router";
+import { Link } from 'react-router-dom';
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -58,6 +59,8 @@ class NoiBac extends Component {
     componentDidMount()
     {
         this.props.loadTopDTs()
+        {this.props.searchSanPhamtheoLoai("ALL")}
+
     }
 
     // handleAfterChange = (index, dontAnimate) =>
@@ -95,7 +98,10 @@ class NoiBac extends Component {
             <div className='section-content'>
                 <div className='section-header'>
                     <span className='title1'><FormattedMessage id="homePage.out-standing-DT"/></span>
-                    <button className='btn-1'><FormattedMessage id="homePage.more-infor"/></button>
+                    <button className='btn-1'>
+                        <Link to="/sanpham/"><FormattedMessage id="homePage.more-infor"/>
+                        </Link>
+                    </button>
                 </div>
                 <div className='section-body'>
                     <div className='khung'>
@@ -113,9 +119,9 @@ class NoiBac extends Component {
                                     <div className='img-noibac ' key={index} onClick= {()=> this.handleViewSanPhamNoiBac(item)}>
                                         <img src={imageBase64}/>
                                         <div className='nensp1'>
-                                        <div>{item.ten_sp}</div>
-                                        <div>{item.gia.toLocaleString()} VNĐ</div>
-                                        <div>Tai nghe GALAXY ...</div>
+                                            <div className='tensp'>{item.ten_sp}</div>
+                                            <div className='giasp'>Giá:{item.gia.toLocaleString()}đ</div>
+                                            <div>...</div>
                                         </div>
                                         
                                     </div>
@@ -146,6 +152,7 @@ const mapDispatchToProps = dispatch => {
     return {
         loadTopDTs: () => dispatch(actions.fetchTopDT()),
         //getGenderStart: () => dispatch(actions.fetchGenderStart()),
+        searchSanPhamtheoLoai: (idLoai) => dispatch(actions.searchSanPhamtheoLoai(idLoai)),
  
     };
 };

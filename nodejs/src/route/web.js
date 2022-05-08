@@ -39,6 +39,8 @@ let initWebRoute = (app) =>
     route.get("/api/get_detail_sanpham", dtController.getDetailSanPham);
     route.put("/api/edit-sanpham", dtController.handleEditSanPham);
     route.delete("/api/delete-sanpham", dtController.handleDeleteSanPham);
+    
+    route.get("/api/search-sanphamtheoloai", dtController.searchSPtheoLoai)
 
     //loaisp
     route.get("/api/GetAllLoaiSanPham", dtController.GetAllLoaiSanPham);
@@ -70,10 +72,27 @@ let initWebRoute = (app) =>
     // chi tiết đơn hàng
 
     route.get("/api/get_trangthai_allcode", dtController.handleGetTrangThai);
-
+    route.get("/api/get_chitiet_donhang", dtController.getChiTietDonHang);
     //đơn hàng
     route.get("/api/get_ALL_DonHang", dtController.getAllDonHang);
+    route.get("/api/get_TrangThai_DonHang", dtController.getTrangThaiDonHang);
+    route.put("/api/save_TrangThaiDonHang", dtController.saveTTDH)
 
+    // yêu thích
+    route.get("/api/get_ALL_YeuThich", dtController.getAllYeuThich);
+    route.post("/api/create-new-yeuthich", dtController.CreateNewYeuThich);
+    route.post("/api/create-delete-yeuthich", dtController.deleteYeuThich);   
+
+
+    // địa chỉ 
+    route.get("/api/get_ALL_DiaChi", dtController.getDiaChiFromUser);
+
+    // markdown
+    route.get("/api/get_ALL_markdown", dtController.getALLMarkdown);
+
+    //ứng dụng
+    route.get("/api/get_ALL_ungdung", dtController.getALLUngDung);
+    ////////////////////////////////////////////////////
     route.get('/nlnghanh',(req, res) => 
     {
         return res.send('Hello Ra Sin');

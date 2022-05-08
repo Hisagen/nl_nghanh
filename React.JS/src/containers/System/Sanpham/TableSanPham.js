@@ -124,7 +124,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         //fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
-        fetchAllSANPHAMStart: (data) => dispatch(actions.fetchAllSANPHAMStart(data)),
+        fetchAllSANPHAMStart: () => dispatch(actions.fetchAllSANPHAMStart()),
         deleteSanPham: (id) => dispatch(actions.deleteSanPham(id)),
         //getInfoDetailSanPham: (id) => dispatch(actions.getInfoDetailSanPham(id))
     };

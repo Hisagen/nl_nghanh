@@ -30,7 +30,8 @@
             "manage-guest": "Manage guest",
             "manage-admin": "Manage admin",
             "crud-redux": "CRUD redux",
-            "whitelist": "whitelist"
+            "whitelist": "whitelist",
+            "store" : "Manage Store"
         },
 
         "product": {

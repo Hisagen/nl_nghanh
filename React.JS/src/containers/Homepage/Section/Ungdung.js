@@ -17,6 +17,7 @@ import avtnen1 from "../../../assets/images/Ungdung/avtnen1.png"
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -45,10 +46,15 @@ class Ungdung extends Component {
     render() {
         let settings = {
             dots: false,
-            infinite: false,
+            infinite: true,
+            autoplay: true,
+            speed: 2000,
+            autoplaySpeed: 3000,
             speed: 500,
             slidesToShow: 1,
             slidesToScroll:  1,
+            initialSlide: 0,
+            cssEase: "linear",
             // nextArrow: <SampleNextArrow />,
             // prevArrow: <SamplePrevArrow />
         };
@@ -59,7 +65,9 @@ class Ungdung extends Component {
             <div className='section-content'>
                 <div className='section-header'>
                     <span className='titleUD'>ỨNG DỤNG YÊU THÍCH</span>
-                    <button className='btn-UD'>xem thêm</button>
+                    <Link to='/ungdung'>
+                        <button className='btn-UD'>xem thêm</button>
+                    </Link>
                 </div>
                 <div className='section-body'>
                 <Slider {...settings}>

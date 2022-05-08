@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ten_dc: {
+      address: {
         type: Sequelize.STRING
       },
       ma_kh: {

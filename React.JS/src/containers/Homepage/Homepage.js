@@ -44,13 +44,30 @@ class Homepage extends Component {
     
 
     render() {
-        
+    //   const settings = {
+    //     dots: false,
+    //     infinite: true,
+    //     autoplay: true,
+    //     speed: 3000,
+    //     autoplaySpeed: 4500,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     initialSlide: 0,
+    //     cssEase: "linear",
+    //     prevArrow: <SlickArrowLeft />,
+    //     nextArrow: <SlickArrowRight />,
+    // };
         let settings = {
             dots: false,
-            infinite: false,
+            infinite: true,
+            autoplay: true,
+            speed: 2000,
+            autoplaySpeed: 3000,
             speed: 500,
             slidesToShow: 2,
             slidesToScroll:  1,
+            initialSlide: 0,
+            cssEase: "linear",
             // nextArrow: <SampleNextArrow />,
             // prevArrow: <SamplePrevArrow />
         };
@@ -64,11 +81,11 @@ class Homepage extends Component {
                <NoiBac 
                     settings = {settings}
                 />
-               <Spkhac settings = {settings}/>
+               {/* <Spkhac settings = {settings}/> */}
                <Handbook
                     settings = {settings}
                 />
-               <About/>
+               {/* <About/> */}
                 <hr/>
                <HomeFooter/>
             </div>

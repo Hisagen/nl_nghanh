@@ -107,13 +107,65 @@ const createDonHang = (data) =>
 
 const getTrangThaiDonHang = () =>
 {
-    return axios.post('/api/get_trangthai_allcode')
+    return axios.get('/api/get_trangthai_allcode')
 }
 
 const getAllDonHang = () =>
 {
     return axios.get('/api/get_ALL_DonHang')
 }
+const getDonHangtheoid_donhang = (id_donhang) =>
+{
+    return axios.get(`/api/get_chitiet_donhang?id_donhang=${id_donhang}`)
+}
+
+//yêu thích
+const CreateNewYeuThich = (data) =>
+{
+    return axios.post(`/api/create-new-yeuthich`,data)
+}
+
+const getAllYeuThich = () =>
+{
+    return axios.get(`/api/get_ALL_YeuThich`)
+}
+
+const deleteYeuThichSerVice = (data) =>
+{
+    return axios.post(`/api/create-delete-yeuthich`,data)
+}
+
+
+const getTTdonhangService = (id) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.get(`/api/get_TrangThai_DonHang?id=${id}`)
+}
+
+const saveTTDH = (data) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.put(`/api/save_TrangThaiDonHang`,data)
+}
+
+const getDiaChiFromUserSerVice = (idUser) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.get(`/api/get_ALL_DiaChi?idUser=${idUser}`)
+}
+
+const getAllMarkdownSerVice = (id) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.get(`/api/get_ALL_markdown?id=${id}`)
+}
+
+const searchSanPhamtheoLoaiSerVice = (idLoai) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.get(`api/search-sanphamtheoloai?idLoai=${idLoai}`)
+}
+
 export  {
     get_all_san_pham,
     get_all_loai_san_pham,
@@ -138,6 +190,15 @@ export  {
     createThanhToan,
     createDonHang,
     getTrangThaiDonHang,
-    getAllDonHang
+    getAllDonHang,
+    getDonHangtheoid_donhang,
+    CreateNewYeuThich,
+    getAllYeuThich,
+    deleteYeuThichSerVice,
+    getTTdonhangService,
+    saveTTDH,
+    getDiaChiFromUserSerVice,
+    getAllMarkdownSerVice,
+    searchSanPhamtheoLoaiSerVice
 
 }

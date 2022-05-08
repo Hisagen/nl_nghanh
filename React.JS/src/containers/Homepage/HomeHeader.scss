@@ -196,6 +196,24 @@
                     opacity: 1;
                 }
             }
+            .welcome{
+                // border:  1px solid red;
+                margin-right: 10px;
+            }
+            .avt{
+                img{
+                    height: 40px;
+                    width: 40px;
+                }
+                
+                }
+        }
+        .btn-logout{
+            padding-top: 20px;
+            &:hover{
+                background-color: #99c8ec;
+                opacity: 0.9;
+            }
         }
     }
 }

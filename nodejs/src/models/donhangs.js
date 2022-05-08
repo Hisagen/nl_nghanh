@@ -10,11 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      // donhangs.hasOne(models.allCode, { foreignKey: 'keyMap'})
-      // donhangs.belongsTo(models.allCode, {foreignKey: 'trangthai', targetKey: "keyMap", as: 'trangthaiData'})
-        donhangs.hasOne(models.allCode, {foreignKey: 'keyMap'})
 
+      donhangs.belongsTo(models.allCode, {foreignKey: 'trangthai', targetKey: "keyMap", as: 'trangthaiData'})
 
     }
   };

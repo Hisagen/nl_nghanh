@@ -11,7 +11,7 @@
             // gap: 97px;
             // border: 1px solid red;
             height: 50px;
-            padding-top: 15px;
+            padding-top: 10px;
             font-weight: 700;
             border-radius: 5px;
             background-color: #ffffff;
@@ -44,6 +44,7 @@
             display: flex;
             // gap: 90px;
             text-align: center;
+            padding-bottom: 15px;
             &:hover{
                 background-color: #CCFFFF;
             }
@@ -64,6 +65,9 @@
             }
             .xem{
                 width: 16%;
+                &:hover{
+                    color: red;
+                }
             }
         }
         .tong{

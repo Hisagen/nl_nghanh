@@ -29,11 +29,11 @@
             "manage-user": "Người dùng",
             "manage-guest": "Quản lý khách hàng",
             "manage-admin": "Quản lý Admin",
-            "crud": "CRUD user",
-            "crud-redux": "CRUD redux",
-            "whitelist": "Yêu Thích"
+            "crud": "Quản Lý Người Dùng",
+            "crud-redux": "Quản Lý Người Dùng",
+            "whitelist": "Yêu Thích",
+            "store" : "Quản Lý Cửa Hàng"
         },
-
         "product": {
             "product": "Sản phẩm",
             "manage-product": "Quản lý sản phẩm",
