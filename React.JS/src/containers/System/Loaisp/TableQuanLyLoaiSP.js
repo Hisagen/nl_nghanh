@@ -38,7 +38,7 @@ class TableQuanLyLoaiSP extends Component {
     render() {
         
         let arrDanhMuc = this.props.loaispArr;
-        
+        console.log("check mảng loại sản phẩm:",arrDanhMuc)
         return (
             <React.Fragment>
                 <table id='TableSanPham'>
@@ -46,6 +46,7 @@ class TableQuanLyLoaiSP extends Component {
                          <tr>
                             <th>Id</th>
                             <th>Tên Loại Sản Phẩm</th>
+                            <th>Tên Danh Mục</th>
                             <th>Actions</th>
                         </tr>
                         {arrDanhMuc && arrDanhMuc.length > 0 && 
@@ -53,7 +54,8 @@ class TableQuanLyLoaiSP extends Component {
                                 return (
                                     <tr key={index}>
                                         <td>{item.id}</td>
-                                        <td>{item.ten_loaisp}</td>                                        
+                                        <td>{item.ten_loaisp}</td>
+                                        <td>{item.danhmuc.ten_dm}</td>                                        
                                         <td>
                                             <button onClick={() => this.handleLoaisp(item)}
                                                 className='btn-edit'><i className="fas fa-pencil-alt"></i></button>

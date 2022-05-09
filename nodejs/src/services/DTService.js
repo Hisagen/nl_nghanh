@@ -108,7 +108,6 @@ let saveSP = (data) => {
         })
 }
 
-
 let getChitietSP = (id) =>
 {
     return new Promise(async (resolve, reject) => {   
@@ -213,28 +212,6 @@ let getAllSanPham = () => {
         })
 }
 
-let GetAllLoaiSanPham = (inputId) => {
-    return new Promise(async(resolve, reject) => {
-        try{
-            let loaisp = '';
-            if(inputId === 'ALL')
-            {
-                loaisp = await db.loaisps.findAll()
-            }
-            if(inputId !== 'ALL')
-            {
-                loaisp = await db.loaisps.findOne({
-                    where: {id:inputId},
-                })
-            }
-            resolve(loaisp);
-        }catch(e)
-        {
-            reject(e);
-        }
-    })
-}
-
 let checkNameSanPham = (nameSP) =>
 {
     return new Promise(async(resolve, reject) => {
@@ -257,73 +234,7 @@ let checkNameSanPham = (nameSP) =>
         }
     })
 }
-let checkNameLoaiSanPham = (nameLSP) =>
-{
-    return new Promise(async(resolve, reject) => {
-        try
-        {   
-            let name = await db.loaisps.findOne({
-                where: {ten_loaisp: nameLSP}
-            })
-            if(name)
-            {
-                resolve(true);
-            }
-            else
-            {
-                resolve(false);
-            }
-        }catch(e)
-        {
-            reject(e);
-        }
-    })
-}
-// let checkNameGioHang = (nameLSP) =>
-// {
-//     return new Promise(async(resolve, reject) => {
-//         try
-//         {   
-//             let name = await db.giohangs.findOne({
-//                 where: {ten_sp: nameLSP}
-//             })
-//             if(name)
-//             {
-//                 resolve(true);
-//             }
-//             else
-//             {
-//                 resolve(false);
-//             }
-//         }catch(e)
-//         {
-//             reject(e);
-//         }
-//     })
-// }
-let checkNameDMSanPham = (nameDM) =>
-{
-    return new Promise(async(resolve, reject) => {
-        try
-        {   
-            let name = await db.danhmucs.findOne({
-                where: {ten_dm: nameDM}
-            })
-            console.log("check danh sách danh mục",name)
-            if(name)
-            {
-                resolve(true);
-            }
-            else
-            {
-                resolve(false);
-            }
-        }catch(e)
-        {
-            reject(e);
-        }
-    })
-}
+
 let CreateNewSanPham = (data) =>
 {
     return new Promise( async(resolve, reject) =>
@@ -350,14 +261,6 @@ let CreateNewSanPham = (data) =>
                     msadmin: data.msadmin,
                     ma_loaisp: data.ma_loaisp,
                     avt: data.avt,
-                    manhinh: data.manhinh,
-                    HDH: data.HDH,
-                    cameraSau: data.cameraSau,
-                    cameraTruoc: data.cameraTruoc,
-                    chip: data.chip,
-                    ram: data.ram,
-                    bonho: data.bonho,
-                    pin: data.pin,
                     gia: data.gia,
                 })
                 // db.query(createSP, function (err, results, fields){
@@ -382,81 +285,7 @@ let CreateNewSanPham = (data) =>
             }
     })
 }
-let CreateNewLoaiSanPham = (data) =>
-{
-    return new Promise( async(resolve, reject) =>
-    {
-        try{
-            
-            let check = await checkNameLoaiSanPham(data.ten_loaisp);
-            console.log(check);
-            if(check === true)
-            {
-                resolve({
-                    errCode: 1,
-                    errMessage: "Loại sản phẩm đã tồn tại! vui lòng nhập loại sản phẩm khác"
-                })
-            }
-            else
-            {
-               let createSP = await db.loaisps.create({
-                    ten_loaisp: data.ten_loaisp,
-                    ma_dm: data.ma_dm,
-                    
-                })
-                // // db.query(createSP, function (err, results, fields){
-                //      console.log("check id mới tạo", createSP.id)
-                // // })
-                resolve({
-                    errCode: 0,
-                    errMessage: "thành công",
-                    
-                })
-            }
-            
-        }catch(e)
-            {
-                reject(e)
-            }
-    })
-}
-let CreateNewDMSanPham = (data) =>
-{
-    return new Promise( async(resolve, reject) =>
-    {
-        try{
-            
-            let check = await checkNameDMSanPham(data.ten_dm);
-            console.log("check tên danh mục",check);
-            if(check === true)
-            {
-                resolve({
-                    errCode: 1,
-                    errMessage: "Loại danh mục đã tồn tại! vui lòng nhập danh mục khác"
-                })
-            }
-            else
-            {
-               let createSP = await db.danhmucs.create({
-                    ten_dm: data.ten_dm,
-                    
-                })
-                // // db.query(createSP, function (err, results, fields){
-                //      console.log("check id mới tạo", createSP.id)
-                // // })
-                resolve({
-                    errCode: 0,
-                    errMessage: "thành công",
-                    
-                })
-            }
-            
-        }catch(e)
-            {
-                reject(e)
-            }
-    })
-}
+
 let updateSanPham = (data) =>
 {
     return new Promise(async(resolve, reject) =>
@@ -537,6 +366,7 @@ let updateSanPham = (data) =>
         }
     })
 }
+
 let deleteSanPham = (id) =>
 {
     return new Promise(async(resolve, reject) =>{
@@ -565,129 +395,97 @@ let deleteSanPham = (id) =>
             })
     })
 }
-let GetAllDanhMuc = (inputId) => {
+
+////////////////////////////////////////////////////////////////////////////// Loại Sản Phẩm
+let GetAllLoaiSanPham = (inputId) => {
     return new Promise(async(resolve, reject) => {
         try{
-            let danhmuc = '';
+            let loaisp = '';
             if(inputId === 'ALL')
             {
-                danhmuc = await db.danhmucs.findAll()
+                loaisp = await db.loaisps.findAll({
+                    include: [
+                        {   
+                            model: db.danhmucs, attributes: ['id','ten_dm']
+                        }
+                        ],
+                })
             }
             if(inputId !== 'ALL')
             {
-                danhmuc = await db.danhmucs.findOne({
+                loaisp = await db.loaisps.findOne({
                     where: {id:inputId},
+                    
                 })
             }
-            resolve(danhmuc);
+            resolve(loaisp);
         }catch(e)
         {
             reject(e);
         }
     })
 }
-let updateDanhMuc = (data) =>
+
+let checkNameLoaiSanPham = (nameLSP) =>
 {
-    return new Promise(async(resolve, reject) =>
+    return new Promise(async(resolve, reject) => {
+        try
+        {   
+            let name = await db.loaisps.findOne({
+                where: {ten_loaisp: nameLSP}
+            })
+            if(name)
+            {
+                resolve(true);
+            }
+            else
+            {
+                resolve(false);
+            }
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+let CreateNewLoaiSanPham = (data) =>
+{
+    return new Promise( async(resolve, reject) =>
     {
-        //data.id = 6;
-        // console.log("check data",data);
         try{
-            if(!data.id)
+            
+            let check = await checkNameLoaiSanPham(data.ten_loaisp);
+            console.log(check);
+            if(check === true)
             {
-                //console.log(data);
                 resolve({
-                    errCode: 2,
-                    errMessage: "khong nhan duoc id"
+                    errCode: 1,
+                    errMessage: "Loại sản phẩm đã tồn tại! vui lòng nhập loại sản phẩm khác"
                 })
             }
-           
-             let DanhMuc = await db.danhmucs.findOne({
-                where: {id: data.id},
-                //raw: false
+            else
+            {
+               let createSP = await db.loaisps.create({
+                    ten_loaisp: data.ten_loaisp,
+                    ma_dm: data.ma_dm,
+                    
                 })
-                console.log("check DanhMuc",DanhMuc);
-                if(DanhMuc)
-                {
-
-                    DanhMuc.ten_dm = data.ten_dm;
-                    await DanhMuc.save();
-                    resolve({
-                        errCode: 0,
-                        errMessage: "update thanh cong"
-                    })
-                }else{
-                    resolve({
-                        errCode: 1,
-                        errMessage: "chua update"
-                    });
-                }
+                // // db.query(createSP, function (err, results, fields){
+                //      console.log("check id mới tạo", createSP.id)
+                // // })
+                resolve({
+                    errCode: 0,
+                    errMessage: "thành công",
+                    
+                })
+            }
+            
         }catch(e)
-        {
-            reject(e);
-        }
-    })
-}
-let deleteDanhMuc = (id) =>
-{
-    return new Promise(async(resolve, reject) =>{
-        
-       let foundDanhMuc = await db.danhmucs.findOne({
-            where: {id: id}
-        })
-        // console.log("check id",id);
-            if(!foundDanhMuc)
             {
-                resolve({
-                    errCode: 2,
-                    errMessage: "không có người dùng này"
-                })
+                reject(e)
             }
-             
-            await db.danhmucs.destroy({
-                where: {id: id}
-            });
-            resolve({
-                errCode: 0,
-                    errMessage: "thành công"
-            })
     })
 }
-let getDetailDanhMuc = (id) =>
-{
-    return new Promise(async (resolve, reject) => {   
-        // console.log("check id",id)
-        if(!id)
-        {
-            resolve({
-                errCode: 1,
-                errMessage: "missing require!"
-            })
-        }
-        else
-        {
-            let data = await db.danhmucs.findAll({
-                where:{id:id},
-                include: [
-                    {   
-                        model: db.loaisps, attributes: ['id', 'ten_loaisp', 'ma_dm']
-                    },
-                ],
-                raw: true,
-                nest: true
-            })
-            //console.log("check data.image1",)
-            resolve({
-                errCode: 0,
-                data: data
-            });
-        }
-
-    })
-}
-
-// danh mục
-
 let updateLoaiSP = (data) =>
 {
     return new Promise(async(resolve, reject) =>
@@ -810,6 +608,192 @@ let search_loaispService = (id) =>
     })
 }
 
+
+//////////////////////////////////////////////////////////////////////////////// Danh Mục
+let checkNameDMSanPham = (nameDM) =>
+{
+    return new Promise(async(resolve, reject) => {
+        try
+        {   
+            let name = await db.danhmucs.findOne({
+                where: {ten_dm: nameDM}
+            })
+            console.log("check danh sách danh mục",name)
+            if(name)
+            {
+                resolve(true);
+            }
+            else
+            {
+                resolve(false);
+            }
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+
+
+let CreateNewDMSanPham = (data) =>
+{
+    return new Promise( async(resolve, reject) =>
+    {
+        try{
+            
+            let check = await checkNameDMSanPham(data.ten_dm);
+            console.log("check tên danh mục",check);
+            if(check === true)
+            {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Loại danh mục đã tồn tại! vui lòng nhập danh mục khác"
+                })
+            }
+            else
+            {
+               let createSP = await db.danhmucs.create({
+                    ten_dm: data.ten_dm,
+                    
+                })
+                // // db.query(createSP, function (err, results, fields){
+                //      console.log("check id mới tạo", createSP.id)
+                // // })
+                resolve({
+                    errCode: 0,
+                    errMessage: "thành công",
+                    
+                })
+            }
+            
+        }catch(e)
+            {
+                reject(e)
+            }
+    })
+}
+
+let GetAllDanhMuc = (inputId) => {
+    return new Promise(async(resolve, reject) => {
+        try{
+            let danhmuc = '';
+            if(inputId === 'ALL')
+            {
+                danhmuc = await db.danhmucs.findAll()
+            }
+            if(inputId !== 'ALL')
+            {
+                danhmuc = await db.danhmucs.findOne({
+                    where: {id:inputId},
+                })
+            }
+            resolve(danhmuc);
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+let updateDanhMuc = (data) =>
+{
+    return new Promise(async(resolve, reject) =>
+    {
+        //data.id = 6;
+        // console.log("check data",data);
+        try{
+            if(!data.id)
+            {
+                //console.log(data);
+                resolve({
+                    errCode: 2,
+                    errMessage: "khong nhan duoc id"
+                })
+            }
+           
+             let DanhMuc = await db.danhmucs.findOne({
+                where: {id: data.id},
+                //raw: false
+                })
+                console.log("check DanhMuc",DanhMuc);
+                if(DanhMuc)
+                {
+
+                    DanhMuc.ten_dm = data.ten_dm;
+                    await DanhMuc.save();
+                    resolve({
+                        errCode: 0,
+                        errMessage: "update thanh cong"
+                    })
+                }else{
+                    resolve({
+                        errCode: 1,
+                        errMessage: "chua update"
+                    });
+                }
+        }catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+let deleteDanhMuc = (id) =>
+{
+    return new Promise(async(resolve, reject) =>{
+        
+       let foundDanhMuc = await db.danhmucs.findOne({
+            where: {id: id}
+        })
+        // console.log("check id",id);
+            if(!foundDanhMuc)
+            {
+                resolve({
+                    errCode: 2,
+                    errMessage: "không có người dùng này"
+                })
+            }
+             
+            await db.danhmucs.destroy({
+                where: {id: id}
+            });
+            resolve({
+                errCode: 0,
+                    errMessage: "thành công"
+            })
+    })
+}
+let getDetailDanhMuc = (id) =>
+{
+    return new Promise(async (resolve, reject) => {   
+        // console.log("check id",id)
+        if(!id)
+        {
+            resolve({
+                errCode: 1,
+                errMessage: "missing require!"
+            })
+        }
+        else
+        {
+            let data = await db.danhmucs.findAll({
+                where:{id:id},
+                include: [
+                    {   
+                        model: db.loaisps, attributes: ['id', 'ten_loaisp', 'ma_dm']
+                    },
+                ],
+                raw: true,
+                nest: true
+            })
+            //console.log("check data.image1",)
+            resolve({
+                errCode: 0,
+                data: data
+            });
+        }
+
+    })
+}
+
 let getdsloaidm = (idDM) =>
 {
     return new Promise(async (resolve, reject) => {   
@@ -853,6 +837,8 @@ let getdsloaidm = (idDM) =>
     })
 }
 
+
+/////////////////////////////////////////////////////////////////////////////// Giỏ Hàng (bảng tạm)
 let CreateNewGioHang = (data) =>
 {
     // console.log('check data',data)
@@ -1004,29 +990,7 @@ let checkNameSPGioHang = (id_sp) =>
         }
     })
 }
-let checkNameSPYeuThich = (id_sp) =>
-{
-    return new Promise(async(resolve, reject) => {
-        try
-        {   
-            let name = await db.yeuthichs.findOne({
-                where: {id_sp: id_sp}
-            })
-            // console.log("check danh sách giỏ hàng",name)
-            if(name)
-            {
-                resolve(true);
-            }
-            else
-            {
-                resolve(false);
-            }
-        }catch(e)
-        {
-            reject(e);
-        }
-    })
-}
+
 let getAllGioHang = () =>
 {
     return new Promise(async (resolve, reject) => {
@@ -1085,136 +1049,30 @@ let deletgiohang = (data) =>
     })
 }
 
-let bulkCreateThanhToan = (data) =>
+/////////////////////////////////////////////////////////////// sản phẩm yêu thích
+let checkNameSPYeuThich = (id_sp) =>
 {
-    // console.log("check data",data)
-    return new Promise ( async (resolve, reject)=>
-    {
-        try{
-            if(!data)
+    return new Promise(async(resolve, reject) => {
+        try
+        {   
+            let name = await db.yeuthichs.findOne({
+                where: {id_sp: id_sp}
+            })
+            // console.log("check danh sách giỏ hàng",name)
+            if(name)
             {
-                resolve({
-                    errCode: 1,
-                    errMessage: "Chưa truyền tham số"
-                })
+                resolve(true);
             }
             else
             {
-                let thanhtoan = await db.donhangs.create({
-                    ngaydathang: Date.now(),
-                    // ngaygiaohang:ngaygiaohang,
-                    // dc_gh:dc_gh,
-                    ma_nguoidung:data.ma_nguoidung,
-                    tongtien:data.tongtien,
-                    trangthai: "DH2",
-                    dc_gh: data.addressNew
-                    // ma_nhanvien:data.ma_nhanvien
-                })     
-                let temp = data.giohang;
-                console.log('check temp đầu',temp)
-                if(temp && temp.length>0)
-                {
-                        temp = temp.map(item =>{
-                        item.avt = new Buffer(item.avt, 'base64').toString('binary');
-                        item.ma_donhang = thanhtoan.id
-                        return item;
-                    })
-                    console.log("check data don hang",temp)
-
-                    await db.chitietdonhangs.bulkCreate(temp);
-                    resolve({
-                        errCode: 0,
-                        errMessage: "Thành Công"
-                    })
-                }
-                await db.giohangs.destroy({
-                    where: {id_nguoidung: data.idUser}
-                });
+                resolve(false);
             }
-            
         }catch(e)
         {
-            reject(e)
-        }
-    })
-}
-let getTrangThai = () =>
-{
-    return new Promise(async (resolve, reject) => {
-        try {
-            
-            let trangthai = await db.allCode.findAll({
-                where : {type : "ORDERS"}
-            });
-            //console.log("avt", sp.avt)
-
-            resolve({
-                errCode: 0,
-                data: trangthai,
-            });
-            
-        } catch (e) {
             reject(e);
         }
     })
 }
-
-let getAllDonHang = () =>
-{
-    return new Promise(async (resolve, reject) => {
-        try {
-            
-            let donhang = await db.donhangs.findAll({
-                include: [
-                    { model: db.allCode, as: 'trangthaiData', attributes: ['valueEn', 'valueVi'] },
-                ], 
-                raw: false,
-                nest: true     
-            });
-            //console.log("avt", sp.avt)
-
-            resolve({
-                errCode: 0,
-                data: donhang,
-            });
-            
-        } catch (e) {
-            reject(e);
-        }
-    })
-}
-
-let getChiTietDonHang = (id_donhang) =>
-{
-    // console.log("check id_donhang", id_donhang)
-    return new Promise(async (resolve, reject) => {   
-        // console.log("check id",idUser)
-        if(!id_donhang)
-        {
-            resolve({
-                errCode: 1,
-                errMessage: "missing require!"
-            })
-        }
-        else
-        {
-            let data = await db.chitietdonhangs.findAll({
-                where:{ma_donhang:id_donhang},
-            })
-            // console.log("check data.avt",data.avt)
-            // if(data.avt)
-            // {
-            //     data.avt = new Buffer(data.avt, 'base64').toString('binary');
-            // }
-            resolve({
-                errCode: 0,
-                data: data
-            });
-        }
-
-    })
-}
-
 let getAllYeuThich = () =>
 {
     return new Promise(async (resolve, reject) => {
@@ -1310,6 +1168,110 @@ let deleteYeuThich = (data) =>
              
     })
 }
+
+
+
+///////////////////////////////////////////////////////////////////////////////////// đơn hàng
+let bulkCreateThanhToan = (data) =>  ////////////// tạo đơn hàng và chi tiết đơn hàng
+{
+    // console.log("check data",data)
+    return new Promise ( async (resolve, reject)=>
+    {
+        try{
+            if(!data)
+            {
+                resolve({
+                    errCode: 1,
+                    errMessage: "Chưa truyền tham số"
+                })
+            }
+            else
+            {
+                let thanhtoan = await db.donhangs.create({
+                    ngaydathang: Date.now(),
+                    // ngaygiaohang:ngaygiaohang,
+                    // dc_gh:dc_gh,
+                    ma_nguoidung:data.ma_nguoidung,
+                    tongtien:data.tongtien,
+                    trangthai: "DH2",
+                    dc_gh: data.addressNew
+                    // ma_nhanvien:data.ma_nhanvien
+                })     
+                let temp = data.giohang;
+                console.log('check temp đầu',temp)
+                if(temp && temp.length>0)
+                {
+                        temp = temp.map(item =>{
+                        item.avt = new Buffer(item.avt, 'base64').toString('binary');
+                        item.ma_donhang = thanhtoan.id
+                        return item;
+                    })
+                    console.log("check data don hang",temp)
+
+                    await db.chitietdonhangs.bulkCreate(temp);
+                    resolve({
+                        errCode: 0,
+                        errMessage: "Thành Công"
+                    })
+                }
+                await db.giohangs.destroy({
+                    where: {id_nguoidung: data.idUser}
+                });
+            }
+            
+        }catch(e)
+        {
+            reject(e)
+        }
+    })
+}
+let getAllDonHang = () =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let donhang = await db.donhangs.findAll({
+                include: [
+                    { model: db.allCode, as: 'trangthaiData', attributes: ['valueEn', 'valueVi'] },
+                ], 
+                raw: false,
+                nest: true     
+            });
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: donhang,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////// trạng thái đơn hàng
+let getTrangThai = () =>
+{
+    return new Promise(async (resolve, reject) => {
+        try {
+            
+            let trangthai = await db.allCode.findAll({
+                where : {type : "ORDERS"}
+            });
+            //console.log("avt", sp.avt)
+
+            resolve({
+                errCode: 0,
+                data: trangthai,
+            });
+            
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 let getTrangThaiDonHang = (id) =>
 {
     return new Promise(async (resolve, reject) => {
@@ -1372,6 +1334,43 @@ let saveTTDH = (data) =>
     })
 }
 
+
+
+///////////////////////////////////////////////////////////////////////////////////// chi tiết đơn hàng
+let getChiTietDonHang = (id_donhang) =>
+{
+    // console.log("check id_donhang", id_donhang)
+    return new Promise(async (resolve, reject) => {   
+        // console.log("check id",idUser)
+        if(!id_donhang)
+        {
+            resolve({
+                errCode: 1,
+                errMessage: "missing require!"
+            })
+        }
+        else
+        {
+            let data = await db.chitietdonhangs.findAll({
+                where:{ma_donhang:id_donhang},
+            })
+            // console.log("check data.avt",data.avt)
+            // if(data.avt)
+            // {
+            //     data.avt = new Buffer(data.avt, 'base64').toString('binary');
+            // }
+            resolve({
+                errCode: 0,
+                data: data
+            });
+        }
+
+    })
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////// địa chỉ user
 let getDiaChiFromUser = (idUser) =>
 {
     return new Promise(async (resolve, reject) => {
@@ -1442,7 +1441,7 @@ let getALLMarkdown = (id) =>
     })
 }
 
-// ứng dụng
+/////////////////////////////////////////////////////////////////////////////////////// ứng dụng
 let saveUD = (data) => {
     //console.log("check contentMarkdown", data.contentMarkdown);
     return new Promise(async (resolve, reject) => {
@@ -1535,7 +1534,9 @@ let getALLUngDung = (id) =>
         }
     })
 }
-let searchSPtheoLoai = (idLoai) =>
+
+
+let searchSPtheoLoai = (idLoai) => ///// tìm sản phẩm theo loại sản phẩm
 {   
     return new Promise(async (resolve, reject) => {
         try {
@@ -1583,46 +1584,72 @@ let searchSPtheoLoai = (idLoai) =>
 }
 
 module.exports={
+
     getTopDTHomeService:getTopDTHomeService,
     getAllSP:getAllSP,
     saveSP:saveSP,
     getChitietSP:getChitietSP,
     getAllSanPham:getAllSanPham,
-    GetAllLoaiSanPham:GetAllLoaiSanPham,
-    CreateNewSanPham:CreateNewSanPham,
-    getDetailSanPham:getDetailSanPham,
-    CreateNewLoaiSanPham:CreateNewLoaiSanPham,
-    checkNameDMSanPham:checkNameDMSanPham,
-    CreateNewDMSanPham:CreateNewDMSanPham,
     updateSanPham:updateSanPham,
     deleteSanPham:deleteSanPham,
-    GetAllDanhMuc:GetAllDanhMuc,
-    updateDanhMuc:updateDanhMuc,
-    deleteDanhMuc:deleteDanhMuc,
-    getDetailDanhMuc:getDetailDanhMuc,
+    CreateNewSanPham:CreateNewSanPham,
+    getDetailSanPham:getDetailSanPham,
+
+    //loại sản phẩm
+    GetAllLoaiSanPham:GetAllLoaiSanPham,
+    CreateNewLoaiSanPham:CreateNewLoaiSanPham,
     updateLoaiSP:updateLoaiSP,
     deleteLoaiSP:deleteLoaiSP,
     getDetailLoaiSP:getDetailLoaiSP,
     search_loaispService:search_loaispService,
+
+    // danh mục sản phẩm
+    checkNameDMSanPham:checkNameDMSanPham,
+    CreateNewDMSanPham:CreateNewDMSanPham,
+    GetAllDanhMuc:GetAllDanhMuc,
+    updateDanhMuc:updateDanhMuc,
+    deleteDanhMuc:deleteDanhMuc,
+    getDetailDanhMuc:getDetailDanhMuc,
     getdsloaidm:getdsloaidm,
+
+
+    // Giỏ hàng (bảng tạm)
     CreateNewGioHang:CreateNewGioHang,
     getGioHang:getGioHang,
     checkNameSPGioHang:checkNameSPGioHang,
     getAllGioHang:getAllGioHang,
     deletgiohang:deletgiohang,
+
+    // tọa đơn hàng và chi tiết đơn hàng
     bulkCreateThanhToan:bulkCreateThanhToan,
+
+    // trạng thái 
     getTrangThai: getTrangThai,
+
+    // đơn hàng
     getAllDonHang:getAllDonHang,
     getChiTietDonHang:getChiTietDonHang,
+    getTrangThaiDonHang:getTrangThaiDonHang,
+    saveTTDH:saveTTDH,
+
+    // sản phẩm yêu thích
     getAllYeuThich:getAllYeuThich,
     checkNameSPYeuThich:checkNameSPYeuThich,
     CreateNewYeuThich:CreateNewYeuThich,
     deleteYeuThich:deleteYeuThich,
-    getTrangThaiDonHang:getTrangThaiDonHang,
-    saveTTDH:saveTTDH,
+
+
+    // địa chỉ
     getDiaChiFromUser:getDiaChiFromUser,
+
+    // bài viết
     getALLMarkdown:getALLMarkdown,
+
+    // tìm sản phẩm theo loại
     searchSPtheoLoai:searchSPtheoLoai,
+
+    // chưa làm xong
     getALLUngDung:getALLUngDung,
-    saveUD:saveUD
+    saveUD:saveUD,
+
 }

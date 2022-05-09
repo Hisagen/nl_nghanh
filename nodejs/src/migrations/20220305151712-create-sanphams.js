@@ -48,30 +48,6 @@ module.exports = {
       // ram: DataTypes.STRING,
       // bonho: DataTypes.STRING,
       // pin: DataTypes.STRING,
-      manhinh: {
-        type: Sequelize.STRING
-      },
-      HDH: {
-        type: Sequelize.STRING
-      },
-      cameraSau: {
-        type: Sequelize.STRING
-      },
-      cameraTruoc: {
-        type: Sequelize.STRING
-      },
-      chip: {
-        type: Sequelize.STRING
-      },
-      ram: {
-        type: Sequelize.STRING
-      },
-      bonho: {
-        type: Sequelize.STRING
-      },
-      pin: {
-        type: Sequelize.STRING
-      },
       gia: {
         type: Sequelize.INTEGER
       },

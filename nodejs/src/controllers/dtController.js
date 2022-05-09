@@ -34,25 +34,9 @@ let getAllSP = async (req, res) =>
     }
 }
 
-// let savechitietSP = async (req, res) =>
-// {
-//     try{
-       
-//         console.log("check req.body", req.body);
-//         let message = await DTService.saveSP(req.body);
-//         console.log("check :response", message)
-//         return res.status(200).json(message)
-//      }catch(e)
-//      {
-//         console.log("check lỗi",e);
-//         return res.status(200).json({
-//             errCode: -1,
-//             errMessage: "Error from Server"
-//         })
-//      }
-// }
 
-let postInforDoctor = async (req, res) => {
+
+let saveSP = async (req, res) => {
     try {
         console.log('trai dua', req.body);
         let response = await DTService.saveSP(req.body);
@@ -125,6 +109,7 @@ let getAllGioHang = async (req, res) =>
         })
     }
 }
+
 let GetAllLoaiSanPham = async (req, res) =>
 {
     let id = req.query.id
@@ -394,31 +379,45 @@ let searchSPtheoLoai  = async (req, res) =>
 }
 
 module.exports = {
+
+
+    ////////////////////////////// sản phẩm
     getTopDTHome:getTopDTHome,
     getAllSP:getAllSP,
     //savechitietSP:savechitietSP,
-    postInforDoctor:postInforDoctor,
+    saveSP:saveSP,
     getDetailSP:getDetailSP,
     getAllSanPham:getAllSanPham,
-    GetAllLoaiSanPham:GetAllLoaiSanPham,
     handleCreateNewSanPham:handleCreateNewSanPham,
     getDetailSanPham:getDetailSanPham,
-    handleCreateNewLoaiSanPham:handleCreateNewLoaiSanPham,
-    handleCreateNewDMSanPham:handleCreateNewDMSanPham,
     handleDeleteSanPham:handleDeleteSanPham,
     handleEditSanPham:handleEditSanPham,
+
+
+    ////////////////////////////// loại sản phẩm
+    GetAllLoaiSanPham:GetAllLoaiSanPham,
+    handleCreateNewLoaiSanPham:handleCreateNewLoaiSanPham,
+    updateLoaiSP:updateLoaiSP,
+    deleteLoaiSP:deleteLoaiSP,
+    search_loaisp:search_loaisp,
+
+
+    ///////////////////////////////// danh mục
+    handleCreateNewDMSanPham:handleCreateNewDMSanPham,
     GetAllDanhMuc:GetAllDanhMuc,
     handleDeletedanhmuc:handleDeletedanhmuc,
     hanldeEditdanhmuc:hanldeEditdanhmuc,
     getDetailDanhMuc:getDetailDanhMuc,
-    updateLoaiSP:updateLoaiSP,
-    deleteLoaiSP:deleteLoaiSP,
-    search_loaisp:search_loaisp,
     getdsloaidm:getdsloaidm,
+
+
+    ////////////////////////////////// giỏ hàng
     handleCreateNewGioHang:handleCreateNewGioHang,
     hanldegetGioHang:hanldegetGioHang,
     getAllGioHang:getAllGioHang,
     hanldeDeleteGioHang:hanldeDeleteGioHang,
+
+    ////////////////////////////////// 
     handleCreateThanhToan:handleCreateThanhToan,
     handleGetTrangThai:handleGetTrangThai,
     getAllDonHang:getAllDonHang,

@@ -30,7 +30,7 @@ let initWebRoute = (app) =>
     route.get("/api/allCode", userController.getAllCode);
     route.get("/api/top_dt_home", dtController.getTopDTHome);
     route.get("/api/get_all_sp", dtController.getAllSP);
-    route.post("/api/save_sp", dtController.postInforDoctor);
+    route.post("/api/save_sp", dtController.saveSP);
     route.get("/api/get_detail_sp", dtController.getDetailSP);
 
     //sanpham

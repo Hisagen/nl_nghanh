@@ -41,6 +41,8 @@ class Quanlysanpham extends Component {
 
             ma_dm_dau: '',
             ma_dm: '',
+            
+
 
 
             HDH: '',
@@ -69,36 +71,29 @@ class Quanlysanpham extends Component {
     }
 
     async componentDidMount() {
-        this.props.fetchAllLoaiSanPhamSTART();
+
+        // this.props.fetchAllLoaiSanPhamSTART();
         this.props.fetchStatusStart();
         this.props.fetchAllSANPHAMStart();
         this.props.fetchAllDanhMucSTART();
-        
-        //this.props.searchLoaisp(1);
+
+        this.props.searchLoaisp(10);
         //console.log("this.state.ma_dm",this.state.ma_dm)
         let res = await get_all_san_pham()
         
         if(res && res.errCode === 0)
         {
+            let arrdanhmuc  = this.props.arrdanhmuc;
+
             this.setState({
-                sanphamArr: res.data
+                sanphamArr: res.data,
+                ma_dm: arrdanhmuc && arrdanhmuc.length>0 ? arrdanhmuc[0].id: ''
+
             })
         }
     }
     async componentDidUpdate(prevProps, prevState, snapshot)
     {
-        // if(prevProps.ma_dm !== this.state.ma_dm)
-        // {
-        //     // let test = []
-
-        //     test = this.props.loaispnew
-        //     if(test && test.errCode === 0)
-        //     {
-        //         this.setState({
-        //             loaiSPArr: test
-        //         })
-        //     }    
-        // }
         if(prevProps.arrdanhmuc !== this.props.arrdanhmuc)
         {
             let arrdanhmuc  = this.props.arrdanhmuc;
@@ -110,14 +105,14 @@ class Quanlysanpham extends Component {
             //this.props.searchLoaisp(this.state.ma_dm)
         }
 
-        if(prevProps.loaiSPRedux !== this.props.loaiSPRedux)
-        {
-            let loaiSPRedux = this.props.loaiSPRedux;
-            this.setState({
-                loaiSPArr: loaiSPRedux,
-                ma_loaisp: loaiSPRedux && loaiSPRedux.length>0 ? loaiSPRedux[0].id : ''
-            })
-        }
+        // if(prevProps.loaispnew !== this.props.loaispnew)
+        // {
+        //     let loaispnew = this.props.loaispnew;
+        //     this.setState({
+        //         loaiSPArr: loaispnew,
+        //         ma_loaisp: loaispnew && loaispnew.length>0 ? loaispnew[0].id : ''
+        //     })
+        // }
         
         
         if(prevProps.statusRedux !== this.props.statusRedux)
@@ -133,7 +128,7 @@ class Quanlysanpham extends Component {
         if(prevProps.listSanPham !== this.props.listSanPham)
         {
             let arrStatus = this.props.statusRedux
-            let arrLoaisp = this.props.loaiSPRedux
+            let arrLoaisp = this.props.loaispnew
             this.setState({
                 ten_sp: '',
                 qc_spHTML: '',
@@ -182,7 +177,7 @@ class Quanlysanpham extends Component {
     }
     checkValidateInput = () => {
         let isValid = true;
-        let arrCheck = ['ten_sp','sl_sp','trangthai','gia','manhinh','HDH','cameraSau','cameraTruoc','chip','ram','bonho','pin',] //,
+        let arrCheck = ['ten_sp','sl_sp','trangthai','gia'] //,
         //console.log("check arrCheck",arrCheck)
         for(let i=0; i<arrCheck.length; i++)
         {
@@ -211,18 +206,10 @@ class Quanlysanpham extends Component {
                 qc_spMarkdown: this.state.qc_spMarkdown,
                 sl_sp: this.state.sl_sp,
                 trangthai: this.state.trangthai,
-                manhinh: this.state.manhinh,
+               
                 msadmin: idAdmin,
                 ma_loaisp: this.state.ma_loaisp,
                 trangthai: this.state.trangthai,
-
-                HDH: this.state.HDH,
-                cameraSau: this.state.cameraSau,
-                cameraTruoc: this.state.cameraTruoc,
-                chip: this.state.chip,
-                ram: this.state.ram,
-                bonho: this.state.bonho,
-                pin: this.state.pin,
                 gia: this.state.gia,
 
                 action: CRUD_ACTIONS.CREATE,
@@ -251,14 +238,6 @@ class Quanlysanpham extends Component {
                 qc_spMarkdown: this.state.qc_spMarkdown,
                 sl_sp: this.state.sl_sp,
                 trangthai: this.state.trangthai,
-                manhinh: this.state.manhinh,
-                HDH: this.state.HDH,
-                cameraSau: this.state.cameraSau,
-                cameraTruoc: this.state.cameraTruoc,
-                chip: this.state.chip,
-                ram: this.state.ram,
-                bonho: this.state.bonho,
-                pin: this.state.pin,
                 gia: this.state.gia,
                 msadmin: idAdmin,
                 ma_loaisp: this.state.ma_loaisp,
@@ -375,15 +354,16 @@ class Quanlysanpham extends Component {
     }
     onClickdanhmuc = () =>
     {
-        alert("lick me");
+        this.props.searchLoaisp(this.state.ma_dm);
     }
 
     render() {
         
         
         // let loaispnew = this.props.loaispnew;
-        console.log("check avt1",this.state.avt1)
-        let loai = this.state.loaiSPArr;
+        // console.log("check avt1",this.state.avt1)
+        console.log("check loại sản phẩm: ", this.props.loaispnew)
+        let loai = this.props.loaispnew;
         let arrdanhmuc = this.state.DMArr;
         let status = this.state.statusArr
         let language = this.props.language
@@ -391,20 +371,13 @@ class Quanlysanpham extends Component {
         qc_sp,
         sl_sp,
         trangthai,
-        manhinh,
+
         msadmin,
         ma_loaisp,
         ma_dm,
-        HDH,
-        cameraSau,
-        cameraTruoc,
-        chip,
-        ram,
-        bonho,
-        pin,
         gia,        
         } = this.state
-        console.log("check component ", this.state)
+        console.log("check state ", this.state)
         return (
             <React.Fragment>
                 <div className='sanpham-redux-container'>
@@ -416,7 +389,8 @@ class Quanlysanpham extends Component {
                             <div className='col-3'>
                                     <label>Danh mục:</label>
                                         <select className='form-control loaisp' type="text"
-                                            onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}                                            
+                                            onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}    
+                                            onClick={(event)=>{this.onClickdanhmuc()}}                                        
                                             value={ma_dm}
                                         >
                                         {arrdanhmuc && arrdanhmuc.length> 0 && 
@@ -493,64 +467,6 @@ class Quanlysanpham extends Component {
                                     ></input>
                                 </div>
                                 
-                                <div className='col-3 mt-3'>
-                                    <label>Màn Hình:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={manhinh}
-                                        onChange={(event)=>{this.onchangeInput(event, 'manhinh')}}
-                                    ></input>
-                                </div>
-
-                                <div className='col-3 mt-3'>
-                                    <label>Hệ Điều Hành:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={HDH}
-                                        onChange={(event)=>{this.onchangeInput(event, 'HDH')}}
-                                    ></input>
-                                </div>
-                                <div className='col-3 mt-3'>
-                                    <label>Camera Sau:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={cameraSau}
-                                        onChange={(event)=>{this.onchangeInput(event, 'cameraSau')}}
-                                    ></input>
-                                </div>
-                                <div className='col-3 mt-3'>
-                                    <label>Camera Trước:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={cameraTruoc}
-                                        onChange={(event)=>{this.onchangeInput(event, 'cameraTruoc')}}
-                                    ></input>
-                                </div>
-                                <div className='col-3 mt-3'>
-                                    <label>Chip:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={chip}
-                                        onChange={(event)=>{this.onchangeInput(event, 'chip')}}
-                                    ></input>
-                                </div>
-                                <div className='col-3 mt-3'>
-                                    <label>Ram:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={ram}
-                                        onChange={(event)=>{this.onchangeInput(event, 'ram')}}
-                                    ></input>
-                                </div>
-                                <div className='col-3 mt-3'>
-                                    <label>Bộ Nhớ:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={bonho}
-                                        onChange={(event)=>{this.onchangeInput(event, 'bonho')}}
-                                    ></input>
-                                </div>
-                                
-                                <div className='col-3 mt-3'>
-                                    <label>Pin:</label>
-                                    <input className='form-control namesp' type="text"
-                                        value={pin}
-                                        onChange={(event)=>{this.onchangeInput(event, 'pin')}}
-                                    ></input>
-                                </div>
                                 
                                 {/* ẢNH */}
                                 <div className='col-3 mt-3'>
@@ -654,7 +570,7 @@ class Quanlysanpham extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        loaiSPRedux: state.sanpham.loaispArr,
+        // loaispnew: state.sanpham.loaispArr,
         statusRedux: state.admin.status,
         language: state.app.language,
         listSanPham: state.sanpham.sanphams,
@@ -667,7 +583,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     
     return {  
-        fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
+        // fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
         fetchStatusStart: () => dispatch(actions.fetchStatusStart()),
         createNewSanPham: (data) => dispatch(actions.createNewSanPham(data)),
         fetchAllSANPHAMStart: () => dispatch(actions.fetchAllSANPHAMStart()),

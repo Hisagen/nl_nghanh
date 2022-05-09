@@ -115,8 +115,9 @@ class QuanLyLoaiSP extends Component {
     }
     render() {
         let {ten_loaisp,ma_dm} = this.state
-        console.log("check component ", this.state)
+        // console.log("check component ", this.state)
         let danhmucArr = this.props.danhmucArr
+        // console.log("check mảng dannh mục", danhmucArr)
         return (
             <React.Fragment>
                 <div className='sanpham-redux-container'>
@@ -188,6 +189,8 @@ const mapDispatchToProps = dispatch => {
         fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
         createNewLoaisp: (data) => dispatch(actions.createNewLoaisp(data)),
         editLoaisp: (data) => dispatch(actions.editLoaisp(data)),
+
+        
     };
 };
 

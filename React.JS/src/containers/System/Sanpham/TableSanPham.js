@@ -59,7 +59,7 @@ class TableSanPham extends Component {
 
         let arrLoaiSanPham = this.props.listLoaiSanPham;
 
-        console.log("arrSanPham.avt",arrSanPham);
+        // console.log("arrSanPham.avt",arrSanPham);
         // console.log("arrLoaiSanPham",arrLoaiSanPham);
         return (
             <React.Fragment>
