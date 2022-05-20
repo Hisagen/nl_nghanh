@@ -262,60 +262,6 @@
         }
     }
 
-    .binhLuan{
-        width: 700px;
-        height: auto;
-        // border: 1px solid red;
-        // display: flex;
-        .contentNoiDung{
-            height: 100%;
-            width: 100%;
-        }
-
-        .btnBL{
-
-            .preview-img-container{
-                display: flex;
-                gap: 5px;
-
-                .btnImg{
-                    width: 100%;
-                    height: 30px;
-                    padding:5px;
-                    border-radius: 3px;
-                    background-color: #ddd;
-                    cursor: pointer;
-
-                    &:hover{
-                        opacity: 0.9;
-                    }
-                }
-
-                .preview-img{
-                    width:70%;
-                    height: 50px;
-                    background: center center no-repeat;
-                    background-size: contain;
-                }
-            }
-
-
-            .btn-primary{
-                padding: 4px 10px;
-            }
-
-        }
-
-        .BLcontent{
-            border: 1px solid gray;
-            height: auto;
-            width: 100%;
-            padding: 5px;
-            background-color: rgb(245, 245, 245);
-            border-radius: "5px";
-        }
-    }
-
     .description{
         width: 100%;
         //border: 1px solid red;

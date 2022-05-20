@@ -5,9 +5,8 @@ import UserManage from '../containers/System/UserManage';
 import UserRedux from '../containers/System/Admin/UserRedux';
 import Header from '../containers/Header/Header';
 import SPManage from '../containers/System/Admin/SPManage';
-import SanPhamRedux from "../containers/System/Admin/SanPhamRedux"
-import BinhLuan from '../containers/System/Admin/binhluan/binhluan';
-import BinhLuanChiTiet from '../containers/System/Admin/binhluan/binhluanchitiet'
+import SanPhamRedux from "../containers/System/Admin/SanPhamRedux";
+import manageCuaHang from "../containers/System/CuaHang/manageCuaHang"
 class System extends Component {
     render() {
         {/*  */}
@@ -22,9 +21,8 @@ class System extends Component {
                                 <Route path="/system/UserRedux" component={UserRedux} />
                                 <Route path="/system/SP-manage" component={SPManage} />
                                 <Route path="/system/sanpham" component={SanPhamRedux} />
-                                <Route path="/system/manage-comment" component={BinhLuan} />
-                                <Route path="/system/detailed-comment/:id" component={BinhLuanChiTiet} />
-                                <Route component={() => { return (<Redirect to={'/system/user-manage'} />) }} /> 
+                                <Route component={() => { return (<Redirect to={'/system/user-manage'} />) }} />                                
+
                             </Switch>
                         </div>
                     </div>

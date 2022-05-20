@@ -33,6 +33,10 @@ import ChiTietTinTuc from '../routes/Khach/ChiTietTinTuc';
 import SanPham from '../routes/Khach/SanPham';
 import DangKy from '../routes/Khach/DangKy';
 import UngDung from './System/Khach/UngDung';
+import manageCuaHang from './System/CuaHang/manageCuaHang';
+import DetailStore from './Homepage/Detail/DetailStore';
+import AllSanPhamMotCuaHang from '../containers/Homepage/Detail/AllSanPhamMotCuaHang';
+import SanPhamTimKiem from './Patient/SanPham/SanPhamTimKiem';
 class App extends Component {
 
     handlePersistorState = () => {
@@ -67,12 +71,12 @@ class App extends Component {
                                     <Route path={path.SANPHAMMANAGE} component={userIsAuthenticated(Sanpham)} />
                                     <Route path={path.DANHMUC} component={userIsAuthenticated(Danhmuc)} />
                                     <Route path={path.LOAISP} component={userIsAuthenticated(Loaisp)} />
-                                    <Route path={path.HOMEPAGE} component={userIsAuthenticated(Homepage)} />
+                                    <Route path={path.HOMEPAGE} component={(Homepage)} />
                                     <Route path={path.DETAIL_SP} exact component={userIsAuthenticated(DetailSP)}/>
                                     <Route path={path.GIOHANG} exact component={userIsAuthenticated(Giohang)}/>
                                     <Route path={path.LICHSUMUAHNAG} exact component={userIsAuthenticated(LichSuDHKhach)}/>
                                     <Route path={path.CHITIET} exact component={userIsAuthenticated(ChiTietGioHangKhach)}/>
-                                    <Route path={path.TINTUC} exact component={userIsAuthenticated(TinTuc)}/>
+                                    <Route path={path.TINTUC} exact component={TinTuc}/>
                                     <Route path={path.LICHSUMUAHNAGADMIN} exact component={userIsAuthenticated(DonHang)}/>
                                     <Route path={path.CHITIETADMIN} exact component={userIsAuthenticated(ChiTietDonHang)}/>
                                     <Route path={path.BAIVIET} exact component={userIsAuthenticated(BaiViet)}/>
@@ -80,7 +84,10 @@ class App extends Component {
                                     <Route path={path.SANPHAM} exact component={userIsAuthenticated(SanPham)}/>
                                     <Route path={path.DANGKY} exact component={DangKy}/>
                                     <Route path={path.UNGDUNG} exact component={UngDung}/>
-
+                                    <Route path={path.CUAHANG} exact component={userIsAuthenticated(manageCuaHang)}/>
+                                    <Route path={path.DETAILSTORE} exact component={DetailStore}/>
+                                    <Route path={path.ALLSANPHAMMOTCUAHANG} exact component={userIsAuthenticated(AllSanPhamMotCuaHang)}/>
+                                    <Route path={path.SANPHAMTIMKIEM} exact component={SanPhamTimKiem}/>
                                     {/* /sanpham/ */}
 
                                     

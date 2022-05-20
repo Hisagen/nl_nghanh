@@ -61,34 +61,6 @@ const getInfoDetailSP = (id) =>
     return axios.get(`/api/get_detail_sp?id=${id}`)
 }
 
-const createBinhLuan = (data) => {
-    return axios.post(`/api/save-binh-luan`, data)
-}
-
-const getAllBinhLuan = (idSP) => {
-    return axios.get(`/api/get_all_binhluan?id=${idSP}`)
-}
-
-const getAllBinhLuanAdmin = (idSP) => {
-    return axios.get(`/api/get_all_binhluan_admin?id=${idSP}`)
-}
-
-const editActionBinhLuan = (Data) =>
-{
-    return axios.put("/api/edit-action-cmt", Data)
-}
-
-const createTraLoi = (data) => {
-    return axios.post(`/api/save-tra-loi`, data)
-}
-
-const getAllTraLoi = (idSP, ma) => {
-    return axios.get(`/api/get_all_TraLoi?id=${idSP}&MaBL=${ma}`)
-}
-
-const getAllTraLoiAdmin = (idSP, ma) => {
-    return axios.get(`/api/get_all_TraLoi_admin?id=${idSP}&MaBL=${ma}`)
-}
 
 export {handelLoginApi, 
     getAllUser, 
@@ -100,11 +72,4 @@ export {handelLoginApi,
     getAllSP,
     saveInForSP,
     getInfoDetailSP,
-    createBinhLuan,
-    getAllBinhLuan,
-    getAllBinhLuanAdmin,
-    editActionBinhLuan,
-    createTraLoi,
-    getAllTraLoi,
-    getAllTraLoiAdmin
 }

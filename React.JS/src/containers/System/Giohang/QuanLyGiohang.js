@@ -16,7 +16,8 @@ import img1 from "../../../assets/images/nenQC/nen1.jpg"
 import {getInfoDetailSanPham, deleteGioHang, createThanhToan,createDonHang,getDiaChiFromUserSerVice} from "../../../services/sanphamService"
 import {withRouter} from "react-router";
 import {toast} from 'react-toastify';
-import {create_new_giohang, getgiohang} from "../../../services/sanphamService"
+import moment from 'moment';
+import {create_new_giohang, getgiohang, getAllGioHang,postChidinhAppointment} from "../../../services/sanphamService"
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 function handleEditorChange({ html, text }) {
     //console.log('handleEditorChange', html, text);
@@ -33,31 +34,38 @@ class QuanLyGiohang extends Component {
             diachiArr : [],
             addressNew: '',
             ten_nguoidung: '',
+            giohangArr: [],
         }
     }
 
     async componentDidMount() {
                 this.props.getDiaChiFromUser(this.state.idUser)
                 this.state.diachiArr = this.props.diachiArr;
-                await  this.props.fetchAllGioHangSTART()
-                if(this.props.match && this.props.match.params && this.props.match.params.id)
-                {   
-                    let id = this.props.match.params.id
-                    // console.log("id",id)
-                    let res = await getInfoDetailSanPham(id)
-                    // let hinh = res.data.hinhsp
-                    // console.log("check res", res)
-                    if(res && res.errCode === 0)
-                    {
-                        this.setState({
-                            detailSP: res,
-                            idUser: this.props.userInfo
-                        })
-                        // let data = this.state.detailSP.data
-                        // console.log("check data",data)
+                // let temp = this.props.fetchAllGioHangSTART(this.props.match.params.idUser)
+               let giohangArr =  await getAllGioHang(this.props.match.params.idUser)
+                console.log("giohangArr jbjkhbkbkj", giohangArr)
+                    this.setState({
+                        giohangArr: giohangArr.data
+                    })
+                
+                // if(this.props.match && this.props.match.params && this.props.match.params.id)
+                // {   
+                //     let id = this.props.match.params.id
+                //     // console.log("id",id)
+                //     let res = await getInfoDetailSanPham(id)
+                //     // let hinh = res.data.hinhsp
+                //     // console.log("check res", res)
+                //     if(res && res.errCode === 0)
+                //     {
+                //         this.setState({
+                //             detailSP: res,
+                //             idUser: this.props.userInfo
+                //         })
+                //         // let data = this.state.detailSP.data
+                //         // console.log("check data",data)
                         
-                    }
-                }       
+                //     }
+                // }       
     }
 
     componentDidUpdate(prevProps, prevState, snapshot)
@@ -101,9 +109,8 @@ class QuanLyGiohang extends Component {
    
     handleDeleteGioHang = async (data) =>
     {
-        this.props.deleteGioHang(data)
-        //console.log('check data',data)
-        // alert("click me")
+        deleteGioHang(data)
+        window.location.reload();
     }
     handleThanhToan = async (subtotal , idUser, giohangArr, addressNew) =>
     {
@@ -116,28 +123,81 @@ class QuanLyGiohang extends Component {
             // ma_nhanvien:
         })
         // console.log("check res.iddonhang",res.iddonhang)
-        if(res && res.errCode === 0)
+        // console.log("res", res)
+        // console.log('res.data.id',res.data.id)
+
+        // console.log('subtotal',subtotal)
+
+       
+        // console.log("",this.props.userInfo.lastName + '' + this.props.userInfo.firstName) 
+        // console.log('addressNew',addressNew)
+        // console.log("res.data[0].ten_sp",res.data1[0].ten_sp)
+        // console.log("res.data[0].gia_sp",res.data1[0].gia_sp.toLocaleString())
+
+        // console.log("res.data[0].soluong_sp",res.data1[0].soluong_sp) 
+        // console.log("res.data[0].thanhtien",res.data1[0].thanhtien.toLocaleString()) 
+        // console.log("res.data[1].ten_sp1",res.data1[1].ten_sp) 
+
+        // console.log("res.data[1].gia_sp1",res.data1[1].gia_sp.toLocaleString()) 
+        
+        // console.log("res.data[1].soluong_sp1",res.data1[1].soluong_sp) 
+        
+        // console.log("res.data[1].thanhtien1",res.data1[1].thanhtien.toLocaleString()) 
+
+        // console.log("moment(+res.data.ngaydathang).format('ll')",moment(+res.data.ngaydathang).format('ll')) 
+
+        console.log("this.props.userInfo.sdt",this.props.userInfo.sdt) 
+
+
+        let res3 = await postChidinhAppointment({
+            
+            iddonhang: res.data.id,
+            tongtien: subtotal,
+            nguoidung: this.props.userInfo.lastName + ' ' + this.props.userInfo.firstName,
+            sdt: this.props.userInfo.sdt,
+            diachi: addressNew,
+
+            ten_sp: res.data1[0].ten_sp,
+            gia_sp:res.data1[0].gia_sp.toLocaleString(),
+            soluong_sp: res.data1[0].soluong_sp,
+            thanhtien:res.data1[0].thanhtien.toLocaleString(),
+
+            ten_sp1: res.data1[1].ten_sp,
+            gia_sp1:res.data1[1].gia_sp.toLocaleString(),
+            soluong_sp1: res.data1[1].soluong_sp,
+            thanhtien1: res.data1[1].thanhtien.toLocaleString(),
+
+            ngay: moment(+res.data.ngaydathang).format('ll'),
+            
+            email: this.props.userInfo.email,
+            
+        });
+
+       
+        if(res && res.errCode === 0 && res3 && res3.errCode === 0) //
         {
             // this.state.idDonHangNew = res.iddonhang
             toast.success("ĐẶT HÀNG THÀNH CÔNG")
-            await  this.props.fetchAllGioHangSTART()
+            // await  this.props.fetchAllGioHangSTART(this.props.match.params.idUser)
             // console.log("check this.state.idUser",this.state.idUser);
             // createDonHang({
             //     giohangArr
             // })
         }
+        // window.location.reload();
 
     }
     render() {
        
         let diachiArr = this.props.diachiArr
-        console.log("check this.state.diachiArr", this.state.diachiArr)
-        let giohangArr = this.props.giohangArr 
+        // console.log("check this.state.diachiArr", this.state.diachiArr)
+        let giohangArr = this.state.giohangArr 
+        // console.log("check giohangArr 1111111111111",this.props.giohangArr)
         this.state.idUser = this.props.userInfo.id
         this.state.ten_nguoidung = this.props.userInfo.lastName
         let addressNew = this.state.addressNew;
         let ten_nguoidung = this.state.ten_nguoidung
-        console.log("check state", this.state)
+        console.log("check props nsfdkjsdnfksjd", this.props.userInfo)
         const subtotal = giohangArr.reduce(
             (acc, item) => acc*1 + item.soluong_sp * item.gia_sp,
             0
@@ -247,14 +307,14 @@ class QuanLyGiohang extends Component {
 const mapStateToProps = state => {
     return {
         userInfo: state.user.userInfo,
-        giohangArr: state.sanpham.giohangArr,
+        // giohangArr: state.sanpham.giohangArr,
         diachiArr: state.sanpham.diachiArr
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {  
-        fetchAllGioHangSTART: () => dispatch(actions.fetchAllGioHangSTART()),
+        fetchAllGioHangSTART: (idUser) => dispatch(actions.fetchAllGioHangSTART(idUser)),
         createNewGioHang: (data) => dispatch(actions.createNewGioHang(data)),
         deleteGioHang: (data) => dispatch(actions.hanldedeleteGioHang(data)),
         getDiaChiFromUser: (idUser) => dispatch(actions.getDiaChiFromUser(idUser)),

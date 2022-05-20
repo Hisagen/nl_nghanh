@@ -43,7 +43,7 @@ class sanphamReducer extends Component {
 
         if(prevProps.listUser !== this.props.listUser)
         {
-            console.log("listUser",this.props.listUser)
+            // console.log("listUser",this.props.listUser)
             let arrGender = this.props.genderRedux;
             let arrRole = this.props.roleRedux;
             this.setState(

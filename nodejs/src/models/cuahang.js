@@ -14,19 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     //   cuahangs.belongsTo(models.allCode, {foreignKey: 'typeRole', targetKey: "keyMap", as: 'typeRoleData'})
     //   cuahangs.belongsTo(models.allCode, {foreignKey: 'gender', targetKey: "keyMap", as: 'genderData'})
     //   cuahangs.hasOne(models.Markdown, {foreignKey: 'SPId' })
+    cuahangs.belongsTo(models.User, { foreignKey: "idCuahang"})
+
     }
   };
   cuahangs.init({
     storeName: DataTypes.STRING,
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
-    address: DataTypes.STRING,
-    sdt: DataTypes.STRING,
-    gender: DataTypes.STRING,
-    typeRole: DataTypes.STRING,
-    avt: DataTypes.STRING,
+    idCuahang: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'cuahangs',

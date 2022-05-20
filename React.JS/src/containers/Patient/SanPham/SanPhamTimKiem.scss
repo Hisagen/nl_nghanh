@@ -1,0 +1,41 @@
+.left-right{
+    // border: 1px solid red;
+    width: auto;
+    height: auto;
+    padding: 0 160px;
+    .sanpham-container{
+        width: auto;
+        .row{
+            .col-3{
+                // border: 1px solid red;
+                width: 239px;
+                height: 500px;
+                .avt{
+                    padding-left: 30px;
+                    img{
+                        height: 208px;
+                        width: 208px;
+                    }
+                }
+                .name{
+                    font-size: 18px;
+                }
+                .gia{
+                    font-weight: 700;
+                    font-size: 15px;
+                }
+
+                ul{
+                    &:hover{
+                        color: #2f80ed;
+                    }
+                    li{
+                        font-size: 12px;
+                        width: 180px;
+                        margin-top: 2px;
+                    }
+                }
+            }
+        }
+    }
+}

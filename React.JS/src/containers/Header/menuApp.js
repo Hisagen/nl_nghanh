@@ -10,7 +10,7 @@ export const adminMenu = [
             
             },
             {
-                name: 'menu.admin.store', link: '/baiviet/',
+                name: 'menu.admin.store', link: '/manage/cuahang',
                 // subMenus: [
                 //     { name: 'menu.posts.manage-posts', link: '/posts/manage-posts'},
                 // ]

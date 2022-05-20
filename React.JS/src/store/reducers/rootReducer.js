@@ -9,6 +9,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import adminReducers from './adminReducers';
 import sanphamReducer from "./sanphamReducers";
+import cuahangReducer from "./cuahangReducer"
 const persistCommonConfig = {
     storage: storage,
     stateReconciler: autoMergeLevel2,
@@ -33,4 +34,5 @@ export default (history) => combineReducers({
     app: persistReducer(appPersistConfig, appReducer),
     admin: adminReducers,
     sanpham: sanphamReducer,
+    cuahang: cuahangReducer,
 })

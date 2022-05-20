@@ -5,7 +5,7 @@ export const path = {
     LOG_OUT: '/logout',
     SYSTEM: '/system',
     DETAIL_SP: '/detail_sp/:id',
-    GIOHANG: '/giohang/',
+    GIOHANG: '/giohang/:idUser',
     DANHMUC: '/Danhmucsanpham/',
     LOAISP: '/Loaisanpham/',
     LICHSUMUAHNAG: '/lichsumuahang/',
@@ -21,6 +21,11 @@ export const path = {
     BAIVIET: '/baiviet/',
     SANPHAMMANAGE: '/Sanpham/manage-sanpham',
 
+    // cửa hàng
+    CUAHANG: '/manage/cuahang',
+    DETAILSTORE: '/detail-store/:id',
+    ALLSANPHAMMOTCUAHANG: '/all-sanpham-mot-cuahang/:idCuaHang',
+    SANPHAMTIMKIEM: '/sanpham-timkiem/:key',
 
 };
 

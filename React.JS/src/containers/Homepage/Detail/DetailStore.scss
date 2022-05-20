@@ -1,0 +1,266 @@
+.Shop{
+    margin: auto;
+    //overflow: scroll;
+    .TT_Shop{
+    display: flex;
+    background: #ededed;
+    //padding: 1.25rem 0;
+    padding: 30px 140px;
+    //margin: 0 120px;
+        .background_Shop{
+            // border: 1px solid red;
+                height: 134px;
+                width: 390px;
+                //display: flex;
+                border-radius: 10px;
+                background-image: url(../../../assets/images/ShopHome/back.png);
+            .avt{
+                //border: 1px solid black;
+                height: 122px;
+                width: 100%;
+                display: flex;  
+                margin-left: 20px;
+                margin-top: -15px;
+                //background-color: red;
+               
+                .avt_Shop{
+                    //border: 1px solid red;
+                    .img1{
+                        width: 72px ;
+                        height: 72px;
+                        border-radius: 50%;
+                        margin-top: 45px;
+                        
+                        // position: Absolute;
+                        // z-index: 0;
+                        // border: 1px solid red;
+                    }
+                    
+                    .logo{
+                        height: 16px;
+                        width: 64px;
+                        margin-left: 7px;
+                        // margin-top: 20px;
+                        z-index: 1;
+                        .img2{
+                            // position: Absolute;
+                            height: 16px;
+                            width: 64px;
+                            margin-top: -39px;
+                        
+                            // margin-bottom: -185px;
+                        }
+                        
+                    }
+                }
+    
+                .name_Shop{
+                    //border: 1px solid red;
+                    height: 80px;
+                    width: 50%;
+                    padding-top: 15px;
+                    padding-left: 5px;
+                    margin-top: 30px;
+                    
+                    .name{
+                        font-size: 17px;
+                        color: #fff;
+                    }
+                    .time{
+                        background:#808080;
+                    }
+                }
+            }
+
+            .btn_follow{
+                border: 1px solid white;
+                height: 25px;
+                width: 90%;
+                margin-left: 15px;
+                text-align: center;
+                border-radius: 10px;
+                cursor: pointer;
+                
+                //margin-top: 40px;
+                button{
+                    border: none;
+                    background: none;
+                    color: #fff;
+                }
+            }
+        }
+        .col-1{
+            // border: 1px solid red;
+            height: 134px;
+            padding-left: 20px;
+            //margin-top: 10px;
+            .khung{
+                padding-top: 7px;
+                width: 400px;
+            // border: 1px solid red;
+
+                .sp{
+                    height: 39px;
+                    // border: 1px solid red;
+                    display: flex;
+                    margin: auto;
+                    padding-top: 7px;
+                    padding-left: 45px;
+                    .vl_sp{
+                        color: red;
+                    }
+                }
+                .fl{
+                    height: 39px;
+                    // border: 1px solid red;
+                    display: flex;
+                    padding-top: 7px;
+                    padding-left: 45px;
+                    .vl_fl{
+                        color: red;
+                    }
+                }
+                .tl{
+                    height: 39px;
+                    // border: 1px solid red;
+                    display: flex;
+                    padding-top: 7px;
+                    padding-left: 45px;
+                    .vl_tl{
+                        color: red;
+                    }
+                }
+            }
+        }
+        .col-2{
+            // border: 1px solid red;
+            height: 134px;
+            width: 30%;
+            padding-left: 385px;
+
+            .khung{
+                padding-top: 7px;
+                width: 400px;
+                .sp{
+                    height: 39px;
+                    // border: 1px solid red;
+                    display: flex;
+                    margin: auto;
+                    padding-top: 7px;
+                    padding-left: 45px;
+                    .vl_sp{
+                        color: red;
+                    }
+                }
+                .fl{
+                    height: 39px;
+                    // border: 1px solid red;
+                    display: flex;
+                    padding-top: 7px;
+                    padding-left: 45px;
+                    .vl_fl{
+                        color: red;
+                    }
+                }
+                .tl{
+                    height: 39px;
+                    // border: 1px solid red;
+                    display: flex;
+                    padding-top: 7px;
+                    padding-left: 45px;
+                    .vl_tl{
+                        color: red;
+                    }
+                }
+            }
+        }
+}
+        .khung_menu{
+            //border: 1px solid red;
+            
+            background: white;
+            .Menu_Shop{
+                margin: 0 -140px;
+                display: flex;
+                margin-top: 10px;
+                position: -webkit-sticky;
+                position: sticky;
+                top: 0;
+                    
+                // position: -webkit-sticky;
+                // top: 0;
+                // position: sticky;
+                
+                .page_Dao{
+                    //border-bottom: red;
+                    //border: 1px solid red;
+                    height: 50px;
+                    width: 20%;
+                    text-align: center;
+                    padding-top: 15px;
+                    cursor: pointer;
+                    &:hover{
+                        color: red;
+
+                    }
+                }
+                .page_AllSp{
+                    //border: 1px solid red;
+                    height: 50px;
+                    width: 20%;
+                    text-align: center;
+                    padding-top: 15px;
+                    cursor: pointer;
+                    &:hover{
+                        color: red;
+
+                    }
+                }
+                .page_AllGh{
+                    //border: 1px solid red;
+                    height: 50px;
+                    width: 20%;
+                    text-align: center;
+                    padding-top: 15px;
+                    cursor: pointer;
+                    &:hover{
+                        color: red;
+
+                    }
+                }
+                .page_Sale{
+                    //border: 1px solid red;
+                    height: 50px;
+                    width: 20%;
+                    text-align: center;
+                    padding-top: 15px;
+                    cursor: pointer;
+                    &:hover{
+                        color: red;
+
+                    }
+                }
+
+                .page_Them{
+                    //border: 1px solid red;
+                    height: 50px;
+                    width: 20%;
+                    text-align: center;
+                    padding-top: 15px;
+                    cursor: pointer;
+                    &:hover{
+                        color: red;
+
+                    }
+                }
+            }
+        }
+    
+
+ }
+
+
+
+
+
+

@@ -38,7 +38,9 @@
                 
                 .child-content{
                     //border: 1px solid red;
-                    width: 100px;       
+                    width: 100px;
+                    margin-left: 30px;
+
                     .hieu-ung{
                         b{
                             position: absolute;
@@ -105,10 +107,50 @@
                                 }        
                             }
                 }
+                ////////////////
+                .search{
+                    text-align: center;
+                    width: 400px;;
+                    padding: 5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0 auto;
+                    border-radius: 25px;
+                    background: #ffe6e6;
+                    i{
+                        margin: 0 5px;
+                    }
+                    input {
+                        height: 30px;
+                        width: 200px;
+                        background: transparent;
+                        border: none;
+                        outline: none;
+                    }
+                .txt-search{
+                    
+                }
+    
+        }
                 .child-whitelist{
+                    .etsy-icon{
+                        svg{
+                            width: 24px;
+                            height: 24px;
+                            &:hover{
+                                // border: 1px solid;
+                                background-color: #AAA;
+                                width: 28px;
+                                height: 28px;
+                                border-radius: 15px
+                            }
+                        }
+                    }
                     //border: 1px solid red;
                     width: 100px; 
-                    padding-top: 15px;
+                    margin-top: 20px;
+                    margin-left: 85px;
                     &:hover{
                         .test{
                             display: block;
@@ -153,11 +195,17 @@
         }
         .right-content{
             width: 25%;
-            
+            padding-top: 10px;
             //cursor: pointer;
             align-items: center;
             display: flex;
             justify-content: flex-end;
+            margin-top: 10px;
+            .dangnhap{
+                display: flex;
+                // border: 1px solid red;
+                padding-right: 10px;
+            }
             .support-content{
                 //border: 1px solid red;
                 //width: 50%;
@@ -209,7 +257,7 @@
                 }
         }
         .btn-logout{
-            padding-top: 20px;
+            // margin-top: 10px;
             &:hover{
                 background-color: #99c8ec;
                 opacity: 0.9;
@@ -222,8 +270,9 @@
     background-color: rgb(197, 146, 146);
     background-position: center;
     background-size: cover;
-    background: url(../../assets/images/nen.png) no-repeat center;
-    height: 490px;
+    background: url(../../assets/images/bon.png) no-repeat center;
+    height: 790px;
+    width: 100% !important;
     //margin: 15px 0;
     display: flex;
     flex-direction: column;
@@ -248,31 +297,7 @@
             text-shadow: 1px 1px 1px #333;
             margin-bottom: 15px;
         }
-        .search{
-                text-align: center;
-                width: 246px;;
-                padding: 5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0 auto;
-                border-radius: 25px;
-                background: orange;
-                i{
-                    margin: 0 5px;
-                }
-                input {
-                    height: 30px;
-                    width: 200px;
-                    background: transparent;
-                    border: none;
-                    outline: none;
-                }
-            .txt-search{
-                
-            }
-
-    }
+        
     }
     .content-dow{
         height: 30%;
@@ -290,17 +315,30 @@
                 padding: 15px;
                
                 .icon-child{
-                    margin: 0 auto;
-                    width: 50px;
-                    border-radius: 50%;
-                    background-color: white;
-                    font-size: 30px;
+                    img{
+                        margin: 0 auto;
+                        height: 114px;
+                        width: 114px;
+                        border-radius: 50%;
+                        background-color: white;
+                        transition: all 0.2s ease-in-out;
+
+                        // font-size: 100px;
+                        cursor: pointer;
+                        &:hover{
+                            height: 120px;
+                            width: 120px;
+                            box-shadow: 5px 5px 5px #5fdddd;
+                        }
+
+                    }
+                    
                 }
                 .text-child{
                     font-size: 20px;
                     font-weight: 600;
                     cursor: pointer;
-                    color: greenyellow;
+                    color: black;
                     transition: all 0.5s ease-in-out;
                     &:hover{
                         color: rgb(126, 131, 212);

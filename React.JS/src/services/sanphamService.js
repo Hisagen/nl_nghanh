@@ -86,9 +86,9 @@ const getgiohang = (idUser) =>
 {
     return axios.get(`/api/lay_ds_giohang?idUser=${idUser}`)
 }
-const getAllGioHang = () =>
+const getAllGioHang = (idUser) =>
 {
-    return axios.get(`/api/GetAllGioHang`)
+    return axios.get(`/api/GetAllGioHang?idUser=${idUser}`)
 }
 const deleteGioHang = (data) =>
 {
@@ -154,10 +154,10 @@ const getDiaChiFromUserSerVice = (idUser) =>
     return axios.get(`/api/get_ALL_DiaChi?idUser=${idUser}`)
 }
 
-const getAllMarkdownSerVice = (id) =>
+const getAllMarkdownSerVice = (data) =>
 {
     // console.log("check id getTTdonhang", id)
-    return axios.get(`/api/get_ALL_markdown?id=${id}`)
+    return axios.post(`/api/get_ALL_markdown`,data)
 }
 
 const searchSanPhamtheoLoaiSerVice = (idLoai) =>
@@ -166,6 +166,30 @@ const searchSanPhamtheoLoaiSerVice = (idLoai) =>
     return axios.get(`api/search-sanphamtheoloai?idLoai=${idLoai}`)
 }
 
+const  getAllSanPhamTheoCuaHangService = (idCuaHang) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.get(`/api/getAllSanPhamTheoCuaHang?idCuaHang=${idCuaHang}`)
+}
+
+
+
+const  TimsanphamtheoloaiThuocCuaHangService = (data) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.post(`/api/search-sanphamtheoloaiThuocCuaHang`, data)
+}
+
+const  TimKiemSanPham = (key) =>
+{
+    // console.log("check id getTTdonhang", id)
+    return axios.get(`/api/TimKiemSanPham/${key}`)
+}
+
+///////////////////// gửi mail
+const postChidinhAppointment = (data) => {
+    return axios.post(`/api/patient-chidinh-appointment`, data);
+}
 export  {
     get_all_san_pham,
     get_all_loai_san_pham,
@@ -199,6 +223,10 @@ export  {
     saveTTDH,
     getDiaChiFromUserSerVice,
     getAllMarkdownSerVice,
-    searchSanPhamtheoLoaiSerVice
+    searchSanPhamtheoLoaiSerVice,
+    getAllSanPhamTheoCuaHangService,
+    TimsanphamtheoloaiThuocCuaHangService,
+    TimKiemSanPham,
+    postChidinhAppointment
 
 }

@@ -75,13 +75,13 @@ class Homepage extends Component {
             <div>
 
                 <HomeHeader isShowBanner = {true}/>
+               
                 <BanNerQC 
                 settings = {settings}/>
-               
+               <Spkhac settings = {settings}/>
                <NoiBac 
                     settings = {settings}
                 />
-               {/* <Spkhac settings = {settings}/> */}
                <Handbook
                     settings = {settings}
                 />

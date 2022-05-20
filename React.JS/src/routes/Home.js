@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {withRouter} from "react-router";
 import {LANGUAGES, USER_ROLE} from "../utils";
 class Home extends Component {
 
     render() {
         const { isLoggedIn, userInfo } = this.props;
-        console.log("check userInfo", userInfo.typeRole)
+        // console.log("check userInfo", userInfo.typeRole)
         let linkToRedirect = ""
-        if(userInfo.typeRole == USER_ROLE.CUSTOMER)
+        if(userInfo && isLoggedIn === true)
         {
-            linkToRedirect = isLoggedIn ? '/home' :'/login'
-        }
-        else
-        {
-            if(userInfo.typeRole == USER_ROLE.ADMIN || userInfo.typeRole == USER_ROLE.MEMBER)
+            if(userInfo.typeRole == USER_ROLE.CUSTOMER)
             {
-                linkToRedirect = isLoggedIn ? '/system/user-manage' :'/login'
+                linkToRedirect = '/home'
             }
-
+            else
+            {
+                if(userInfo.typeRole == USER_ROLE.ADMIN || userInfo.typeRole == USER_ROLE.MEMBER)
+                {
+                    linkToRedirect = '/system/user-manage'
+                }
+    
+            }
         }
+        // else
+        // {
+        //     linkToRedirect = '/home'
+        // }
+        
           //: '/login'; // /system/user-manage
 
         return (
+            // this.props.history.push(linkToRedirect)
+
             <Redirect to={linkToRedirect} />
         );
     }
@@ -41,4 +52,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

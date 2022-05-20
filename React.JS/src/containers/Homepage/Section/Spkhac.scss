@@ -1,11 +1,16 @@
 .section-Spkhac{
     .section-content{
+        margin: 0 1px;
         .section-body{
+                width: 1300px;
             .img-khac{
                 padding: 0 30px;
+                border: 1px solid #f2f2f2;
+                // width: auto !important;
+                // opacity: 0.6;
                 img{
-                    height: 160px;
-                    width: 200px;
+                    height: 112px;
+                    width: 199px;
                 }
             }
         }

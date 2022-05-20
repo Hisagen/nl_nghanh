@@ -14,7 +14,7 @@ class Giohang extends Component {
                     <div className="system-container">
                         <div className="system-list">
                             <Switch>
-                                <Route path="/giohang/" component={QuanLyGiohang} />
+                                <Route path="/giohang/:idUser" component={QuanLyGiohang} />
                             </Switch>
                         </div>
                     </div>

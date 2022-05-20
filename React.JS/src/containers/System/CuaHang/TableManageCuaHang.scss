@@ -1,0 +1,31 @@
+#TableManageCuaHang {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100% !important;
+    text-align: center;
+
+  }
+  
+  #TableManageCuaHang td, #TableManageCuaHang th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  #TableManageCuaHang td{
+    img{
+      height: 80px;
+      width: 80px;
+    }
+  }
+   #TableManageCuaHang tr:nth-child(even){background-color: #f2f2f2;}
+  
+   #TableManageCuaHang tr:hover {background-color: #ddd;}
+  
+  #TableManageCuaHang th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    // text-align: center !important;
+    background-color: #04AA6D;
+    color: white;
+    //text-align: center;
+  }

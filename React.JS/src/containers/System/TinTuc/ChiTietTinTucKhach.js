@@ -14,6 +14,7 @@ import HomeFooter from '../../Homepage/HomeFooter';
 import NoiBac from '../../Homepage/Section/NoiBac';
 import moment from 'moment';
 import img1 from "../../../assets/images/TinTuc/galaxy-m53-2_1280x720-800-resize.jpg"
+import { getAllMarkdownSerVice } from "../../../services/sanphamService"
 // import ChiTietTinTucKhach from '../../Homepage/Section/ChiTietTinTucKhach';
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 // import {deleteSanPham} from "../../../store/actions/sanphamAction"
@@ -34,10 +35,20 @@ class ChiTietTinTucKhach extends Component {
         currentDate.setHours(0,0,0,0);
         this.state = {
             currentDate: '',
+            detailTinTuc: ''
         }
     }
    async componentDidMount () {
-        this.props.getOneMarkdown(this.props.match.params.id);
+       console.log("this.props.match.params.id",this.props.match.params.id)
+        let detailTinTuc = await getAllMarkdownSerVice({
+            id: this.props.match.params.id,
+            limit: ''
+        });
+        this.setState({
+            detailTinTuc: detailTinTuc.data
+        })
+        // this.state. = await 
+        // console.log("detailTinTuc",detailTinTuc.data)
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         
@@ -51,8 +62,9 @@ class ChiTietTinTucKhach extends Component {
     //     console.log("check mardownOne", this.props.markdownone)
     // }
     render() {
-       console.log("check markdownOne", this.props.markdownone)
-       let markdownone = this.props.markdownone
+        console.log("detailTinTuc",this.state.detailTinTuc)
+
+       let markdownone = this.state.detailTinTuc
        let base64 = ''
        if(markdownone.avt)
        {
@@ -86,13 +98,13 @@ class ChiTietTinTucKhach extends Component {
 
 const mapStateToProps = state => {
     return {
-        markdownone: state.sanpham.markdownone,
+        // markdownArr: state.sanpham.markdownArr,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getOneMarkdown: (data) => dispatch(actions.getOneMarkdown(data)),
+        // getOneMarkdown: (data) => dispatch(actions.getAllMarkdown(data)),
         
     };
 };

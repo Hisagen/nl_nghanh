@@ -17,7 +17,7 @@ export const fetchGenderStart =  () => {
                 type: actionTypes.FETCH_GENDER_START
             })
             let res = await getAllCodeService("Gender");
-            console.log("check res Gender", res)
+            // console.log("check res Gender", res)
             if(res && res.errCode === 0 )
             {
                 dispatch(fetchGenderSuccess(res.data));

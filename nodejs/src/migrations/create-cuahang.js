@@ -11,33 +11,36 @@ module.exports = {
       storeName: {
         type: Sequelize.STRING
       },
-      firstName: {
-        type: Sequelize.STRING
+      idCuahang: {
+        type: Sequelize.INTEGER
       },
-      lastName: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      address: {
-        type: Sequelize.STRING
-      },
-      sdt: {
-        type: Sequelize.STRING
-      },
-      gender: {
-        type: Sequelize.STRING
-      },
-      typeRole: {
-        type: Sequelize.STRING
-      },
-      avt: {
-        type: Sequelize.STRING
-      },
+      // firstName: {
+      //   type: Sequelize.STRING
+      // },
+      // lastName: {
+      //   type: Sequelize.STRING
+      // },
+      // password: {
+      //   type: Sequelize.STRING
+      // },
+      // email: {
+      //   type: Sequelize.STRING
+      // },
+      // address: {
+      //   type: Sequelize.STRING
+      // },
+      // sdt: {
+      //   type: Sequelize.STRING
+      // },
+      // gender: {
+      //   type: Sequelize.STRING
+      // },
+      // typeRole: {
+      //   type: Sequelize.STRING
+      // },
+      // avt: {
+      //   type: Sequelize.BLOB('long')
+      // },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

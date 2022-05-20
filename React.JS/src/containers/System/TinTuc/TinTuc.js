@@ -38,7 +38,10 @@ class TinTuc extends Component {
         }
     }
    async componentDidMount () {
-        this.props.getAllMarkdown("ALL");
+        this.props.getAllMarkdown({
+            id: "ALL",
+            limit: ''
+        });
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
         
@@ -51,7 +54,7 @@ class TinTuc extends Component {
 
         if(this.props.history)
         {
-            this.props.history.push(`/ChiTietTinTuc/${item.SPId}`)
+            this.props.history.push(`/ChiTietTinTuc/${item.id}`)
         }
     }
     render() {

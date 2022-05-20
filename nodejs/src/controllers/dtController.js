@@ -1,4 +1,6 @@
 import DTService from "../services/DTservice"
+import db from "../models/index"
+import DonHangservice from '../services/DonHangservice'
 let getTopDTHome = async (req, res) => {
     let limit = req.query.limit;
     if(!limit)
@@ -94,10 +96,11 @@ let getAllSanPham = async (req, res) =>
         })
     }
 }
+
 let getAllGioHang = async (req, res) =>
 {
     try{
-        let sp = await DTService.getAllGioHang(req.body);
+        let sp = await DTService.getAllGioHang(req.query.idUser);
         console.log(sp);
         return res.status(200).json(sp);
     }catch(e)
@@ -360,7 +363,7 @@ let getDiaChiFromUser = async (req, res) =>
 
 let getALLMarkdown  = async (req, res) =>
 {
-    let message = await DTService.getALLMarkdown(req.query.id);
+    let message = await DTService.getALLMarkdown(req.body);
     // console.log("check message", message);
     return res.status(200).json(message);
 }
@@ -378,50 +381,50 @@ let searchSPtheoLoai  = async (req, res) =>
     return res.status(200).json(message);
 }
 
-
-//Bình Luận
-let handleSaveBinhLuan = async (req, res) => {
-    let message = await DTService.SaveBinhLuan(req.body);
+let sanphamtheoloaiThuocCuaHang  = async (req, res) =>
+{
+    let message = await DTService.sanphamtheoloaiThuocCuaHang(req.body);
     // console.log("check message", message);
     return res.status(200).json(message);
 }
 
-let handleGetAllBinhLuan = async (req, res) => {
-    let message = await DTService.GetAllBinhLuan(req.query.id);
+let TimKiemSanPham  = async (req, res) =>
+{
+    const { Op } = require("sequelize");
+    // let message = await DTService.TimKiemSanPham(req.query.data);
+    let sanpham =  await db.sanphams.findAll({
+            //    "$or":[
+            //        {ten_sp:req.params.key}
+            //    ]
+                where: {
+                    ten_sp: {
+                    [Op.like]: `%${req.params.key}%`
+                    }
+              },
+            })
+    // console.log("check $regex:req.params.key", $regex);
+    return res.status(200).json(sanpham);
+}
+let getAllSanPhamTheoCuaHang = async (req, res) =>
+{
+    let message = await DTService.getAllSanPhamTheoCuaHang(req.query.idCuaHang);
     // console.log("check message", message);
     return res.status(200).json(message);
 }
 
-let handleEditActionCMT = async (req, res) => {
-    let message = await DTService.EditActionCMT(req.body);
-    // console.log("check message", message);
-    return res.status(200).json(message);
-}
 
-let handleGetAllBinhLuanAdmin = async (req, res) => {
-    let message = await DTService.GetAllBinhLuanAdmin(req.query.id);
-    // console.log("check message", message);
-    return res.status(200).json(message);
+///////////////////////////////////// gửi mail
+let postChidinhAppointment = async (req, res) => {
+    try {
+        let infor = await DonHangservice.postChidinhAppointment(req.body);
+        return res.status(200).json(infor);
+    } catch (e) {
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server...'
+        })
+    }
 }
-
-let handleSaveTraLoi = async (req, res) => {
-    let message = await DTService.SaveTraLoi(req.body);
-    // console.log("check message", message);
-    return res.status(200).json(message);
-}
-
-let handleGetAllTraLoi = async (req, res) => {
-    let message = await DTService.GetAllTraLoi(req.query.id, req.query.MaBL);
-    // console.log("check message", message);
-    return res.status(200).json(message);
-}
-
-let handleGetAllTraLoiAdmin = async (req, res) => {
-    let message = await DTService.GetAllTraLoiAdmin(req.query.id, req.query.MaBL);
-    // console.log("check message", message);
-    return res.status(200).json(message);
-}
-
 module.exports = {
 
 
@@ -436,7 +439,8 @@ module.exports = {
     getDetailSanPham:getDetailSanPham,
     handleDeleteSanPham:handleDeleteSanPham,
     handleEditSanPham:handleEditSanPham,
-
+    getAllSanPhamTheoCuaHang:getAllSanPhamTheoCuaHang,
+    sanphamtheoloaiThuocCuaHang:sanphamtheoloaiThuocCuaHang,
 
     ////////////////////////////// loại sản phẩm
     GetAllLoaiSanPham:GetAllLoaiSanPham,
@@ -474,16 +478,9 @@ module.exports = {
     getDiaChiFromUser:getDiaChiFromUser,
     getALLMarkdown:getALLMarkdown,
     searchSPtheoLoai:searchSPtheoLoai,
-    getALLUngDung: getALLUngDung,
-    
-    // bình luận
-    handleSaveBinhLuan: handleSaveBinhLuan,
-    handleGetAllBinhLuan: handleGetAllBinhLuan,
-    handleEditActionCMT: handleEditActionCMT,
-    handleGetAllBinhLuanAdmin: handleGetAllBinhLuanAdmin,
+    getALLUngDung:getALLUngDung,
+    TimKiemSanPham:TimKiemSanPham,
 
-    //Trả lời
-    handleSaveTraLoi: handleSaveTraLoi,
-    handleGetAllTraLoi: handleGetAllTraLoi,
-    handleGetAllTraLoiAdmin: handleGetAllTraLoiAdmin
+    //////////////////////// gửi mail
+    postChidinhAppointment:postChidinhAppointment
 }

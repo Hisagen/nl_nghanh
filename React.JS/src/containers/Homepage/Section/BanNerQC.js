@@ -9,11 +9,11 @@ import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
 
 
-import imgBanner1 from "../../../assets/images/banner/banner11.png";
-import imgBanner2 from "../../../assets/images/banner/banner22.png";
-import imgBanner3 from "../../../assets/images/banner/banner33.png";
-import imgBanner4 from "../../../assets/images/banner/banner44.png";
-import imgBanner5 from "../../../assets/images/banner/banner55.png";
+import imgBanner1 from "../../../assets/images/nenQC/banner1.jpg";
+import imgBanner2 from "../../../assets/images/nenQC/banner2.jpg";
+import imgBanner3 from "../../../assets/images/nenQC/banner4.jpg";
+import imgBanner4 from "../../../assets/images/nenQC/banner6.jpg";
+import imgBanner5 from "../../../assets/images/nenQC/banner5.jpg";
 
 
 

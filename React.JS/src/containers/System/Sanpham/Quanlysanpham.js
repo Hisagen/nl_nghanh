@@ -363,6 +363,8 @@ class Quanlysanpham extends Component {
         // let loaispnew = this.props.loaispnew;
         // console.log("check avt1",this.state.avt1)
         console.log("check loại sản phẩm: ", this.props.loaispnew)
+        // console.log("check userInfo", this.props.userInfo.id)
+        // let id = this.props.userInfo.id;
         let loai = this.props.loaispnew;
         let arrdanhmuc = this.state.DMArr;
         let status = this.state.statusArr
@@ -410,12 +412,9 @@ class Quanlysanpham extends Component {
                                         <select className='form-control loaisp' type="text"
                                             onChange={(event)=>{this.onchangeInput(event, 'ma_loaisp')}}
                                             value={ma_loaisp}
-                                        >
-                                        
+                                        >                                        
                                             {loai && loai.length> 0 && 
                                                 loai.map((item, index) =>{
-                                                    
-
                                                     return (
                                                         <option key={index} value={item.id}>
                                                             {item.ten_loaisp}
@@ -570,6 +569,7 @@ class Quanlysanpham extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        // userInfo: state.user.userInfo,
         // loaispnew: state.sanpham.loaispArr,
         statusRedux: state.admin.status,
         language: state.app.language,

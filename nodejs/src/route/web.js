@@ -1,7 +1,8 @@
-import express, { Route, Router } from "express";
+import express, { Router } from "express";
 import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
 import dtController from "../controllers/dtController";
+import CuaHangConTroller from "../controllers/CuaHangConTroller";
 let route = express.Router(); 
 
 let initWebRoute = (app) =>
@@ -39,8 +40,12 @@ let initWebRoute = (app) =>
     route.get("/api/get_detail_sanpham", dtController.getDetailSanPham);
     route.put("/api/edit-sanpham", dtController.handleEditSanPham);
     route.delete("/api/delete-sanpham", dtController.handleDeleteSanPham);
-    
+    route.get("/api/getAllSanPhamTheoCuaHang", dtController.getAllSanPhamTheoCuaHang)
     route.get("/api/search-sanphamtheoloai", dtController.searchSPtheoLoai)
+    route.post("/api/search-sanphamtheoloaiThuocCuaHang", dtController.sanphamtheoloaiThuocCuaHang)
+    route.get("/api/TimKiemSanPham/:key", dtController.TimKiemSanPham)
+
+    
 
     //loaisp
     route.get("/api/GetAllLoaiSanPham", dtController.GetAllLoaiSanPham);
@@ -88,32 +93,24 @@ let initWebRoute = (app) =>
     route.get("/api/get_ALL_DiaChi", dtController.getDiaChiFromUser);
 
     // markdown
-    route.get("/api/get_ALL_markdown", dtController.getALLMarkdown);
-     //BinhLuans
-    route.post("/api/save-binh-luan", dtController.handleSaveBinhLuan);
-    route.get("/api/get_all_binhluan", dtController.handleGetAllBinhLuan);
-    route.get("/api/get_all_binhluan_admin", dtController.handleGetAllBinhLuanAdmin);
-    route.put("/api/edit-action-cmt", dtController.handleEditActionCMT);
-
-    //trả lời
-    route.post("/api/save-tra-loi", dtController.handleSaveTraLoi);
-    route.get("/api/get_all_TraLoi", dtController.handleGetAllTraLoi);
-    route.get("/api/get_all_TraLoi_admin", dtController.handleGetAllTraLoiAdmin);
+    route.post("/api/get_ALL_markdown", dtController.getALLMarkdown);
 
     //ứng dụng
     route.get("/api/get_ALL_ungdung", dtController.getALLUngDung);
-
     ////////////////////////////////////////////////////
     route.get('/nlnghanh',(req, res) => 
     {
         return res.send('Hello Ra Sin');
     });
 
+    ////////////////////////////////////////////////////// Cửa Hàng
 
-   
+    route.post(`/api/create-cuahang`, CuaHangConTroller.CreateNewCuaHang);
+    route.get(`/api/get-all-cuahang`, CuaHangConTroller.getAllCuaHang);
+    route.post(`/api/update-cuahang`, CuaHangConTroller.updateCuaHang);
 
-    
-
+    ///////////////// gửi mail
+    route.post('/api/patient-chidinh-appointment', dtController.postChidinhAppointment);
     return app.use("/",route);
 }
 

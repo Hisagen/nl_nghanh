@@ -8,137 +8,9 @@ import {get_all_loai_san_pham, create_new_SanPham,get_all_san_pham,
     getAllGioHang, create_new_giohang,deleteGioHang
     ,getTrangThaiDonHang,getAllDonHang,getDonHangtheoid_donhang, CreateNewYeuThich,
     getAllYeuThich,deleteYeuThichSerVice,getTTdonhangService,getDiaChiFromUserSerVice,
-    getAllMarkdownSerVice, searchSanPhamtheoLoaiSerVice
+    getAllMarkdownSerVice, searchSanPhamtheoLoaiSerVice, getAllSanPhamTheoCuaHangService,
+    TimsanphamtheoloaiThuocCuaHangService,
 } from "../../services/sanphamService";
-    import {createBinhLuan, getAllBinhLuan, getAllBinhLuanAdmin,getAllTraLoi, getAllTraLoiAdmin} from "../../services/userService"
-
-
-
-export const handleCreateBinhLuan = (data) => {
-    return async (dispatch, getState) => {
-        try {
-            let res = await createBinhLuan(data);
-            
-            if (res && res.errCode === 0) {
-                toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.CREATE_BINHLUAN_SUCCESS,
-                });
-                // dispatch(handleGetAllBinhLuan());
-            } else {
-                dispatch({
-                    type: actionTypes.CREATE_BINHLUAN_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.CREATE_BINHLUAN_FAILED,
-            });
-            console.log('CREATE_BINHLUAN_FAILED error',e);
-        }
-    }
-}
-
-export const handleGetAllBinhLuan = (idSP) => {
-    return async (dispatch, getState) => {
-        try {
-            let res = await getAllBinhLuan(idSP);
-            
-            if (res && res.errCode === 0) {
-                // toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.GET_ALL_BINHLUAN_SUCCESS,
-                    data: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_ALL_BINHLUAN_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.GET_ALL_BINHLUAN_FAILED,
-            });
-            console.log('CREATE_BINHLUAN_FAILED error',e);
-        }
-    }
-}
-
-export const handleGetAllBinhLuanAdmin = (idSP, ma) => {
-    return async (dispatch, getState) => {
-        try {
-            let res = await getAllBinhLuanAdmin(idSP, ma);
-            // console.log("res", res)
-            if (res && res.errCode === 0) {
-                // toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.GET_ALL_BINHLUAN_ADMIN_SUCCESS,
-                    data: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_ALL_BINHLUAN_ADMIN_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.GET_ALL_BINHLUAN_ADMIN_FAILED,
-            });
-            console.log('CREATE_BINHLUAN_FAILED error',e);
-        }
-    }
-}
-
-export const handleGetAllTraLoi = (idSP, ma) => {
-    return async (dispatch, getState) => {
-        try {
-            // console.log("idSP", idSP, "ma", ma)
-            let res = await getAllTraLoi(idSP, ma);
-            // console.log("res",res);
-            if (res && res.errCode === 0) {
-                // toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_SUCCESS,
-                    data: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.GET_ALL_TRALOI_FAILED,
-            });
-            console.log('CREATE_BINHLUAN_FAILED error',e);
-        }
-    }
-}
-
-export const handleGetAllTraLoiAdmin = (idSP, ma) => {
-    return async (dispatch, getState) => {
-        try {
-            let res = await getAllTraLoiAdmin(idSP, ma);
-            // console.log("res", res)
-            if (res && res.errCode === 0) {
-                // toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_ADMIN_SUCCESS,
-                    data: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_ADMIN_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.GET_ALL_TRALOI_ADMIN_FAILED,
-            });
-            console.log('CREATE_TRALOI_FAILED error',e);
-        }
-    }
-}
 
 export const createNewSanPham = (data) =>
 {
@@ -182,7 +54,7 @@ export const fetchAllSANPHAMStart = () =>
     {
         try{
             let res = await get_all_san_pham();
-            // console.log("check res sản phẩm", res)
+            console.log("check res all sản phẩm", res)
             if(res && res.errCode === 0)
             {
                 dispatch({
@@ -207,6 +79,37 @@ export const fetchAllSANPHAMStart = () =>
     }
 }
 
+
+export const getAllSanPhamTheoCuaHang = (idCuaHang) =>
+{  
+    return async (dispatch,getState) =>
+    {
+        try{
+            let res = await getAllSanPhamTheoCuaHangService(idCuaHang);
+            console.log("check res all sản phẩm theo cửa hàng", res)
+            if(res && res.errCode === 0)
+            {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SANPHAM_THEO_CUAHANG_SUCCESS,
+                    sanphamtheocuahang: res.data
+                })
+            }
+            else
+            {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SANPHAM_THEO_CUAHANG_FAILED, 
+                })
+            }
+
+        }catch(e)
+        {
+            console.log("FETCH_TEST_SANPHAM_FAILED", e)
+            dispatch({
+                type: actionTypes.FETCH_ALL_SANPHAM_THEO_CUAHANG_FAILED,
+            })
+        }
+    }
+}
 export const editSanPham = (data) =>
 {
     return async (dispatch, getState) =>{
@@ -590,7 +493,7 @@ export const getGiohang = (idUser) =>
                         type: actionTypes.GET_ALL_GIO_HANG_SUCCESS,
                         giohangArr: res.data,
                 })
-                dispatch(fetchAllGioHangSTART());
+                dispatch(fetchAllGioHangSTART(''));
 
             }
             else
@@ -613,7 +516,7 @@ export const fetchAllGioHangSTART = (userId) =>
         try{
 
             let res = await getAllGioHang(userId);
-            // console.log("check res mới", res)
+            console.log("check res giỏ hàng theo nguoi dùng", res)
             if(res && res.errCode === 0 )
             {
                 dispatch(fetchAllGioHangSuccess(res.data));
@@ -648,7 +551,7 @@ export const createNewGioHang = (data) =>
             {
                 toast.success("THÊM SẢN PHẨM THÀNH CÔNG")
                 //dispatch(saveGioHangSuccess());
-                dispatch(fetchAllGioHangSTART());
+                dispatch(fetchAllGioHangSTART(''));
             }else
             {
                 toast.error("KHÔNG THỂ THÊM SẢN PHẨM THÀNH CÔNG")
@@ -685,7 +588,7 @@ export const hanldedeleteGioHang = (data) =>
             {
                 toast.success("XÓA THÀNH CÔNG")
                 //dispatch(saveGioHangSuccess());
-                dispatch(fetchAllGioHangSTART());
+                dispatch(fetchAllGioHangSTART(''));
             }else
             {
                 toast.error("KHÔNG THỂ XÓA")
@@ -996,13 +899,13 @@ export const getDiaChiFromUserFailed = () => ({
     type: actionTypes.GET_DIACHIFROMUSER_FAILED
 })
 
-export const getAllMarkdown = (id) =>
+export const getAllMarkdown = (data) =>
 {
     return async (dispatch, getState) =>
     {
         try{
 
-            let res = await getAllMarkdownSerVice(id);
+            let res = await getAllMarkdownSerVice(data);
             console.log("check res getAllMarkdown", res)
             if(res && res.errCode === 0 )
             {
@@ -1099,3 +1002,35 @@ export const searchSanPhamtheoLoaiSuccess = (data) => ({
 export const searchSanPhamtheoLoaiFailed = () => ({
     type: actionTypes.SEARCH_SANPHAM_THEOLOAI_FAILED
 })
+
+
+export const TimsanphamtheoloaiThuocCuaHang = (data) =>
+{  
+    return async (dispatch,getState) =>
+    {
+        try{
+            let res = await TimsanphamtheoloaiThuocCuaHangService(data);
+            console.log("check res TimsanphamtheoloaiThuocCuaHang", res)
+            if(res && res.errCode === 0)
+            {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SANPHAM_THEO_LOAI_THUOC_CUAHANG_SUCCESS,
+                    timsanphamtheoLoaiThuoccuahang: res.data
+                })
+            }
+            else
+            {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_SANPHAM_THEO_LOAI_THUOC_CUAHANG_FAILED, 
+                })
+            }
+
+        }catch(e)
+        {
+            console.log("FETCH_TEST_SANPHAM_FAILED", e)
+            dispatch({
+                type: actionTypes.FETCH_ALL_SANPHAM_THEO_LOAI_THUOC_CUAHANG_FAILED,
+            })
+        }
+    }
+}

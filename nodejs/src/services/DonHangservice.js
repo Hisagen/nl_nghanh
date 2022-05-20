@@ -2,6 +2,7 @@ const { reject, promise } = require("bcrypt/promises");
 import bcrypt from "bcryptjs";
 import { request } from "express";
 import db from "../models/index"
+import emailService from './emailService'
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -85,9 +86,50 @@ let getAllDonHang = () =>
     })
 }
 
+let postChidinhAppointment = (data) => {
+    console.log('dataa',data)
+    return new Promise(async (resolve, reject) => {
+        try {
+            // if (!data.khunggio || !data.tenbacsi || !data.email || !data.phong || !data.chuyenkhoa
+            //     || !data.ngay || !data.tenbenhnhan || !data.sdtbacsi || !data.ngay) {
+            //     resolve({
+            //         errCode: 1,
+            //         errMessage: 'Missing parameter'
+            //     });
+            // } else {
+            // let token = uuidv4();
+            await emailService.sendSimpleEmail({
+                reciverEmail: data.email,
+                iddonhang: data. iddonhang,
+                tongtien:data.tongtien,
+                nguoidung:data.nguoidung,
+                diachi:data.diachi,
+                ten_sp:data.ten_sp,
+                sdt: data.sdt,
+                gia_sp:data.gia_sp,
+                soluong_sp:data.soluong_sp,
+                thanhtien:data.thanhtien,
+                ten_sp1:data.ten_sp1,
+                gia_sp1:data.gia_sp1,
+                soluong_sp1:data.soluong_sp1,
+                thanhtien1:data.thanhtien1,
+                ngay:data.ngay,
+                })
+            // }
+            resolve({
+                errCode: 0,
+                errMessage: 'save infor doctor succeed!'
+            })
+            // }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 
 module.exports={
     // bài viết
     bulkCreateThanhToan:bulkCreateThanhToan,
-    getAllDonHang:getAllDonHang
+    getAllDonHang:getAllDonHang,
+    postChidinhAppointment:postChidinhAppointment
     }

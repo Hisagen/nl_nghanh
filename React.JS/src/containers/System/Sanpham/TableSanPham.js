@@ -54,7 +54,7 @@ class TableSanPham extends Component {
     }
     render() {
         // console.log("check all user", this.props.listUser);
-        //console.log("check SPRedux:", this.state.SPRedux);
+        console.log("check listSanPham:", this.props.listSanPham);
         let arrSanPham = this.props.listSanPham;
 
         let arrLoaiSanPham = this.props.listLoaiSanPham;

@@ -20,6 +20,7 @@ class SanPham extends Component {
         this.state = {
             ma_loaisp: 'ALL',
             sanphamArr: [],
+            sanphamSearch: [],
         }
     }
 
@@ -31,7 +32,15 @@ class SanPham extends Component {
         this.setState({
             sanphamArr: res.data
         })
-        console.log("check res", res.data)
+        // console.log("check res", res.data)
+        let mangTemp = []
+        // if(this.props.location.state && this.props.location.state.length > 0)
+        // {
+        //     mangTemp = this.props.location.state
+        //     this.setState({
+        //         sanphamSearch: mangTemp
+        //     })
+        // }
 
     }
     componentDidUpdate(prevProps, prevState, snapshot)
@@ -80,7 +89,7 @@ class SanPham extends Component {
         let ma_loaisp = this.state.ma_loaisp
         let loai = this.props.loaispArr
         // console.log("check sanphamArr", sanphamArr)
-        
+        console.log("check mảng url 1111111111111", this.props)
         return (
             <>
                 <HomeHeader/>   

@@ -63,7 +63,7 @@ class UserRedux extends Component {
 
         if(prevProps.listUser !== this.props.listUser)
         {
-            console.log("listUser",this.props.listUser)
+            // console.log("listUser",this.props.listUser)
             let arrGender = this.props.genderRedux;
             let arrRole = this.props.roleRedux;
             this.setState(
@@ -225,7 +225,7 @@ class UserRedux extends Component {
         return (
             <div className='user-redux-container'>
                 <div className='title'>
-                    HỆ THỐNG BÁN ĐIỆN THOẠI DI ĐỘNG 
+                    HỆ THỐNG BÁN ĐỒ HANDMADE 
                 </div>
                 <div className="user-redux-body" >
                     <div className='container'>

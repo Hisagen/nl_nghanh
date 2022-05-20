@@ -15,12 +15,9 @@ const initialState = {
     markdown: [],
     markdownone: [],
     // tìm
-    sanphamArr: [],
-    binhLuans: [],
-    binhLuanAdmins: [],
-
-    traLois: [],
-    traLoiAdmins: [],
+    sanphamArr: [], // tìm theo loại 
+    sanphamtheocuahang: [],
+    timsanphamtheoLoaiThuoccuahang: [],
 }
 
 const sanphamReducer = (state = initialState, action) => {
@@ -70,6 +67,7 @@ const sanphamReducer = (state = initialState, action) => {
             }
         case actionTypes.FETCH_ALL_GIOHANGNEW_SUCCESS: 
             state.giohangArr = action.data;
+            console.log("check state.giohangArr",state.giohangArr)
             return {
                 ...state,
             }
@@ -167,50 +165,27 @@ const sanphamReducer = (state = initialState, action) => {
             state.sanphamArr = [];
             return {
                 ...state,
-            }
-        case actionTypes.GET_ALL_BINHLUAN_SUCCESS: 
-            state.binhLuans = action.data;
+            } 
+        case actionTypes.FETCH_ALL_SANPHAM_THEO_CUAHANG_SUCCESS: 
+            state.sanphamtheocuahang = action.sanphamtheocuahang;
             return {
                 ...state,
             }
-        case actionTypes.GET_ALL_BINHLUAN_FAILED:
-            state.binhLuans = [];
+        case actionTypes.FETCH_ALL_SANPHAM_THEO_CUAHANG_FAILED:
+            state.sanphamtheocuahang = [];
             return {
                 ...state,
             }
-        case actionTypes.GET_ALL_BINHLUAN_ADMIN_SUCCESS: 
-            state.binhLuanAdmins = action.data;
+        case actionTypes.FETCH_ALL_SANPHAM_THEO_LOAI_THUOC_CUAHANG_SUCCESS: 
+            state.timsanphamtheoLoaiThuoccuahang = action.timsanphamtheoLoaiThuoccuahang;
             return {
                 ...state,
             }
-        
-        case actionTypes.GET_ALL_BINHLUAN_ADMIN_FAILED:
-            state.binhLuanAdmins = [];
+        case actionTypes.FETCH_ALL_SANPHAM_THEO_LOAI_THUOC_CUAHANG_FAILED:
+            state.timsanphamtheoLoaiThuoccuahang = [];
             return {
                 ...state,
-            }
-        
-        case actionTypes.GET_ALL_TRALOI_SUCCESS: 
-            state.traLois = action.data;
-            return {
-                ...state,
-            }
-        case actionTypes.GET_ALL_TRALOI_FAILED:
-            state.traLois = [];
-            return {
-                ...state,
-            }
-        case actionTypes.GET_ALL_TRALOI_ADMIN_SUCCESS: 
-            state.traLoiAdmins = action.data;
-            return {
-                ...state,
-            }
-        
-        case actionTypes.GET_ALL_TRALOI_ADMIN_FAILED:
-            state.traLoiAdmins = [];
-            return {
-                ...state,
-            }
+            }    
         default:
             return state;
     }
