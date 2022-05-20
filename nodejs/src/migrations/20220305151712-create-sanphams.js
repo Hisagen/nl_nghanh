@@ -25,7 +25,9 @@ module.exports = {
       trangthai: {
         type: Sequelize.STRING
       },
-
+      trangThaiBL: {
+        type: Sequelize.STRING
+      },
       // msadmin: DataTypes.INTEGER,
       // ma_loaisp: DataTypes.INTEGER,
       // ma_hinhsp: DataTypes.INTEGER,

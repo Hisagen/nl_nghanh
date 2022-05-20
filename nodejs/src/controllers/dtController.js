@@ -378,6 +378,50 @@ let searchSPtheoLoai  = async (req, res) =>
     return res.status(200).json(message);
 }
 
+
+//Bình Luận
+let handleSaveBinhLuan = async (req, res) => {
+    let message = await DTService.SaveBinhLuan(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleGetAllBinhLuan = async (req, res) => {
+    let message = await DTService.GetAllBinhLuan(req.query.id);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleEditActionCMT = async (req, res) => {
+    let message = await DTService.EditActionCMT(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleGetAllBinhLuanAdmin = async (req, res) => {
+    let message = await DTService.GetAllBinhLuanAdmin(req.query.id);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleSaveTraLoi = async (req, res) => {
+    let message = await DTService.SaveTraLoi(req.body);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleGetAllTraLoi = async (req, res) => {
+    let message = await DTService.GetAllTraLoi(req.query.id, req.query.MaBL);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
+let handleGetAllTraLoiAdmin = async (req, res) => {
+    let message = await DTService.GetAllTraLoiAdmin(req.query.id, req.query.MaBL);
+    // console.log("check message", message);
+    return res.status(200).json(message);
+}
+
 module.exports = {
 
 
@@ -430,5 +474,16 @@ module.exports = {
     getDiaChiFromUser:getDiaChiFromUser,
     getALLMarkdown:getALLMarkdown,
     searchSPtheoLoai:searchSPtheoLoai,
-    getALLUngDung:getALLUngDung
+    getALLUngDung: getALLUngDung,
+    
+    // bình luận
+    handleSaveBinhLuan: handleSaveBinhLuan,
+    handleGetAllBinhLuan: handleGetAllBinhLuan,
+    handleEditActionCMT: handleEditActionCMT,
+    handleGetAllBinhLuanAdmin: handleGetAllBinhLuanAdmin,
+
+    //Trả lời
+    handleSaveTraLoi: handleSaveTraLoi,
+    handleGetAllTraLoi: handleGetAllTraLoi,
+    handleGetAllTraLoiAdmin: handleGetAllTraLoiAdmin
 }

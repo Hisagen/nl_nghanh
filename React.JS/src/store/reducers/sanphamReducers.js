@@ -16,6 +16,11 @@ const initialState = {
     markdownone: [],
     // tìm
     sanphamArr: [],
+    binhLuans: [],
+    binhLuanAdmins: [],
+
+    traLois: [],
+    traLoiAdmins: [],
 }
 
 const sanphamReducer = (state = initialState, action) => {
@@ -162,7 +167,50 @@ const sanphamReducer = (state = initialState, action) => {
             state.sanphamArr = [];
             return {
                 ...state,
-            } 
+            }
+        case actionTypes.GET_ALL_BINHLUAN_SUCCESS: 
+            state.binhLuans = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_BINHLUAN_FAILED:
+            state.binhLuans = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_BINHLUAN_ADMIN_SUCCESS: 
+            state.binhLuanAdmins = action.data;
+            return {
+                ...state,
+            }
+        
+        case actionTypes.GET_ALL_BINHLUAN_ADMIN_FAILED:
+            state.binhLuanAdmins = [];
+            return {
+                ...state,
+            }
+        
+        case actionTypes.GET_ALL_TRALOI_SUCCESS: 
+            state.traLois = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_TRALOI_FAILED:
+            state.traLois = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_TRALOI_ADMIN_SUCCESS: 
+            state.traLoiAdmins = action.data;
+            return {
+                ...state,
+            }
+        
+        case actionTypes.GET_ALL_TRALOI_ADMIN_FAILED:
+            state.traLoiAdmins = [];
+            return {
+                ...state,
+            }
         default:
             return state;
     }

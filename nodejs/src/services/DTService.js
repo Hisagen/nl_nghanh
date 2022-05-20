@@ -257,7 +257,8 @@ let CreateNewSanPham = (data) =>
                     qc_spHTML: data.qc_spHTML,
                     qc_spMarkdown: data.qc_spMarkdown,
                     sl_sp: data.sl_sp,
-                    trangthai: data.trangthai,
+                   trangthai: data.trangthai,
+                    trangThaiBL: 0,
                     msadmin: data.msadmin,
                     ma_loaisp: data.ma_loaisp,
                     avt: data.avt,
@@ -1559,7 +1560,9 @@ let searchSPtheoLoai = (idLoai) => ///// tìm sản phẩm theo loại sản p
             else
             {
                 let Markdown = await db.sanphams.findAll({
-                    where : {ma_loaisp: idLoai},
+                    where: {
+                        ma_loaisp: idLoai,
+                    },
                     include: [
                         {   
                             model: db.loaisps, attributes: ['id','ten_loaisp']
@@ -1583,8 +1586,226 @@ let searchSPtheoLoai = (idLoai) => ///// tìm sản phẩm theo loại sản p
     })
 }
 
-module.exports={
+let SaveBinhLuan = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            if (!data.NoiDungBL && !data.MaNguoiBL) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "thiếu", 
+                })
+            } else {
+                await db.BinhLuans.create({
+                    NoiDungBL: data.NoiDungBL,
+                    // Time: data.Time,
+                    MaSP: data.MaSP,
+                    MaNguoiBL: data.MaNguoiBL,
+                    TrangThai: data.TrangThai,
+                    TrangThaiBL: data.TrangThaiBL,
+                    anhBL: data.anhBL,
+                })
 
+                let sp = await db.sanphams.findOne({
+                    where: {id: data.MaSP}
+                })
+                sp.trangThaiBL = data.TrangThaiBL;
+                await sp.save();
+                resolve({
+                errCode: 0,
+                errMessage: "thanh cong",    
+            })
+            }
+        }catch(e){
+            reject(e)
+        }
+    })
+}
+
+let GetAllBinhLuan = (idSP) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.BinhLuans.findAll({
+                where: {
+                    TrangThai: 1,
+                    maSP: idSP,
+                },
+                include: [
+                    {   
+                        model: db.User, as: "binhLuansData"
+                    }
+                ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let GetAllBinhLuanAdmin = (idSP) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.BinhLuans.findAll({
+                where: {
+                    // TrangThai: 1,
+                    maSP: idSP,
+                },
+                include: [
+                    {   
+                        model: db.User, as: "binhLuansData"
+                    }
+                ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let EditActionCMT = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // let sp = await db.sanphams.findOne({
+            //     where: { id: data.idSP },
+            //     raw: false,
+            // })
+
+            // if (sp) {
+            //     sp.trangThaiBL = data.tt;
+            // }
+            // await sp.save()
+
+            let bl = await db.BinhLuans.findOne({
+                where: { id: data.idBL },
+                raw: false,
+            })
+
+            if (bl) {
+                // bl.TrangThaiBL = data.tt;
+                bl.TrangThai = data.tt;
+            }
+            await bl.save()
+
+            // let tl = await db.TraLois.findOne({
+            //     where: { id: data.idSP },
+            //     raw: false,
+            // })
+
+            // if (tl) {
+            //     bl.TrangThaiBL = 0;
+            //     bl.TrangThai = 0
+            // }
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let SaveTraLoi = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.NoiDungTL && !data.MaBL &&data.MaNguoiTL) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "thiếu",
+                })
+            } else {
+                await db.TraLois.create({
+                    NoiDungTL: data.NoiDungTL,
+                    MaBL: data.MaBL,
+                    MaSP: data.MaSP,
+                    MaNguoiTL: data.MaNguoiTL,
+                    TrangThai: 1,
+                })
+
+                let sp = await db.sanphams.findOne({
+                    where: { id: data.MaSP }
+                })
+                sp.trangThaiBL = 0;
+                await sp.save();
+
+                let bl = await db.BinhLuans.findOne({
+                    where: { id: data.MaBL }
+                })
+                bl.TrangThaiBL = 0;
+                await bl.save();
+                resolve({
+                    errCode: 0,
+                    errMessage: "thanh cong",
+                })
+            }
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let GetAllTraLoi = (idSP, Ma) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.TraLois.findAll({
+                where: {
+                    TrangThai: 1,
+                    maSP: idSP,
+                    MaBL:Ma,
+                },
+                // include: [
+                //     {   
+                //         model: db.User, as: "binhLuansData"
+                //     }
+                // ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let GetAllTraLoiAdmin = (idSP, Ma) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.TraLois.findAll({
+                where: {
+                    // TrangThai: 1,
+                    maSP: idSP,
+                    MaBL:Ma,
+                },
+                // include: [
+                //     {   
+                //         model: db.User, as: "binhLuansData"
+                //     }
+                // ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+module.exports={
     getTopDTHomeService:getTopDTHomeService,
     getAllSP:getAllSP,
     saveSP:saveSP,
@@ -1650,6 +1871,16 @@ module.exports={
 
     // chưa làm xong
     getALLUngDung:getALLUngDung,
-    saveUD:saveUD,
-
+    saveUD: saveUD,
+    
+    //bình luận 
+    SaveBinhLuan: SaveBinhLuan,
+    GetAllBinhLuan: GetAllBinhLuan,
+    EditActionCMT: EditActionCMT,
+    GetAllBinhLuanAdmin: GetAllBinhLuanAdmin,
+    
+    //Trả Lời
+    SaveTraLoi: SaveTraLoi,
+    GetAllTraLoi: GetAllTraLoi,
+    GetAllTraLoiAdmin:GetAllTraLoiAdmin,
 }

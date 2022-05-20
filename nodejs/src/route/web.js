@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express, { Route, Router } from "express";
 import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
 import dtController from "../controllers/dtController";
@@ -89,15 +89,30 @@ let initWebRoute = (app) =>
 
     // markdown
     route.get("/api/get_ALL_markdown", dtController.getALLMarkdown);
+     //BinhLuans
+    route.post("/api/save-binh-luan", dtController.handleSaveBinhLuan);
+    route.get("/api/get_all_binhluan", dtController.handleGetAllBinhLuan);
+    route.get("/api/get_all_binhluan_admin", dtController.handleGetAllBinhLuanAdmin);
+    route.put("/api/edit-action-cmt", dtController.handleEditActionCMT);
+
+    //trả lời
+    route.post("/api/save-tra-loi", dtController.handleSaveTraLoi);
+    route.get("/api/get_all_TraLoi", dtController.handleGetAllTraLoi);
+    route.get("/api/get_all_TraLoi_admin", dtController.handleGetAllTraLoiAdmin);
 
     //ứng dụng
     route.get("/api/get_ALL_ungdung", dtController.getALLUngDung);
+
     ////////////////////////////////////////////////////
     route.get('/nlnghanh',(req, res) => 
     {
         return res.send('Hello Ra Sin');
     });
 
+
+   
+
+    
 
     return app.use("/",route);
 }

@@ -24,10 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     qc_spMarkdown: DataTypes.TEXT("long"),
     sl_sp: DataTypes.STRING,
     trangthai: DataTypes.STRING,
+    trangThaiBL: DataTypes.STRING,
     msadmin: DataTypes.INTEGER,
     ma_loaisp: DataTypes.INTEGER,
     gia: DataTypes.INTEGER,
-    avt: DataTypes.STRING,
+    avt: DataTypes.BLOB('long'),
   }, {
     sequelize,
     modelName: 'sanphams',
