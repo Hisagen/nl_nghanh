@@ -84,61 +84,63 @@ export const handleGetAllBinhLuanAdmin = (idSP, ma) => {
             dispatch({
                 type: actionTypes.GET_ALL_BINHLUAN_ADMIN_FAILED,
             });
-            console.log('CREATE_BINHLUAN_FAILED error',e);
+            console.log('CREATE_BINHLUAN_FAILED error', e);
+            console.log('CREATE_BINHLUAN_FAILED error', e);
+            
         }
     }
 }
+// dgrdgfdcggfg
+// export const handleGetAllTraLoi = (idSP, ma) => {
+//     return async (dispatch, getState) => {
+//         try {
+//             // console.log("idSP", idSP, "ma", ma)
+//             let res = await getAllTraLoi(idSP, ma);
+//             // console.log("res",res);
+//             if (res && res.errCode === 0) {
+//                 // toast.success("Create a comment user success");
+//                 dispatch({
+//                     type: actionTypes.GET_ALL_TRALOI_SUCCESS,
+//                     data: res.data,
+//                 });
+//             } else {
+//                 dispatch({
+//                     type: actionTypes.GET_ALL_TRALOI_FAILED,
+//                 });
+//             }
+//         } catch (e) {
+//             dispatch({
+//                 type: actionTypes.GET_ALL_TRALOI_FAILED,
+//             });
+//             console.log('CREATE_BINHLUAN_FAILED error',e);
+//         }
+//     }
+// }
 
-export const handleGetAllTraLoi = (idSP, ma) => {
-    return async (dispatch, getState) => {
-        try {
-            // console.log("idSP", idSP, "ma", ma)
-            let res = await getAllTraLoi(idSP, ma);
-            // console.log("res",res);
-            if (res && res.errCode === 0) {
-                // toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_SUCCESS,
-                    data: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.GET_ALL_TRALOI_FAILED,
-            });
-            console.log('CREATE_BINHLUAN_FAILED error',e);
-        }
-    }
-}
-
-export const handleGetAllTraLoiAdmin = (idSP, ma) => {
-    return async (dispatch, getState) => {
-        try {
-            let res = await getAllTraLoiAdmin(idSP, ma);
-            // console.log("res", res)
-            if (res && res.errCode === 0) {
-                // toast.success("Create a comment user success");
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_ADMIN_SUCCESS,
-                    data: res.data,
-                });
-            } else {
-                dispatch({
-                    type: actionTypes.GET_ALL_TRALOI_ADMIN_FAILED,
-                });
-            }
-        } catch (e) {
-            dispatch({
-                type: actionTypes.GET_ALL_TRALOI_ADMIN_FAILED,
-            });
-            console.log('CREATE_TRALOI_FAILED error',e);
-        }
-    }
-}
+// export const handleGetAllTraLoiAdmin = (idSP, ma) => {
+//     return async (dispatch, getState) => {
+//         try {
+//             let res = await getAllTraLoiAdmin(idSP, ma);
+//             // console.log("res", res)
+//             if (res && res.errCode === 0) {
+//                 // toast.success("Create a comment user success");
+//                 dispatch({
+//                     type: actionTypes.GET_ALL_TRALOI_ADMIN_SUCCESS,
+//                     data: res.data,
+//                 });
+//             } else {
+//                 dispatch({
+//                     type: actionTypes.GET_ALL_TRALOI_ADMIN_FAILED,
+//                 });
+//             }
+//         } catch (e) {
+//             dispatch({
+//                 type: actionTypes.GET_ALL_TRALOI_ADMIN_FAILED,
+//             });
+//             console.log('CREATE_TRALOI_FAILED error',e);
+//         }
+//     }
+// }
 
 export const createNewSanPham = (data) =>
 {
