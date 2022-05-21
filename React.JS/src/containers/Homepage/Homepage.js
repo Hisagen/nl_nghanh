@@ -79,9 +79,10 @@ class Homepage extends Component {
                 <BanNerQC 
                 settings = {settings}/>
                <Spkhac settings = {settings}/>
-               <NoiBac 
+               <NoiBac className="noi-bac"
                     settings = {settings}
                 />
+                
                <Handbook
                     settings = {settings}
                 />

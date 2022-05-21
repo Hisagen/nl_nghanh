@@ -386,12 +386,12 @@ class Quanlysanpham extends Component {
         return (
             <React.Fragment>
                 <div className='sanpham-redux-container'>
-                    <div className='title'>Quản lý sản phẩm</div>
+                    <div className='title my-5'>Quản lý sản phẩm</div>
                     <div className='sanpham-redux-body'>
                         <div className='container'>
                             <div className='row'>
                                 
-                            <div className='col-3'>
+                            <div className='col-4'>
                                     <label>Danh mục:</label>
                                         <select className='form-control loaisp' type="text"
                                             onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}    
@@ -410,7 +410,7 @@ class Quanlysanpham extends Component {
                                         </select>
                                 </div>
 
-                                <div className='col-3'>
+                                <div className='col-4'>
                                     <label>Loại sản phẩm:</label>
                                         <select className='form-control loaisp' type="text"
                                             onChange={(event)=>{this.onchangeInput(event, 'ma_loaisp')}}
@@ -429,21 +429,21 @@ class Quanlysanpham extends Component {
                                         </select>
                                 </div>
 
-                                <div className='col-3'>
+                                <div className='col-4'>
                                     <label>Tên sản phẩm:</label>
                                     <input className='form-control namesp' type="text"
                                         value={ten_sp}
                                         onChange={(event)=>{this.onchangeInput(event, 'ten_sp')}}
                                     ></input>
                                 </div>
-                                <div className='col-3'>
+                                <div className='col-4 mt-4'>
                                     <label>Số lượng:</label>
                                     <input className='form-control slsp' type="text"
                                         value={sl_sp}
                                         onChange={(event)=>{this.onchangeInput(event, 'sl_sp')}}
                                     ></input>
                                 </div>
-                                <div className='col-3 mt-3'>
+                                <div className='col-4 mt-4'>
                                     <label>Trạng thái:</label>
                                     <select className='form-control ttsp'
                                         onChange={(event)=>{this.onchangeInput(event, 'trangthai')}}
@@ -461,7 +461,7 @@ class Quanlysanpham extends Component {
                                     </select>
                                 </div>
                                 
-                                <div className='col-3 mt-3'>
+                                <div className='col-4 mt-4'>
                                     <label>Giá:</label>
                                     <input className='form-control namesp' type="text"
                                         value={gia}
@@ -471,7 +471,7 @@ class Quanlysanpham extends Component {
                                 
                                 
                                 {/* ẢNH */}
-                                <div className='col-3 mt-3'>
+                                <div className='col-3 mt-5'>
                                     <label><FormattedMessage id="manage-user.avt"/></label>
                                     <div className='preview-img-container'>
                                         <input id='previewImg' type='file' hidden
@@ -489,7 +489,7 @@ class Quanlysanpham extends Component {
                                 </div>   
                                 
 
-                                <div className='col-3 mt-3'>
+                                <div className='col-3 mt-5'>
                                     <label><FormattedMessage id="manage-user.avt1"/></label>
                                     <div className='preview-img-container'>
                                         <div className='preview-image2' 
@@ -499,7 +499,7 @@ class Quanlysanpham extends Component {
                                     </div>
                                 </div>                 
                                 
-                                <div className='col-3 mt-3'>
+                                <div className='col-3 mt-5'>
                                     <label><FormattedMessage id="manage-user.avt2"/></label>
                                     <div className='preview-img-container'>
                                         
@@ -510,7 +510,7 @@ class Quanlysanpham extends Component {
                                     </div>
                                 </div>  
 
-                                <div className='col-3 mt-3'>
+                                <div className='col-3 mt-5'>
                                     <label><FormattedMessage id="manage-user.avt3"/></label>
                                     <div className='preview-img-container'>
                                         

@@ -121,11 +121,11 @@ class QuanLyLoaiSP extends Component {
         return (
             <React.Fragment>
                 <div className='sanpham-redux-container'>
-                    <div className='title'>Quản lý loại sản phẩm</div>
+                    <div className='title my-5'>Quản lý loại sản phẩm</div>
                     <div className='sanpham-redux-body'>
                         <div className='container'>
                             <div className='row'>
-                            <div className='col-3'>
+                            <div className='col-3 ml-3'>
                                     <label>Danh Mục:</label>
                                         <select className='form-control loaisp' type="text"
                                             onChange={(event)=>{this.onchangeInput(event, 'ma_dm')}}
@@ -150,7 +150,7 @@ class QuanLyLoaiSP extends Component {
                                     ></input>
                                 </div>
     
-                                <div className='col-12 mt-3 btn-createSP'>
+                                <div className='col-12 mt-3 ml-3 btn-createSP'>
                                     <button
                                         onClick={()=> this.hanldeSaveDanhMuc()}
                                         >{this.state.action === CRUD_ACTIONS.EDIT ? 

@@ -115,11 +115,10 @@ HomeHeader extends Component {
         // console.log("isLoggedIn",this.props.isLoggedIn)
         return (
             <React.Fragment>
-                 <div className='home-header-container'>
+                 <div className='home-header-container sticky-top'>
                     <div className='home-header-content'>
-                        <div  className='left-content'>
-                            <i className="fas fa-bars"></i>
-                            <img className='Header-logo' src= {logo1} onClick={()=> this.returnHome()}/>
+                        <div  className='left-content' onClick={()=> this.returnHome()}>
+                        <div className='font-logo' style={{}}>ByMe</div>
                         </div>
                         <div className='center-content'> 
                             <div className='search'>
@@ -239,7 +238,7 @@ HomeHeader extends Component {
                                     </div>
                             }
                             <div className='support-content'>
-                                <div><b><i className="fas fa-question-circle"></i> <FormattedMessage id="homeheader.hoidap"/></b></div>
+                                <div style={{width:"100px"}} className='mr-10'><b><i className="fas fa-question-circle" ></i> <FormattedMessage id="homeheader.hoidap"/></b></div>
                             </div>
                             
                             {isLoggedIn ? 
@@ -264,7 +263,7 @@ HomeHeader extends Component {
                     <div className='home-header-banner'>
                     <div className='content-up'>
                         <div className='title1'><FormattedMessage id="homeheader.title1"/></div>
-                        <div className='title2'>HISAGEN</div>
+                        <div className='title2'>ByMe</div>
                         
                     </div>
                     <div className='content-dow'>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
@@ -30,23 +30,23 @@ class BanNerQC extends Component {
                 <Slider {...this.props.settings}>
                     <div className='img-customize'>
                         <img src={imgBanner1}/>
-                        <h3>Reno7 | Reno7 5G</h3>
+                        <h3>Nguyên Liệu Thủ công Cần Thơ</h3>
                     </div>
                     <div className='img-customize'>
                     <img src={imgBanner2}/>
-                        <h3>AppleWatch | S6</h3>
+                        <h3>shop đồ handmade được yêu thích ở Cần Thơ</h3>
                     </div>
                     <div className='img-customize'>
                     <img src={imgBanner3}/>
-                        <h3>Lenovo | YOGA</h3>
+                        <h3>Shop uy tín Chất Lượng</h3>
                     </div>
                     <div className='img-customize'>
                     <img src={imgBanner4}/>
-                        <h3>Đồng Hồ | Giảm 50%</h3>
+                        <h3>Đặt nhu cầu khách hàng lên hàng đầu</h3>
                     </div>
                     <div className='img-customize'>
                     <img src={imgBanner5}/>
-                        <h3>Tai Nghe | Giảm 30%</h3>
+                        <h3>SALE</h3>
                     </div>
                     </Slider>
                 </div>

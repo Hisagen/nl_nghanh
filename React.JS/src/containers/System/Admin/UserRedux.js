@@ -224,7 +224,7 @@ class UserRedux extends Component {
 
         return (
             <div className='user-redux-container'>
-                <div className='title'>
+                <div className='title mt-5'>
                     HỆ THỐNG BÁN ĐỒ HANDMADE 
                 </div>
                 <div className="user-redux-body" >
@@ -264,21 +264,21 @@ class UserRedux extends Component {
                                     onChange={(event)=>{this.onchangeInput(event, 'ten')}}
                                 ></input>
                             </div>
-                            <div className='col-3'>
+                            <div className='col-3 mt-4'>
                                 <label><FormattedMessage id="manage-user.sdt"/></label>
                                 <input className='form-control ten' type="text"
                                     value={sdt}
                                     onChange={(event)=>{this.onchangeInput(event, 'sdt')}}
                                 ></input>
                             </div>
-                            <div className='col-9'>
+                            <div className='col-9 mt-4'>
                                 <label><FormattedMessage id="manage-user.dc"/></label>
                                 <input className='form-control diachi' type="text"
                                     value={diachi}
                                     onChange={(event)=>{this.onchangeInput(event, 'diachi')}}
                                 ></input>
                             </div>
-                            <div class="col-3">
+                            <div class="col-3 mt-4">
                                 <label><FormattedMessage id="manage-user.gt"/></label>
                                 <select className="form-control" 
                                     
@@ -296,7 +296,7 @@ class UserRedux extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className="col-3">
+                            <div className="col-3 mt-4">
                                 <label><FormattedMessage id="manage-user.cv"/></label>
                                 <select className="form-control"
                                     onChange={(event)=>{this.onchangeInput(event, 'chucvu')}}
@@ -314,7 +314,7 @@ class UserRedux extends Component {
                                     }
                                 </select>
                             </div>
-                            <div className='col-3'>
+                            <div className='col-3 mt-4'>
                                 <label><FormattedMessage id="manage-user.avt"/></label>
                                 <div className='preview-img-container'>
                                     <input id='previewImg' type='file' hidden

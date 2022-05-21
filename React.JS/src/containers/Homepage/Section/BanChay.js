@@ -87,8 +87,11 @@ class NoiBac extends Component {
             // nextArrow: <SampleNextArrow />,
             // prevArrow: <SamplePrevArrow />
         };
+        //console.log("check topDTRedux", this.props.topDTRedux);
         let allDT = this.state.arrDT;
+        // console.log("check allDT",allDT);
         let {language} = this.props; 
+        //allDT = allDT.concat(allDT).concat(allDT);
         return (
             <div className='section-share section-NoiBac'>
             

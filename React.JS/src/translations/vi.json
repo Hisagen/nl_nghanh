@@ -5,7 +5,7 @@
         "lsdh": "Lịch Sử Đơn Hàng",
         "tintuc": "Tin Tức",
         "hoidap": "Hỏi đáp",
-        "title1": "Cửa Hàng Di Động",
+        "title1": "Sàn thương mại điện tử",
         "place": "Tìm kiếm...",
         "welcome":"Xin Chào"
     },
@@ -73,7 +73,7 @@
         "edit": "Lưu thay đổi"
     },
     "homePage":{
-        "out-standing-DT": "ĐIỆN THOẠI NỔI BẬC NHẤT",
+        "out-standing-DT": "SẢN PHẨM NỔI BẬC NHẤT",
         "more-infor": "XEM THÊM"
     }
     

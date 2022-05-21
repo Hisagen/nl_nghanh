@@ -105,11 +105,11 @@ class QuanLyDanhMuc extends Component {
         return (
             <React.Fragment>
                 <div className='sanpham-redux-container'>
-                    <div className='title'>Quản lý danh mục sản phẩm</div>
+                    <div className='title my-5'>Quản lý danh mục sản phẩm</div>
                     <div className='sanpham-redux-body'>
                         <div className='container'>
                             <div className='row'>
-                                <div className='col-3'>
+                                <div className='col-3 ml-3'>
                                     <label>Tên danh mục sản phẩm:</label>
                                     <input className='form-control namesp' type="text"
                                         value={ten_dm}
@@ -117,7 +117,7 @@ class QuanLyDanhMuc extends Component {
                                     ></input>
                                 </div>
     
-                                <div className='col-12 mt-3 btn-createSP'>
+                                <div className='col-12 mt-3 ml-3 btn-createSP'>
                                     <button
                                         onClick={()=> this.hanldeSaveDanhMuc()}
                                         >{this.state.action === CRUD_ACTIONS.EDIT ? 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import MdEditor from 'react-markdown-editor-lite';
 import MarkdownIt from 'markdown-it';
-import {LANGUAGES, CRUD_ACTIONS, CommonUtils} from "../../../utils";
+import {LANGUAGES, CRUD_ACTIONS, CommonUtils, dateFormat} from "../../../utils";
 import * as actions from "../../../store/actions";
 import "./DonHangManage.scss"
 import { FormattedMessage } from 'react-intl';
@@ -15,6 +15,9 @@ import {withRouter} from "react-router";
 import { Link } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import {create_new_giohang, getgiohang} from "../../../services/sanphamService"
+import moment from 'moment';
+import { createLogger } from 'redux-logger';
+
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 function handleEditorChange({ html, text }) {
     //console.log('handleEditorChange', html, text);
@@ -22,10 +25,13 @@ function handleEditorChange({ html, text }) {
 class DonHangManage extends Component {
     constructor(props)
     {
+        const currentDate = new Date();
+        currentDate.setHours(0,0,0,0);
         super(props);
         this.state = {
             idUser: '',
             donhangArr: '',
+            currentDate: '',
             // idDonHangNew: ''
         }
     }
@@ -117,17 +123,20 @@ class DonHangManage extends Component {
                             {donhangArr && donhangArr.length >0 &&
                                 donhangArr.map((item,index) =>{
                                     {/* console.log("check item.trangthaiData",item.trangthaiData) */}
+                                    let formatedDate = moment(item.createdAt).format(dateFormat.SEND_TO_SERVER)
 
+                                    let formatedDate2 = moment(item.updatedAt).format(dateFormat.SEND_TO_SERVER)
+                                    console.log("check formatedDate2",formatedDate2+7)
                                     return (
                                         <div className='TD mt-3 mb-5'>
                                             <div className='id mt-5'>
                                                 {item.id}
                                             </div>
                                             <div className='ngaydathang mt-5'>
-                                                {item.ngaydathang}
+                                                {formatedDate}
                                             </div>
                                             <div className='ngaygiaohang mt-5'>
-                                                23213242342
+                                                {formatedDate2}
                                             </div>
                                             <div className='tongtien mt-5'>
                                                 {item.tongtien}

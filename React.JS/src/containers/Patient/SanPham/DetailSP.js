@@ -196,6 +196,9 @@ class DetailSP extends Component {
             <HomeHeader isShowBanner = {false}/>
             <div className='sp-detail-container'>
                 {/* <div className='intro-sp'>{language === LANGUAGES.VI ? nameVi : nameEn} </div>  */}
+                <div className='name-sp'>
+                 {sp.ten_sp}
+                </div>
                 <hr/>
                 <div className='thongtin-sp'>
                     <div className='anh'>
@@ -230,7 +233,7 @@ class DetailSP extends Component {
                     </div>
                     
                     <div className='bienthe-sp'>
-                        <div className='ram-sp'>
+                        {/* <div className='ram-sp'>
                             <div className='ram'>128GB</div>
                             <div className='ram'>128GB</div>
                             <div className='ram'>128GB</div>
@@ -241,10 +244,27 @@ class DetailSP extends Component {
                             <div className='color'>Vàng</div>
                             <div className='color'>Vàng</div>
                             <div className='color'>Vàng</div>
-                        </div>
+                        </div> */}
                         
                         <div className='chung'>
                         <div className='khung mt-3'>
+                            <div className='bl-dg'>
+                                <div className='sao'><u>4.8<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></u> &nbsp; |
+                                </div>
+                                <div className='danh-gia'><u>220</u> Đánh giá  &nbsp; | </div>
+                                <div className='da-ban'>2.7k đã bán</div>
+
+                            </div>
+                            <br/>
+                            <div className='si-le'>
+                                <div className='si-le-title' style={{width:'100px'}}>Mua Giá Bán Buôn/ Bán Sỉ</div>
+                                <div >Mua từ (=10) sản phẩm chỉ với ₫21.000</div>
+                            </div>
+                            <div className='vanchuyen'>
+                                <div className='vanchuyen-title' style={{width:'100px'}}>Vận Chuyển</div>
+                                <div ><i class="fas fa-shipping-fast"></i> Miễn phí vận chuyển</div>
+                            </div>
+                            <div className='gia-sp mt-3'>Giá: {so.toLocaleString()}₫</div>
                             
                             <div className='btn-spyt' 
                                 onClick={() => this.handlethemvaoyeuthich(sp, this.state.idUser)}
@@ -269,12 +289,11 @@ class DetailSP extends Component {
                             <input className='text-soluong' type="text" value={quantity} disabled></input>
                             <button className='btn-soluong-giam' onClick={()=> this.onUpdateQuantity(sp, this.state.quantity+1)}><i className="fas fa-plus"></i></button>
                         </div>
-                        <div className='gia-sp mt-3'>Giá: {so.toLocaleString()}₫</div>
                         <button className='btn-muangay'
                                 onClick={() => this.handlethemvaogiohang(sp)}
 
                         >MUA NGAY</button>
-                        <p className='title-cauhinh'>Cấu hình Điện thoại {sp.ten_sp} 128GB</p>
+                        {/* <p className='title-cauhinh'>Cấu hình Điện thoại {sp.ten_sp} 128GB</p>
                         <div className='cauhinh-sp'>
                             <div className='tt-1'>
                                 <div className='name-cauhinh'>Màn hình:</div>
@@ -308,14 +327,25 @@ class DetailSP extends Component {
                                 <div className='name-cauhinh'>Pin, Sạc:</div>
                                 <div className='dulieu'>4352 mAh20 W</div>
                             </div>
-                        </div>
+                        </div> */}
                     </div> 
                 </div> 
                 <div className='chitiet-sp'>
                     <p className='title-chitiet'>Thông Tin Sản Phẩm</p>  
                 </div>
                 
-1               <div className='binhLuan'>
+                
+
+                <div className='description mt-5'>
+                        {sp.qc_spHTML && sp.qc_spMarkdown
+                            &&
+                            <div dangerouslySetInnerHTML={{__html: sp.qc_spHTML}}>
+                            </div>
+                                
+                        }
+                </div>
+
+                <div className='binhLuan'>
                     <label className='title'>Bình luận</label>        
                         <textarea className="contentNoiDung" rows="5"
                             onChange={(event) => this.onChangeInput(event, 'binhLuan')}
@@ -393,16 +423,8 @@ class DetailSP extends Component {
                             </div>
                         </div>
 
-                </div>  
+                </div> 
 
-                <div className='description mt-5'>
-                        {sp.qc_spHTML && sp.qc_spMarkdown
-                            &&
-                            <div dangerouslySetInnerHTML={{__html: sp.qc_spHTML}}>
-                            </div>
-                                
-                        }
-                </div>
                 <div className='spkhac'>
                     <NoiBac/>
                 </div>

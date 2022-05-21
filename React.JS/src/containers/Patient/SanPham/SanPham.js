@@ -141,13 +141,13 @@ class SanPham extends Component {
                                             </div>
                                             <div className='name mt-3'>{item.ten_sp}</div>
                                             <div className='gia'>{item.gia.toLocaleString()}đ</div>
-                                            <ul>
+                                            {/* <ul>
                                                 <li>Màn hình:{item.manhinh}</li>
                                                 <li>RAM {item.ram}, ROM {item.bonho}</li>
                                                 <li>Camera sau: {item.cameraSau}</li>
                                                 <li>Camera trước: {item.cameraTruoc}</li>
                                                 <li>Pin {item.pin}</li>
-                                            </ul>
+                                            </ul> */}
                                         </div>
                                     )
                                 })

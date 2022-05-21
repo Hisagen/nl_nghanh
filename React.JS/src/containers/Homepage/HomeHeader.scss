@@ -3,6 +3,7 @@
     height: 80px;
     padding: 0 40px;
     overflow: scroll;
+    background-color: white;
     .home-header-content{
         width: 100%;
         height: 100%;
@@ -11,6 +12,11 @@
             width: 20%;
             display: flex;
             align-items: center;
+            .font-logo{
+                font-family: 'Permanent Marker', cursive;
+                font-size: 50px;
+                color: rgb(11, 170, 191);
+            }
             .Header-logo{
                 height: 100%;
                 width: 90%;
@@ -134,6 +140,7 @@
     
         }
                 .child-whitelist{
+                    
                     .etsy-icon{
                         svg{
                             width: 24px;
@@ -152,10 +159,12 @@
                     margin-top: 20px;
                     margin-left: 85px;
                     &:hover{
+                        // z-index: 10;
+                        
                         .test{
                             display: block;
                             position: absolute;
-                            z-index: 1000;
+                            z-index: 1;
                             //border: 1px solid black;
                             width: auto;
                             height: auto;
@@ -194,7 +203,7 @@
                 
         }
         .right-content{
-            width: 25%;
+            width: 30%;
             padding-top: 10px;
             //cursor: pointer;
             align-items: center;
@@ -246,7 +255,8 @@
             }
             .welcome{
                 // border:  1px solid red;
-                margin-right: 10px;
+                // padding-left: 50px;
+                width: 300px;
             }
             .avt{
                 img{
@@ -283,19 +293,20 @@
         //border: 1px solid red;
         .title1 {
             text-align: center;
-            color: greenyellow;
-            font-size: 30px;
-            text-shadow: 1px 1px 1px #333;
-            margin-bottom: 15px;
-            padding-top: 120px;
-            
+            font-size: 60px;
+            color: rgb(242, 162, 23);
+            font-weight: 700;
+            text-shadow: 4px 4px 4px rgb(14, 13, 13);
+            margin-bottom: 5px;
+            margin-top: 140px;
         }
+    
         .title2 {
             text-align: center;
-            color: greenyellow;
-            font-size: 30px;
-            text-shadow: 1px 1px 1px #333;
-            margin-bottom: 15px;
+            font-size: 70px;
+            color: rgb(242, 162, 23);
+            font-weight: 700;
+            text-shadow: 4px 4px 4px rgb(14, 13, 13);
         }
         
     }

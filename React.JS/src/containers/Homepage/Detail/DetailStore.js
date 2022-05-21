@@ -7,7 +7,6 @@ import HomeHeader from '../HomeHeader';
 import HomeFooter from '../HomeFooter';
 import {withRouter} from "react-router";
 import * as actions from "../../../store/actions";
-import AllSanPhamMotCuaHang from './AllSanPhamMotCuaHang';
 class DetailStore extends Component {
     constructor(props)
     {
@@ -20,6 +19,7 @@ class DetailStore extends Component {
     async componentDidMount(){
         await this.props.getAllCuaHang(this.props.match.params.id); 
         await this.props.getAllSanPhamTheoCuaHang(this.props.match.params.id);
+        this.props.fetchAllLoaiSanPhamSTART();
         /// LẤY THÔNG TIN CHI TIẾT MỘT CỬA HÀNG
         let cuahangArr = this.props.cuahangArr 
         console.log("check cuahangArr",cuahangArr)
@@ -45,7 +45,7 @@ class DetailStore extends Component {
         this.props.history.push(`/all-sanpham-mot-cuahang/${this.props.match.params.id}`)
     }
     render() {
-        // console.log("check thông tin cửa hàng", this.state.cuahangArr)
+        
         let data = this.state.cuahangArr
         let storeName = this.state.storeName
         let imageBase64 =''
@@ -56,7 +56,7 @@ class DetailStore extends Component {
                     imageBase64 = new Buffer(data.avt, 'base64').toString('binary')  
                 }
         }
-        // console.log("check sanphamtheocuahang", this.props.sanphamtheocuahang)
+        console.log("check sanphamtheocuahang", this.props.sanphamtheocuahang)
         let settings = {
             dots: false,
             infinite: true,
@@ -158,7 +158,6 @@ class DetailStore extends Component {
                     </div>
                 </div>
                 <div style={{height:"100px"}}></div>
-                <AllSanPhamMotCuaHang/>
                 <HomeFooter/>
             </div>
         );
@@ -177,6 +176,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getAllCuaHang: (data) => dispatch(actions.getAllCuaHang(data)),
+        fetchAllLoaiSanPhamSTART: () =>dispatch(actions.fetchAllLoaiSanPhamSTART()),
         getAllSanPhamTheoCuaHang: (idCuaHang) => dispatch(actions.getAllSanPhamTheoCuaHang(idCuaHang)),
     };
 };

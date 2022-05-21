@@ -5,7 +5,7 @@
         "lsdh": "Order History",
         "tintuc": "News",
         "hoidap": "Q&A",
-        "title1": "Mobile store",
+        "title1": "Ecommerce level",
         "place": "Search...",
         "welcome": "WelCome"
     },
@@ -76,7 +76,7 @@
     },
    
     "homePage":{
-        "out-standing-DT": "MOST HOT PHONE",
+        "out-standing-DT": "MOST HOT PRODUCT",
         "more-infor": "MORE INFOR"
     }
 }
