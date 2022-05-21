@@ -52,12 +52,12 @@ let getAllSP = () => {
 let saveSP = (data) => {
     //console.log("check contentMarkdown", data.contentMarkdown);
     return new Promise(async (resolve, reject) => {
-    console.log("check contentHTML", data.contentHTML);
-    console.log("check lisp", data);
+    // console.log("check contentHTML", data.contentHTML);
+    // console.log("check lisp", data);
             try {
                     if(!data.contentHTML || !data.action)
                     {
-                        console.log("check Data", data)
+                        // console.log("check Data", data)
                         resolve({
                             errCode: 1,
                             errMessage: "thiếu"
@@ -242,7 +242,7 @@ let CreateNewSanPham = (data) =>
         try{
             
             let check = await checkNameSanPham(data.ten_sp);
-            console.log(check);
+            // console.log(check);
             if(check === true)
             {
                 resolve({
@@ -258,6 +258,7 @@ let CreateNewSanPham = (data) =>
                     qc_spMarkdown: data.qc_spMarkdown,
                     sl_sp: data.sl_sp,
                     trangthai: data.trangthai,
+                    trangThaiBL: 0,
                     msadmin: data.msadmin,
                     ma_loaisp: data.ma_loaisp,
                     avt: data.avt,
@@ -307,7 +308,7 @@ let updateSanPham = (data) =>
                 where: {id: data.id},
                 //raw: false
                 })
-                console.log("check sanpham",sanpham);
+                // console.log("check sanpham",sanpham);
                 if(sanpham)
                 {
                     sanpham.ten_sp = data.ten_sp;
@@ -484,7 +485,7 @@ let CreateNewLoaiSanPham = (data) =>
         try{
             
             let check = await checkNameLoaiSanPham(data.ten_loaisp);
-            console.log(check);
+            // console.log(check);
             if(check === true)
             {
                 resolve({
@@ -647,7 +648,7 @@ let checkNameDMSanPham = (nameDM) =>
             let name = await db.danhmucs.findOne({
                 where: {ten_dm: nameDM}
             })
-            console.log("check danh sách danh mục",name)
+            // console.log("check danh sách danh mục",name)
             if(name)
             {
                 resolve(true);
@@ -671,7 +672,7 @@ let CreateNewDMSanPham = (data) =>
         try{
             
             let check = await checkNameDMSanPham(data.ten_dm);
-            console.log("check tên danh mục",check);
+            // console.log("check tên danh mục",check);
             if(check === true)
             {
                 resolve({
@@ -743,7 +744,7 @@ let updateDanhMuc = (data) =>
                 where: {id: data.id},
                 //raw: false
                 })
-                console.log("check DanhMuc",DanhMuc);
+                // console.log("check DanhMuc",DanhMuc);
                 if(DanhMuc)
                 {
 
@@ -870,12 +871,14 @@ let getdsloaidm = (idDM) =>
 /////////////////////////////////////////////////////////////////////////////// Giỏ Hàng (bảng tạm)
 let CreateNewGioHang = (data) =>
 {
-    // console.log('check data',data)
+    console.log('check data.detailSP',data.detailSP)
     
     return new Promise( async(resolve, reject) =>
     {
         // if(data.detailSP.data.id)
         // {}
+        // console.log('data.detailSP.id',data.detailSP.id)
+        // console.log(' data.idUser', data.idUser)
         let check = await checkNameSPGioHang(data.detailSP.id, data.idUser)
         // console.log("check check", check)
         try{   
@@ -883,14 +886,13 @@ let CreateNewGioHang = (data) =>
                 {
                     let giohang = await db.giohangs.findOne(
                     {
-                        where : { id_sp:data.detailSP.id,
+                        where : { id_sp: data.detailSP.id,
                                   id_nguoidung: data.idUser
                             }
                     })  
-                    // console.log("check giỏ hàng",giohang)
 
                     let sp = await db.sanphams.findOne({
-                        where: {id:data.detailSP.id}
+                        where: {id: data.detailSP.id}
                     }) 
 
                     if(sp)
@@ -919,7 +921,6 @@ let CreateNewGioHang = (data) =>
                     {
                         tong = giohang.soluong_sp*1 + data.quantity*1
                     }
-                    console.log("tổng",tong)
                     if(giohang)
                     {
                         giohang.soluong_sp = tong
@@ -938,7 +939,8 @@ let CreateNewGioHang = (data) =>
                         soluong_sp: data.quantity,
                         thanhtien: data.quantity * data.detailSP.gia,
                         id_sp:data.detailSP.id,
-                        id_nguoidung: data.idUser
+                        id_nguoidung: data.idUser,
+                        id_CuaHang: data.detailSP.idCuahang,
                     })
                     let sp = await db.sanphams.findOne({
                         where: {id:data.detailSP.id}
@@ -1063,7 +1065,7 @@ let getAllGioHang = (idUser) =>
 
 let deletgiohang = (data) =>
 {
-    console.log(" check data 11233423 ",data)
+    // console.log(" check data 11233423 ",data)
     return new Promise(async(resolve, reject) =>{
         
         let giohang = await db.giohangs.findOne({
@@ -1198,7 +1200,7 @@ let CreateNewYeuThich = (data) =>
 
 let deleteYeuThich = (data) =>
 {
-    console.log(" check data ",data)
+    // console.log(" check data ",data)
     return new Promise(async(resolve, reject) =>{
         
         let yeuthich = await db.yeuthichs.findOne({
@@ -1255,7 +1257,7 @@ let bulkCreateThanhToan = (data) =>  ////////////// tạo đơn hàng và chi 
                     // ma_nhanvien:data.ma_nhanvien
                 })     
                 let temp = data.giohang;
-                console.log('check temp đầu',temp)
+                // console.log('check temp đầu',temp)
                 if(temp && temp.length>0)
                 {
                         temp = temp.map(item =>{
@@ -1263,7 +1265,7 @@ let bulkCreateThanhToan = (data) =>  ////////////// tạo đơn hàng và chi 
                         item.ma_donhang = thanhtoan.id
                         return item;
                     })
-                    console.log("check data don hang",temp)
+                    // console.log("check data don hang",temp)
 
                    let chitietthanhtoan =  await db.chitietdonhangs.bulkCreate(temp);
                     resolve({
@@ -1468,7 +1470,7 @@ let getDiaChiFromUser = (idUser) =>
 }
 let getALLMarkdown = (data) =>
 {   
-    console.log("check data getALLMarkdown",data)
+    // console.log("check data getALLMarkdown",data)
     return new Promise(async (resolve, reject) => {
         try {
             if(data.limit === '')
@@ -1521,8 +1523,8 @@ let getALLMarkdown = (data) =>
 let saveUD = (data) => {
     //console.log("check contentMarkdown", data.contentMarkdown);
     return new Promise(async (resolve, reject) => {
-    console.log("check contentHTML", data.contentHTML);
-    console.log("check lisp", data);
+    // console.log("check contentHTML", data.contentHTML);
+    // console.log("check lisp", data);
             try {
                     if(!data.contentHTML || !data.action)
                     {
@@ -1664,7 +1666,7 @@ let searchSPtheoLoai = (idLoai) => ///// tìm sản phẩm theo loại sản p
 let sanphamtheoloaiThuocCuaHang = (data) => ///// tìm sản phẩm theo loại sản phẩm
 {   
     return new Promise(async (resolve, reject) => {
-        console.log("data 1111111111111111111", data)
+        // console.log("data 1111111111111111111", data)
 
         try {
             if(data.idCuaHang && data.idLoai === "ALL")
@@ -1723,7 +1725,7 @@ let sanphamtheoloaiThuocCuaHang = (data) => ///// tìm sản phẩm theo loạ
 let TimKiemSanPham = (data) => ///// tìm sản phẩm theo loại sản phẩm
 {   
     return new Promise(async (resolve, reject) => {
-        console.log("data 1111111111111111111", data)
+        // console.log("data 1111111111111111111", data)
 
         try {
             if(data)
@@ -1746,6 +1748,273 @@ let TimKiemSanPham = (data) => ///// tìm sản phẩm theo loại sản phâ�
         }
     })
 }
+
+let SaveBinhLuan = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            if (!data.NoiDungBL && !data.MaNguoiBL) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "thiếu", 
+                })
+            } else {
+                await db.BinhLuans.create({
+                    NoiDungBL: data.NoiDungBL,
+                    // Time: data.Time,
+                    MaSP: data.MaSP,
+                    MaNguoiBL: data.MaNguoiBL,
+                    TrangThai: data.TrangThai,
+                    TrangThaiBL: data.TrangThaiBL,
+                    anhBL: data.anhBL,
+                })
+
+                let sp = await db.sanphams.findOne({
+                    where: {id: data.MaSP}
+                })
+                sp.trangThaiBL = data.TrangThaiBL;
+                await sp.save();
+                resolve({
+                errCode: 0,
+                errMessage: "thanh cong",    
+            })
+            }
+        }catch(e){
+            reject(e)
+        }
+    })
+}
+
+let GetAllBinhLuan = (idSP) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.BinhLuans.findAll({
+                where: {
+                    TrangThai: 1,
+                    maSP: idSP,
+                },
+                include: [
+                    {   
+                        model: db.User, as: "binhLuansData"
+                    }
+                ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let GetAllBinhLuanAdmin = (idSP) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.BinhLuans.findAll({
+                where: {
+                    // TrangThai: 1,
+                    maSP: idSP,
+                },
+                include: [
+                    {   
+                        model: db.User, as: "binhLuansData"
+                    }
+                ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let EditActionCMT = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            // let sp = await db.sanphams.findOne({
+            //     where: { id: data.idSP },
+            //     raw: false,
+            // })
+
+            // if (sp) {
+            //     sp.trangThaiBL = data.tt;
+            // }
+            // await sp.save()
+
+            let bl = await db.BinhLuans.findOne({
+                where: { id: data.idBL },
+                raw: false,
+            })
+
+            if (bl) {
+                // bl.TrangThaiBL = data.tt;
+                bl.TrangThai = data.tt;
+            }
+            await bl.save()
+
+            // let tl = await db.TraLois.findOne({
+            //     where: { id: data.idSP },
+            //     raw: false,
+            // })
+
+            // if (tl) {
+            //     bl.TrangThaiBL = 0;
+            //     bl.TrangThai = 0
+            // }
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let SaveTraLoi = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.NoiDungTL && !data.MaBL &&data.MaNguoiTL) {
+                resolve({
+                    errCode: 1,
+                    errMessage: "thiếu",
+                })
+            } else {
+                await db.TraLois.create({
+                    NoiDungTL: data.NoiDungTL,
+                    MaBL: data.MaBL,
+                    MaSP: data.MaSP,
+                    MaNguoiTL: data.MaNguoiTL,
+                    TrangThai: 1,
+                })
+
+                let sp = await db.sanphams.findOne({
+                    where: { id: data.MaSP }
+                })
+                sp.trangThaiBL = 0;
+                await sp.save();
+
+                let bl = await db.BinhLuans.findOne({
+                    where: { id: data.MaBL }
+                })
+                bl.TrangThaiBL = 0;
+                await bl.save();
+                resolve({
+                    errCode: 0,
+                    errMessage: "thanh cong",
+                })
+            }
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let GetAllTraLoi = (idSP, Ma) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.TraLois.findAll({
+                where: {
+                    TrangThai: 1,
+                    maSP: idSP,
+                    MaBL:Ma,
+                },
+                // include: [
+                //     {   
+                //         model: db.User, as: "binhLuansData"
+                //     }
+                // ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let GetAllTraLoiAdmin = (idSP, Ma) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let BL = await db.TraLois.findAll({
+                where: {
+                    // TrangThai: 1,
+                    maSP: idSP,
+                    MaBL:Ma,
+                },
+                // include: [
+                //     {   
+                //         model: db.User, as: "binhLuansData"
+                //     }
+                // ],
+                raw: true,
+                nest: true,
+            })
+            resolve({
+                errCode: 0,
+                data: BL,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+
+
+let thongkesanphamtheocuahang = (idCuaHang) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let sanpham = await db.sanphams.findAll({
+                where: {idCuahang:idCuaHang},
+                attributes: ['ten_sp','sl_sp','id'],
+            })
+                 
+            resolve({
+                errCode: 0,
+                data: sanpham,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
+
+let thongkesanphamtheochitiet = (idSp,idCuaHang) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let sanpham = await db.chitietdonhangs.findAll({
+                where: {
+                    id_CuaHang:idCuaHang,
+                    id_sp:idSp,
+                    // id_sp:idSP
+                },
+
+                attributes: ['ten_sp','soluong_sp',"id_sp"],
+            })
+            let tongsoluong = +0
+            sanpham && sanpham.length > 0 &&
+            sanpham.map((item, index) => {
+                tongsoluong+= item.soluong_sp
+            })
+            console.log('tongsoluong',tongsoluong)
+            resolve({
+                // errCode: 0,
+               tongsoluong,
+            });
+        } catch (e) {
+            reject (e)
+        }
+    })
+}
 module.exports={
 
     getTopDTHomeService:getTopDTHomeService,
@@ -1759,7 +2028,8 @@ module.exports={
     getDetailSanPham:getDetailSanPham,
     getAllSanPhamTheoCuaHang:getAllSanPhamTheoCuaHang,
     sanphamtheoloaiThuocCuaHang:sanphamtheoloaiThuocCuaHang,
-
+    thongkesanphamtheocuahang:thongkesanphamtheocuahang,
+    thongkesanphamtheochitiet:thongkesanphamtheochitiet,
     TimKiemSanPham:TimKiemSanPham,
     //loại sản phẩm
     GetAllLoaiSanPham:GetAllLoaiSanPham,
@@ -1817,5 +2087,14 @@ module.exports={
     // chưa làm xong
     getALLUngDung:getALLUngDung,
     saveUD:saveUD,
+    //bình luận 
+    SaveBinhLuan: SaveBinhLuan,
+    GetAllBinhLuan: GetAllBinhLuan,
+    EditActionCMT: EditActionCMT,
+    GetAllBinhLuanAdmin: GetAllBinhLuanAdmin,
 
+    //Trả Lời
+    SaveTraLoi: SaveTraLoi,
+    GetAllTraLoi: GetAllTraLoi,
+    GetAllTraLoiAdmin:GetAllTraLoiAdmin,
 }

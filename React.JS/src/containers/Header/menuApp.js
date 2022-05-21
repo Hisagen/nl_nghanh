@@ -15,12 +15,7 @@ export const adminMenu = [
                 //     { name: 'menu.posts.manage-posts', link: '/posts/manage-posts'},
                 // ]
             },
-            {
-                name: 'menu.comment.manage-comment', link: '/baiviet/',
-                // subMenus: [
-                //     { name: 'menu.posts.manage-posts', link: '/posts/manage-posts'},
-                // ]
-            },
+            
         ]            
     },
 ];

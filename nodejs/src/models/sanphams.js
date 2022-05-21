@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     msadmin: DataTypes.INTEGER,
     ma_loaisp: DataTypes.INTEGER,
     gia: DataTypes.INTEGER,
-    avt: DataTypes.STRING,
+    avt: DataTypes.BLOB('long'),
     idCuahang: DataTypes.INTEGER,
   }, {
     sequelize,

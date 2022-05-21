@@ -7,7 +7,7 @@ import HomeHeader from '../HomeHeader';
 import HomeFooter from '../HomeFooter';
 import {withRouter} from "react-router";
 import * as actions from "../../../store/actions";
-
+import AllSanPhamMotCuaHang from './AllSanPhamMotCuaHang';
 class DetailStore extends Component {
     constructor(props)
     {
@@ -18,7 +18,9 @@ class DetailStore extends Component {
         }
     }
     async componentDidMount(){
-        await this.props.getAllCuaHang(this.props.match.params.id); /// LẤY THÔNG TIN CHI TIẾT MỘT CỬA HÀNG
+        await this.props.getAllCuaHang(this.props.match.params.id); 
+        await this.props.getAllSanPhamTheoCuaHang(this.props.match.params.id);
+        /// LẤY THÔNG TIN CHI TIẾT MỘT CỬA HÀNG
         let cuahangArr = this.props.cuahangArr 
         console.log("check cuahangArr",cuahangArr)
         this.setState({
@@ -156,6 +158,7 @@ class DetailStore extends Component {
                     </div>
                 </div>
                 <div style={{height:"100px"}}></div>
+                <AllSanPhamMotCuaHang/>
                 <HomeFooter/>
             </div>
         );

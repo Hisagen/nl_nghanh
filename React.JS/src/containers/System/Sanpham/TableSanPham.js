@@ -32,6 +32,7 @@ class TableSanPham extends Component {
     }
    async componentDidMount () {
         this.props.fetchAllSANPHAMStart();
+        this.props.getAllSanPhamTheoCuaHang(this.props.userInfo.id);
         //this.props.fetchAllLoaiSanPhamSTART();
         //let res = await getInfoDetailSanPham(6);
     }
@@ -55,7 +56,7 @@ class TableSanPham extends Component {
     render() {
         // console.log("check all user", this.props.listUser);
         console.log("check listSanPham:", this.props.listSanPham);
-        let arrSanPham = this.props.listSanPham;
+        let arrSanPham = this.props.sanphamtheocuahang;
 
         let arrLoaiSanPham = this.props.listLoaiSanPham;
 
@@ -118,6 +119,9 @@ const mapStateToProps = state => {
     return {
         listSanPham: state.sanpham.sanphams,
         listLoaiSanPham: state.sanpham.loaispArr,
+        userInfo: state.user.userInfo,
+        sanphamtheocuahang: state.sanpham.sanphamtheocuahang,
+
     };
 };
 
@@ -125,6 +129,7 @@ const mapDispatchToProps = dispatch => {
     return {
         //fetchAllLoaiSanPhamSTART: () => dispatch(actions.fetchAllLoaiSanPhamSTART()),
         fetchAllSANPHAMStart: () => dispatch(actions.fetchAllSANPHAMStart()),
+        getAllSanPhamTheoCuaHang: (idCuaHang) => dispatch(actions.getAllSanPhamTheoCuaHang(idCuaHang)),
         deleteSanPham: (id) => dispatch(actions.deleteSanPham(id)),
         //getInfoDetailSanPham: (id) => dispatch(actions.getInfoDetailSanPham(id))
     };

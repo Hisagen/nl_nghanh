@@ -38,7 +38,9 @@
             "product":"product",
             "manage-product": "Manage product",
             "manage-product-type": "Manage type product",
-            "manage-product-category": "Mange category"
+            "manage-product-category": "Mange category",
+            "product-statistics": "Product Statistics"
+
         },
 
         "posts": {

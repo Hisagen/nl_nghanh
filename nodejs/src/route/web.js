@@ -44,8 +44,8 @@ let initWebRoute = (app) =>
     route.get("/api/search-sanphamtheoloai", dtController.searchSPtheoLoai)
     route.post("/api/search-sanphamtheoloaiThuocCuaHang", dtController.sanphamtheoloaiThuocCuaHang)
     route.get("/api/TimKiemSanPham/:key", dtController.TimKiemSanPham)
-
-    
+    route.get("/api/thong-ke-san-pham-theo-cua-hang", dtController.thongkesanphamtheocuahang)//////////////////////////////////////
+    route.get("/api/thong-ke-san-pham-theo-chitiet", dtController.thongkesanphamtheochitiet)//////////////////////////////////////
 
     //loaisp
     route.get("/api/GetAllLoaiSanPham", dtController.GetAllLoaiSanPham);
@@ -111,6 +111,17 @@ let initWebRoute = (app) =>
 
     ///////////////// gửi mail
     route.post('/api/patient-chidinh-appointment', dtController.postChidinhAppointment);
+
+    //BinhLuans
+    route.post("/api/save-binh-luan", dtController.handleSaveBinhLuan);
+    route.get("/api/get_all_binhluan", dtController.handleGetAllBinhLuan);
+    route.get("/api/get_all_binhluan_admin", dtController.handleGetAllBinhLuanAdmin);
+    route.put("/api/edit-action-cmt", dtController.handleEditActionCMT);
+
+    //trả lời
+    route.post("/api/save-tra-loi", dtController.handleSaveTraLoi);
+    route.get("/api/get_all_TraLoi", dtController.handleGetAllTraLoi);
+    route.get("/api/get_all_TraLoi_admin", dtController.handleGetAllTraLoiAdmin);
     return app.use("/",route);
 }
 

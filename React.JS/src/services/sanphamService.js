@@ -190,6 +190,14 @@ const  TimKiemSanPham = (key) =>
 const postChidinhAppointment = (data) => {
     return axios.post(`/api/patient-chidinh-appointment`, data);
 }
+
+const thongkesanphamtheocuahang = (idCuaHang) => {
+    return axios.get(`/api/thong-ke-san-pham-theo-cua-hang?idCuaHang=${idCuaHang}`);
+}
+
+const thongkesanphamtheochitiet = (idSp,idCuaHang) => {
+    return axios.get(`/api/thong-ke-san-pham-theo-chitiet?idSp=${idSp}&idCuaHang=${idCuaHang}`);
+}
 export  {
     get_all_san_pham,
     get_all_loai_san_pham,
@@ -227,6 +235,8 @@ export  {
     getAllSanPhamTheoCuaHangService,
     TimsanphamtheoloaiThuocCuaHangService,
     TimKiemSanPham,
-    postChidinhAppointment
+    postChidinhAppointment,
+    thongkesanphamtheocuahang,
+    thongkesanphamtheochitiet
 
 }

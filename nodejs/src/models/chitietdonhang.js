@@ -23,7 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     thanhtien: DataTypes.INTEGER,
     ma_donhang: DataTypes.INTEGER,
     id_sp: DataTypes.INTEGER,
-    id_nguoidung: DataTypes.INTEGER
+    id_nguoidung: DataTypes.INTEGER,
+    id_CuaHang: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'chitietdonhangs',

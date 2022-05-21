@@ -12,8 +12,9 @@ export const MenuChu = [
                 name: 'menu.product.manage-product', link: '/Sanpham/manage-sanpham',
                 
             },
-            
-            
+            { 
+                name: 'menu.product.product-statistics', link: '/system/product-statistics',
+            },            
         ]
     },
 
@@ -33,7 +34,7 @@ export const MenuChu = [
         name: 'menu.comment.comment', 
         menus: [
             {
-                name: 'menu.comment.manage-comment', link: '/comment/manage-comment',
+                name: 'menu.comment.manage-comment', link: '/system/manage-comment',
                 // subMenus: [
                 //     { name: 'menu.comment.manage-comment', link: '/comment/manage-comment'},
                 // ]

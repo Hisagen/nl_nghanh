@@ -174,17 +174,11 @@ class QuanLyGiohang extends Component {
         });
 
        
-        if(res && res.errCode === 0 && res3 && res3.errCode === 0) //
+        if(res && res.errCode == 0 && res3 && res3.errCode == 0) //
         {
-            // this.state.idDonHangNew = res.iddonhang
             toast.success("ĐẶT HÀNG THÀNH CÔNG")
-            // await  this.props.fetchAllGioHangSTART(this.props.match.params.idUser)
-            // console.log("check this.state.idUser",this.state.idUser);
-            // createDonHang({
-            //     giohangArr
-            // })
         }
-        // window.location.reload();
+        window.location.reload();
 
     }
     render() {

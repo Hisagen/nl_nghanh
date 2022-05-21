@@ -35,6 +35,9 @@ module.exports = {
       id_nguoidung: {
         type: Sequelize.INTEGER
       },
+      id_CuaHang: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -87,7 +87,6 @@ class AllSanPhamMotCuaHang extends Component {
         
         return (
             <>
-                <HomeHeader/>   
                 <br/>
                 <br/>
                 <br/>
@@ -152,7 +151,6 @@ class AllSanPhamMotCuaHang extends Component {
                     </div>
                 </div>
                 <NoiBac/>
-                <HomeFooter/>
             </>
             
         );

@@ -17,6 +17,11 @@ const initialState = {
     // tìm
     sanphamArr: [], // tìm theo loại 
     sanphamtheocuahang: [],
+    binhLuans: [],
+    binhLuanAdmins: [],
+
+    traLois: [],
+    traLoiAdmins: [],
     timsanphamtheoLoaiThuoccuahang: [],
 }
 
@@ -186,6 +191,49 @@ const sanphamReducer = (state = initialState, action) => {
             return {
                 ...state,
             }    
+            case actionTypes.GET_ALL_BINHLUAN_SUCCESS: 
+            state.binhLuans = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_BINHLUAN_FAILED:
+            state.binhLuans = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_BINHLUAN_ADMIN_SUCCESS: 
+            state.binhLuanAdmins = action.data;
+            return {
+                ...state,
+            }
+
+        case actionTypes.GET_ALL_BINHLUAN_ADMIN_FAILED:
+            state.binhLuanAdmins = [];
+            return {
+                ...state,
+            }
+
+        case actionTypes.GET_ALL_TRALOI_SUCCESS: 
+            state.traLois = action.data;
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_TRALOI_FAILED:
+            state.traLois = [];
+            return {
+                ...state,
+            }
+        case actionTypes.GET_ALL_TRALOI_ADMIN_SUCCESS: 
+            state.traLoiAdmins = action.data;
+            return {
+                ...state,
+            }
+
+        case actionTypes.GET_ALL_TRALOI_ADMIN_FAILED:
+            state.traLoiAdmins = [];
+            return {
+                ...state,
+            }
         default:
             return state;
     }

@@ -10,11 +10,13 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Avt from './Avt';
-import {getInfoDetailSP} from "../../../services/userService"
-import {getInfoDetailSanPham, CreateNewYeuThich} from "../../../services/sanphamService"
-import { LANGUAGES } from '../../../utils';
+import {getInfoDetailSP,  createBinhLuan, getAllBinhLuan, getAllTraLoi} from "../../../services/userService"
+import {getInfoDetailSanPham, CreateNewYeuThich, create_new_giohang} from "../../../services/sanphamService"
+import { LANGUAGES , CommonUtils} from '../../../utils';
 import {withRouter} from "react-router";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+import Lightbox from 'react-image-lightbox';
+import moment from "moment";
 
 class DetailSP extends Component {
     
@@ -30,6 +32,11 @@ class DetailSP extends Component {
             idUser: '',
             quantity: 1,
 
+            previewImg: '',
+            avatar: '', 
+            binhLuan: '',
+            binhLuanArr: [],
+            tl: []
         }
     }
 
@@ -46,6 +53,7 @@ class DetailSP extends Component {
             if(res && res.errCode === 0)
             {
                 this.setState({
+                    idSP: this.props.match.params.id,
                     detailSP: res.data,
                     hinh1: hinh.image1,
                     hinh2: hinh.image2,
@@ -57,13 +65,19 @@ class DetailSP extends Component {
 
             //  
 
+            this.props.handleGetAllBinhLuan(this.state.idSP);
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        
+        if (prevProps.binhLuans !== this.props.binhLuans) {
+            let arrBL = this.props.binhLuans
+            this.setState({
+                binhLuanArr: arrBL,
+            })
+        }
     }
-    handlethemvaogiohang = (sp) =>
+    handlethemvaogiohang = async (sp) =>
     {
         //console.log("View info Sản Phẩm:", sp);
         if(sp.sl_sp==0)
@@ -72,8 +86,8 @@ class DetailSP extends Component {
         }
         else
         {
+            await create_new_giohang(this.state)
             this.props.history.push(`/giohang/${this.state.idUser}`)
-            this.props.createNewGioHang(this.state)
             window.location.reload();
 
         }
@@ -82,6 +96,8 @@ class DetailSP extends Component {
     {
         this.props.createYeuThich({sp:sp, idUser:idUser})
         console.log("check sp",sp)
+        window.location.reload();
+
     }
     onUpdateQuantity = (sp, quantity) =>
     {
@@ -104,6 +120,62 @@ class DetailSP extends Component {
             })
         }
     }
+    handleOnChangeImg = async (event) => {
+        let data = event.target.files;
+        let file = data[0];
+        if(file) {
+            let base64 = await CommonUtils.getBase64(file);
+            let objectURL = URL.createObjectURL(file);
+            this.setState({
+                previewImg: objectURL,
+                avatar: base64
+            })
+        }
+    }
+
+    openPreviewImage = () => {
+        if (!this.state.previewImg) {
+            return;
+        }
+        this.setState({
+            isOpen: true,
+        })
+    }
+
+    onChangeInput = (event, id) => {
+        let copyState = { ...this.state}
+        copyState[id] = event.target.value;
+        this.setState({
+            ...copyState,
+        })
+        console.log('copyState',copyState)
+    }
+// Time: moment().format("DD-MM-YYYY hh:mm:ss"),
+
+    handleOnClickSave = async () => {
+        await this.props.handleCreateBinhLuan({
+            NoiDungBL: this.state.binhLuan,
+            MaNguoiBL: this.props.userInfo.id,
+            MaSP: this.state.idSP,
+            TrangThai: 1,
+            TrangThaiBL: 1,
+            anhBL: this.state.avatar,
+        })
+        await this.props.handleGetAllBinhLuan(this.state.idSP);
+    }
+
+    handleOnLoad = async (data) => {
+        let ne = await getAllTraLoi(data.MaSP, data.id)
+        console.log('ne', ne)
+        // if (ne) {
+        //     // this.setState({
+        //     //     tl: ne,
+        //     // })
+        // }
+        // this.setState({
+        //     tl: ne,
+        // })
+    }
     render() {
         console.log("state",this.state)
         let {language} = this.props;
@@ -113,6 +185,8 @@ class DetailSP extends Component {
         let img1 = detailSP.hinh1;
         let img2 = detailSP.hinh2;
         let img3 = detailSP.hinh3;
+        let { binhLuanArr } = this.state;
+        console.log('binhLuanArr',binhLuanArr);
         let so = parseInt(sp.gia);
         let quantity = sp.sl_sp > 0 ? this.state.quantity : sp.sl_sp
         console.log("check giá sản phẩm 111111111111", sp.gia)
@@ -240,6 +314,87 @@ class DetailSP extends Component {
                 <div className='chitiet-sp'>
                     <p className='title-chitiet'>Thông Tin Sản Phẩm</p>  
                 </div>
+                
+1               <div className='binhLuan'>
+                    <label className='title'>Bình luận</label>        
+                        <textarea className="contentNoiDung" rows="5"
+                            onChange={(event) => this.onChangeInput(event, 'binhLuan')}
+                        >
+
+                    </textarea>
+
+                    <div className='btnBL row'>
+                        <div className='col-3'>
+                            <div className="preview-img-container">
+                                <input
+                                    id="previewImg"
+                                    type="file" hidden
+                                    onChange = {(event) => this.handleOnChangeImg(event)}
+                                />
+                                <label className="btnImg" htmlFor="previewImg">Tải ảnh <i className="fas fa-upload"></i></label>
+                                <div className="preview-img"
+                                    style={{ backgroundImage: `url(${this.state.previewImg})` }}
+                                    onClick={() => this.openPreviewImage()}
+                                >
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-7"></div>    
+                        <div className='col-2'>
+                            <button className='btn-primary'
+                                onClick={() => this.handleOnClickSave()}    
+                            >Gửi</button> 
+                        </div>
+                    </div>
+
+                        <div style={{ fontWeight: "600" }}>Có { binhLuanArr.length } bình luận</div>
+
+                    <hr/>
+
+
+                        {binhLuanArr && binhLuanArr.length > 0 && binhLuanArr.map((item, index) => {
+                            let imageBase64 = '';
+                            if (item.binhLuansData.avt) {
+                                imageBase64 = new Buffer(item.binhLuansData.avt, 'base64').toString('binary')  
+                            }
+
+                            let anhBL = '';
+                            if (item.anhBL) {
+                                anhBL = new Buffer(item.anhBL, 'base64').toString('binary')  
+                            }
+
+                            // console.log(imageBase64)
+                            return (
+                                <>
+                                    <div className="bl-ten" style={{ fontWeight: "600", fontSize: "15px" , backgroundColor: "lavender"}}>
+                                        <span>
+                                            <img src={imageBase64} className="img-img"  alt=" " style={{width: "30px", height: "40px", background: "center center no-repeat", backgroundSize: "contain" }}/>
+                                        </span>
+                                        {item.binhLuansData.firstName} {item.binhLuansData.lastName}: 
+                                    </div>
+                                    <div className="bl-content" style={{ fontSize: "15px", textAlign: "justify" }}>
+                                        {item.NoiDungBL}
+                                    </div>
+                                        {anhBL?<img src={anhBL} className="img-img"  alt=" " style={{width: "50px", height: "70px", background: "center center no-repeat", backgroundSize: "contain"}}/>:''}
+                                    <hr />
+
+                                    <div onLoad={this.handleOnLoad(item)}></div>
+                                </>
+                            )
+                        })}
+
+                        <div className="BLcontent mt-2">
+                            <div className="bl-ten" style={{ fontWeight: "600", fontSize: "15px"}}>
+                                <span> <img src="" alt = "gắn hình" /> </span> Admin:     
+                            </div>
+
+                            <div className="bl-content" style={{ fontSize: "15px", textAlign: "justify"}}>
+                                cảm ơn (tự mà load vô) :)))
+                            </div>
+                        </div>
+
+                </div>  
+
                 <div className='description mt-5'>
                         {sp.qc_spHTML && sp.qc_spMarkdown
                             &&
@@ -260,6 +415,12 @@ class DetailSP extends Component {
                 <br/>
                 <br/>
             </div>
+            {this.state.isOpen === true &&
+                <Lightbox
+                    mainSrc={this.state.previewImg}
+                    onCloseRequest={() => this.setState({ isOpen: false })}
+                />
+            }    
             <HomeFooter/>
             
             </>
@@ -274,7 +435,8 @@ const mapStateToProps = state => {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
         userInfo: state.user.userInfo,
-        giohangArr: state.sanpham.giohangArr
+        giohangArr: state.sanpham.giohangArr,
+        binhLuans: state.sanpham.binhLuans,
 
     };
 };
@@ -284,6 +446,8 @@ const mapDispatchToProps = dispatch => {
         getGiohang: (idUser) => dispatch(actions.getGiohang(idUser)),
         createNewGioHang: (data) => dispatch(actions.createNewGioHang(data)),
         createYeuThich: (data) => dispatch(actions.createYeuThich(data)),
+        handleCreateBinhLuan: (data) => dispatch(actions.handleCreateBinhLuan(data)),
+        handleGetAllBinhLuan: (data) => dispatch(actions.handleGetAllBinhLuan(data)),
     };
 };
 

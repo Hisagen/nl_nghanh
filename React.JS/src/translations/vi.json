@@ -38,7 +38,8 @@
             "product": "Sản phẩm",
             "manage-product": "Quản lý sản phẩm",
             "manage-product-type": "Quản lý loại sản phẩm",
-            "manage-product-category": "Quản lý Danh mục"
+            "manage-product-category": "Quản lý Danh mục",
+            "product-statistics": "Thống kê sản phẩm"
         },
 
         "posts": {

@@ -17,9 +17,13 @@ class Home extends Component {
             }
             else
             {
-                if(userInfo.typeRole == USER_ROLE.ADMIN || userInfo.typeRole == USER_ROLE.MEMBER)
+                if(userInfo.typeRole == USER_ROLE.ADMIN)
                 {
-                    linkToRedirect = '/system/user-manage'
+                    linkToRedirect = '/System/UserRedux'
+                }
+                else if(userInfo.typeRole == USER_ROLE.MEMBER)
+                {
+                    linkToRedirect = '/Sanpham/manage-sanpham'
                 }
     
             }

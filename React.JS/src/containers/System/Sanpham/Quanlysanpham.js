@@ -77,7 +77,7 @@ class Quanlysanpham extends Component {
         this.props.fetchAllSANPHAMStart();
         this.props.fetchAllDanhMucSTART();
 
-        this.props.searchLoaisp(10);
+        this.props.searchLoaisp(11);
         //console.log("this.state.ma_dm",this.state.ma_dm)
         let res = await get_all_san_pham()
         
@@ -227,6 +227,7 @@ class Quanlysanpham extends Component {
                 avt2: this.state.avt2,
                 avt3: this.state.avt3,
             })
+            window.location.reload();
             // this.props.edit
         }
         if(action === CRUD_ACTIONS.EDIT)
@@ -248,6 +249,8 @@ class Quanlysanpham extends Component {
                 avt2: this.state.avt2,
                 avt3: this.state.avt3,
             })
+            window.location.reload();
+
         }
     }
     handleEditorChange = ({ html, text }) => {
